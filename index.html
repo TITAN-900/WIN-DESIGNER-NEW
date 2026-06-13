@@ -1,0 +1,2220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WIN DESIGNER | Modern Luxury Interior Design</title>
+  <meta name="description" content="WIN DESIGNER creates elegant modern interiors, custom cabinetry, walnut woodwork and complete renovation solutions for refined residential and commercial spaces." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #f8f4ec;
+      --ivory: #fffdf8;
+      --linen: #eee5d8;
+      --sand: #d7c5ad;
+      --wood: #a97853;
+      --walnut: #6f4a35;
+      --stone: #81786d;
+      --sage: #78806f;
+      --ink: #26211d;
+      --muted: #6f675e;
+      --line: rgba(70, 56, 43, 0.13);
+      --glass: rgba(255, 253, 248, 0.78);
+      --shadow: 0 24px 80px rgba(77, 56, 38, 0.14);
+      --soft-shadow: 0 14px 45px rgba(77, 56, 38, 0.1);
+      --radius: 28px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        linear-gradient(135deg, rgba(255, 253, 248, 0.96), rgba(248, 244, 236, 0.98) 44%, rgba(238, 229, 216, 0.92)),
+        repeating-linear-gradient(90deg, rgba(111, 74, 53, 0.025) 0 1px, transparent 1px 120px);
+      font-family: "Inter", Arial, sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .page-shell {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .section {
+      position: relative;
+      padding: 108px 0;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(260px, 0.6fr);
+      gap: 48px;
+      align-items: end;
+      margin-bottom: 46px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--walnut);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 42px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.55;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 0.96;
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 7.6rem;
+      max-width: 780px;
+    }
+
+    h2 {
+      margin-top: 16px;
+      font-size: 4.9rem;
+      max-width: 790px;
+    }
+
+    h3 {
+      font-size: 2.35rem;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .lead {
+      font-size: 1.16rem;
+      color: #574e46;
+    }
+
+    .nav {
+      position: fixed;
+      top: 22px;
+      left: 50%;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: min(1160px, calc(100% - 32px));
+      min-height: 74px;
+      padding: 14px 16px 14px 22px;
+      border: 1px solid rgba(255, 255, 255, 0.74);
+      border-radius: 999px;
+      background: var(--glass);
+      box-shadow: 0 20px 70px rgba(79, 57, 39, 0.13);
+      backdrop-filter: blur(22px);
+      transform: translateX(-50%);
+      transition: min-height 320ms var(--ease), box-shadow 320ms var(--ease), background 320ms var(--ease);
+    }
+
+    .nav.is-scrolled {
+      min-height: 64px;
+      background: rgba(255, 253, 248, 0.9);
+      box-shadow: 0 18px 55px rgba(79, 57, 39, 0.18);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      flex: 0 0 auto;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(111, 74, 53, 0.28);
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(238, 229, 216, 0.58));
+      color: var(--walnut);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.05rem;
+      line-height: 1;
+    }
+
+    .brand-name {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      line-height: 1.1;
+    }
+
+    .brand-name strong {
+      font-size: 0.92rem;
+    }
+
+    .brand-name span {
+      color: var(--stone);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      margin-inline: 18px;
+      color: #453c35;
+      font-size: 0.83rem;
+      font-weight: 700;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding: 11px 12px;
+      border-radius: 999px;
+      transition: color 250ms ease, background 250ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.is-active {
+      color: var(--walnut);
+      background: rgba(169, 120, 83, 0.08);
+    }
+
+    .nav-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fffaf1;
+      font-size: 0.84rem;
+      font-weight: 800;
+      box-shadow: 0 16px 34px rgba(38, 33, 29, 0.18);
+      transition: transform 260ms var(--ease), box-shadow 260ms var(--ease), background 260ms ease;
+    }
+
+    .nav-action:hover {
+      background: var(--walnut);
+      box-shadow: 0 22px 42px rgba(111, 74, 53, 0.24);
+      transform: translateY(-2px);
+    }
+
+    .menu-toggle {
+      display: none;
+      position: relative;
+      width: 48px;
+      height: 48px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(111, 74, 53, 0.1);
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      position: absolute;
+      left: 14px;
+      width: 20px;
+      height: 2px;
+      border-radius: 999px;
+      background: currentColor;
+      transition: transform 260ms var(--ease), top 260ms var(--ease), opacity 200ms ease;
+    }
+
+    .menu-toggle span:nth-child(1) {
+      top: 17px;
+    }
+
+    .menu-toggle span:nth-child(2) {
+      top: 23px;
+    }
+
+    .menu-toggle span:nth-child(3) {
+      top: 29px;
+    }
+
+    body.menu-open .menu-toggle span:nth-child(1) {
+      top: 23px;
+      transform: rotate(45deg);
+    }
+
+    body.menu-open .menu-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+
+    body.menu-open .menu-toggle span:nth-child(3) {
+      top: 23px;
+      transform: rotate(-45deg);
+    }
+
+    .hero {
+      min-height: 100svh;
+      padding: 148px 0 78px;
+      display: grid;
+      align-items: center;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(420px, 0.72fr);
+      gap: 56px;
+      align-items: center;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-copy .lead {
+      max-width: 600px;
+      margin-top: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      margin-top: 36px;
+    }
+
+    .button {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 56px;
+      padding: 0 24px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.88rem;
+      font-weight: 800;
+      overflow: hidden;
+      transition: transform 270ms var(--ease), box-shadow 270ms var(--ease), background 270ms ease, color 270ms ease;
+    }
+
+    .button.primary {
+      background: linear-gradient(135deg, var(--ink), #5f4535);
+      color: #fffaf1;
+      box-shadow: 0 22px 52px rgba(76, 53, 37, 0.22);
+    }
+
+    .button.secondary {
+      border-color: rgba(111, 74, 53, 0.18);
+      background: rgba(255, 253, 248, 0.58);
+      color: var(--ink);
+      backdrop-filter: blur(14px);
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+    }
+
+    .button.primary:hover {
+      box-shadow: 0 26px 68px rgba(76, 53, 37, 0.28);
+    }
+
+    .button.secondary:hover {
+      background: rgba(255, 253, 248, 0.9);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .button svg,
+    .icon {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      max-width: 670px;
+      margin-top: 54px;
+    }
+
+    .hero-meta-card {
+      min-height: 118px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      border-radius: 22px;
+      background: rgba(255, 253, 248, 0.62);
+      box-shadow: var(--soft-shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .hero-meta-card strong {
+      display: block;
+      color: var(--walnut);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 2.3rem;
+      font-weight: 700;
+      line-height: 0.9;
+    }
+
+    .hero-meta-card span {
+      display: block;
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 690px;
+      isolation: isolate;
+    }
+
+    .hero-image-wrap {
+      position: absolute;
+      inset: 0 0 76px 22px;
+      border-radius: 48px;
+      overflow: hidden;
+      box-shadow: 0 38px 120px rgba(71, 51, 36, 0.24);
+    }
+
+    .hero-image-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, transparent 42%, rgba(36, 29, 23, 0.18)),
+        linear-gradient(135deg, rgba(255, 253, 248, 0.16), transparent 48%);
+      pointer-events: none;
+    }
+
+    .hero-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.04);
+      animation: subtleZoom 10s var(--ease) forwards;
+    }
+
+    .floating-panel {
+      position: absolute;
+      right: -12px;
+      bottom: 0;
+      z-index: 4;
+      width: min(365px, 82%);
+      padding: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 30px;
+      background: rgba(255, 253, 248, 0.78);
+      box-shadow: 0 28px 70px rgba(65, 47, 34, 0.18);
+      backdrop-filter: blur(20px);
+    }
+
+    .floating-panel img {
+      width: 100%;
+      height: 178px;
+      border-radius: 22px;
+      object-fit: cover;
+    }
+
+    .floating-panel h3 {
+      margin-top: 18px;
+      font-size: 1.82rem;
+      line-height: 1;
+    }
+
+    .floating-panel p {
+      margin-top: 8px;
+      font-size: 0.9rem;
+    }
+
+    .vertical-label {
+      position: absolute;
+      left: 0;
+      bottom: 36px;
+      z-index: 5;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      color: rgba(38, 33, 29, 0.54);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+    }
+
+    .scroll-cue {
+      position: absolute;
+      left: 50%;
+      bottom: 26px;
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 64px;
+      border: 1px solid rgba(111, 74, 53, 0.22);
+      border-radius: 999px;
+      background: rgba(255, 253, 248, 0.44);
+      transform: translateX(-50%);
+      backdrop-filter: blur(10px);
+    }
+
+    .scroll-cue span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--walnut);
+      animation: scrollDot 1.7s ease-in-out infinite;
+    }
+
+    .about-band {
+      border-block: 1px solid rgba(111, 74, 53, 0.1);
+      background:
+        linear-gradient(90deg, rgba(255, 253, 248, 0.7), rgba(238, 229, 216, 0.5)),
+        url("https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1800&q=84") center / cover fixed;
+      background-blend-mode: screen;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1fr);
+      gap: 64px;
+      align-items: center;
+    }
+
+    .about-image {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      aspect-ratio: 4 / 5;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent, rgba(38, 33, 29, 0.15));
+    }
+
+    .about-copy p {
+      max-width: 680px;
+      margin-top: 20px;
+    }
+
+    .signature-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .signature-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 16px;
+      border: 1px solid rgba(111, 74, 53, 0.14);
+      border-radius: 999px;
+      background: rgba(255, 253, 248, 0.62);
+      color: #50463c;
+      font-size: 0.82rem;
+      font-weight: 800;
+      backdrop-filter: blur(12px);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 38px;
+    }
+
+    .stat-card {
+      min-height: 150px;
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.76);
+      border-radius: 26px;
+      background: rgba(255, 253, 248, 0.66);
+      box-shadow: var(--soft-shadow);
+      backdrop-filter: blur(16px);
+      transition: transform 320ms var(--ease), box-shadow 320ms var(--ease);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card strong {
+      display: block;
+      color: var(--walnut);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 3.65rem;
+      line-height: 0.9;
+    }
+
+    .stat-card span {
+      display: block;
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .service-card {
+      position: relative;
+      min-height: 330px;
+      padding: 28px;
+      border: 1px solid rgba(111, 74, 53, 0.12);
+      border-radius: 28px;
+      background: rgba(255, 253, 248, 0.72);
+      box-shadow: 0 12px 38px rgba(77, 56, 38, 0.08);
+      overflow: hidden;
+      transition: transform 330ms var(--ease), box-shadow 330ms var(--ease), border-color 330ms ease;
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 5px;
+      background: linear-gradient(90deg, rgba(111, 74, 53, 0), rgba(111, 74, 53, 0.36), rgba(120, 128, 111, 0));
+      opacity: 0;
+      transform: scaleX(0.42);
+      transition: opacity 330ms ease, transform 330ms var(--ease);
+    }
+
+    .service-card:hover {
+      border-color: rgba(111, 74, 53, 0.24);
+      box-shadow: var(--shadow);
+      transform: translateY(-9px);
+    }
+
+    .service-card:hover::before {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    .service-icon {
+      display: grid;
+      place-items: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(111, 74, 53, 0.12), rgba(120, 128, 111, 0.13));
+      color: var(--walnut);
+    }
+
+    .service-card h3 {
+      margin-top: 38px;
+    }
+
+    .service-card p {
+      margin-top: 15px;
+      font-size: 0.95rem;
+    }
+
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 28px;
+      color: var(--walnut);
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+
+    .project-card {
+      position: relative;
+      min-height: 430px;
+      border-radius: 30px;
+      overflow: hidden;
+      background: var(--linen);
+      box-shadow: var(--soft-shadow);
+      isolation: isolate;
+    }
+
+    .project-card.large {
+      grid-column: span 7;
+    }
+
+    .project-card.medium {
+      grid-column: span 5;
+    }
+
+    .project-card.small {
+      grid-column: span 4;
+      min-height: 360px;
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      object-fit: cover;
+      transition: transform 700ms var(--ease), filter 700ms ease;
+    }
+
+    .project-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, transparent 38%, rgba(26, 20, 16, 0.72));
+      opacity: 0.96;
+      transition: opacity 330ms ease;
+    }
+
+    .project-info {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      z-index: 2;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      color: #fffaf1;
+    }
+
+    .project-info h3 {
+      font-size: 2.25rem;
+      line-height: 1;
+    }
+
+    .project-info span {
+      display: inline-flex;
+      margin-bottom: 10px;
+      color: rgba(255, 250, 241, 0.8);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .project-arrow {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      flex: 0 0 auto;
+      border: 1px solid rgba(255, 255, 255, 0.48);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(10px);
+      transition: transform 330ms var(--ease), background 330ms ease;
+    }
+
+    .project-card:hover img {
+      filter: saturate(1.04) contrast(1.04);
+      transform: scale(1.07);
+    }
+
+    .project-card:hover .project-arrow {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translate(4px, -4px);
+    }
+
+    .why-section {
+      background: linear-gradient(135deg, rgba(255, 253, 248, 0.68), rgba(238, 229, 216, 0.55));
+    }
+
+    .why-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(360px, 0.68fr);
+      gap: 58px;
+      align-items: center;
+    }
+
+    .why-list {
+      display: grid;
+      gap: 15px;
+      margin-top: 34px;
+    }
+
+    .why-item {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 18px;
+      align-items: start;
+      padding: 22px;
+      border: 1px solid rgba(111, 74, 53, 0.12);
+      border-radius: 26px;
+      background: rgba(255, 253, 248, 0.65);
+      box-shadow: 0 12px 38px rgba(77, 56, 38, 0.07);
+      transition: transform 310ms var(--ease), background 310ms ease;
+    }
+
+    .why-item:hover {
+      background: rgba(255, 253, 248, 0.9);
+      transform: translateX(8px);
+    }
+
+    .why-item .service-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+    }
+
+    .why-item h3 {
+      font-size: 1.55rem;
+    }
+
+    .why-item p {
+      margin-top: 6px;
+      font-size: 0.93rem;
+    }
+
+    .why-image-stack {
+      position: relative;
+      min-height: 610px;
+    }
+
+    .why-image-main,
+    .why-image-accent {
+      position: absolute;
+      overflow: hidden;
+      border-radius: 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .why-image-main {
+      inset: 0 0 90px 34px;
+    }
+
+    .why-image-accent {
+      left: 0;
+      bottom: 0;
+      width: 58%;
+      height: 245px;
+      border: 10px solid var(--cream);
+    }
+
+    .why-image-main img,
+    .why-image-accent img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .material-note {
+      position: absolute;
+      right: 24px;
+      bottom: 28px;
+      z-index: 3;
+      width: min(258px, 58%);
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 24px;
+      background: rgba(255, 253, 248, 0.8);
+      box-shadow: 0 20px 55px rgba(66, 49, 36, 0.16);
+      backdrop-filter: blur(18px);
+    }
+
+    .material-note strong {
+      display: block;
+      color: var(--walnut);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.9rem;
+      line-height: 0.95;
+    }
+
+    .material-note span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .testimonial-card {
+      display: flex;
+      min-height: 360px;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 28px;
+      border: 1px solid rgba(111, 74, 53, 0.12);
+      border-radius: 28px;
+      background: rgba(255, 253, 248, 0.72);
+      box-shadow: 0 12px 38px rgba(77, 56, 38, 0.08);
+    }
+
+    .stars {
+      color: var(--walnut);
+      font-size: 0.85rem;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+    }
+
+    .quote {
+      margin-top: 26px;
+      color: #453c35;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.95rem;
+      line-height: 1.08;
+    }
+
+    .client {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 34px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(111, 74, 53, 0.11);
+    }
+
+    .client-avatar {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(111, 74, 53, 0.16), rgba(120, 128, 111, 0.16));
+      color: var(--walnut);
+      font-weight: 900;
+    }
+
+    .client strong {
+      display: block;
+      color: var(--ink);
+      font-size: 0.94rem;
+    }
+
+    .client span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .contact-section {
+      padding-bottom: 88px;
+    }
+
+    .contact-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 0.86fr) minmax(360px, 0.72fr);
+      gap: 24px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      border-radius: 38px;
+      background: rgba(255, 253, 248, 0.66);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .contact-form {
+      padding: 34px;
+      border-radius: 28px;
+      background: rgba(255, 253, 248, 0.74);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .field {
+      position: relative;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      border: 1px solid rgba(111, 74, 53, 0.15);
+      border-radius: 18px;
+      background: rgba(248, 244, 236, 0.72);
+      color: var(--ink);
+      outline: 0;
+      transition: border-color 240ms ease, box-shadow 240ms ease, background 240ms ease;
+    }
+
+    .field input {
+      height: 58px;
+      padding: 0 18px;
+    }
+
+    .field textarea {
+      min-height: 142px;
+      resize: vertical;
+      padding: 16px 18px;
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      border-color: rgba(111, 74, 53, 0.44);
+      background: rgba(255, 253, 248, 0.92);
+      box-shadow: 0 0 0 4px rgba(111, 74, 53, 0.08);
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: rgba(78, 69, 60, 0.56);
+    }
+
+    .submit-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .whatsapp {
+      border-color: rgba(120, 128, 111, 0.25);
+      background: rgba(120, 128, 111, 0.13);
+      color: #405044;
+    }
+
+    .contact-side {
+      position: relative;
+      display: flex;
+      min-height: 600px;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+      border-radius: 30px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(38, 33, 29, 0.22), rgba(38, 33, 29, 0.72)),
+        url("https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1200&q=84") center / cover;
+      color: #fffaf1;
+    }
+
+    .contact-side::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 23px;
+      pointer-events: none;
+    }
+
+    .contact-details {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      gap: 12px;
+      padding: 34px;
+    }
+
+    .detail-card {
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.13);
+      backdrop-filter: blur(14px);
+    }
+
+    .detail-card span {
+      display: block;
+      color: rgba(255, 250, 241, 0.72);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .detail-card strong,
+    .detail-card a {
+      display: block;
+      margin-top: 7px;
+      color: #fffaf1;
+      font-size: 0.98rem;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    .map-card {
+      position: relative;
+      z-index: 2;
+      min-height: 196px;
+      margin: 0 34px 34px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 26px;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.14) 1px, transparent 1px) 0 0 / 42px 42px,
+        linear-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px) 0 0 / 42px 42px,
+        rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+    }
+
+    .map-line {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(32deg, transparent 0 26%, rgba(255, 250, 241, 0.28) 26% 27%, transparent 27%),
+        linear-gradient(137deg, transparent 0 45%, rgba(255, 250, 241, 0.2) 45% 46%, transparent 46%),
+        linear-gradient(78deg, transparent 0 62%, rgba(255, 250, 241, 0.18) 62% 63%, transparent 63%);
+    }
+
+    .map-pin {
+      position: absolute;
+      left: 50%;
+      top: 48%;
+      display: grid;
+      place-items: center;
+      width: 62px;
+      height: 62px;
+      border: 1px solid rgba(255, 255, 255, 0.36);
+      border-radius: 50%;
+      background: rgba(255, 250, 241, 0.2);
+      box-shadow: 0 0 0 18px rgba(255, 250, 241, 0.09);
+      transform: translate(-50%, -50%);
+    }
+
+    .map-caption {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: rgba(255, 250, 241, 0.86);
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .footer {
+      padding: 50px 0 44px;
+      border-top: 1px solid rgba(111, 74, 53, 0.1);
+      background: rgba(255, 253, 248, 0.4);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .footer p {
+      max-width: 330px;
+      font-size: 0.88rem;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+      color: #50473f;
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .socials {
+      display: flex;
+      justify-content: end;
+      gap: 10px;
+    }
+
+    .socials a {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(111, 74, 53, 0.14);
+      border-radius: 50%;
+      background: rgba(255, 253, 248, 0.72);
+      color: var(--walnut);
+      transition: transform 260ms var(--ease), background 260ms ease;
+    }
+
+    .socials a:hover {
+      background: var(--ink);
+      color: #fffaf1;
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      margin-top: 36px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: opacity 800ms var(--ease), transform 800ms var(--ease);
+      transition-delay: var(--delay, 0ms);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    [data-parallax] {
+      will-change: transform;
+    }
+
+    @keyframes subtleZoom {
+      from {
+        transform: scale(1.08);
+      }
+      to {
+        transform: scale(1.02);
+      }
+    }
+
+    @keyframes scrollDot {
+      0%,
+      100% {
+        opacity: 0.45;
+        transform: translateY(-12px);
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(12px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .container {
+        width: min(100% - 32px, 960px);
+      }
+
+      .nav {
+        width: calc(100% - 26px);
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 84px;
+        left: 13px;
+        right: 13px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin: 0;
+        padding: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.76);
+        border-radius: 28px;
+        background: rgba(255, 253, 248, 0.95);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(20px);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-12px);
+        transition: opacity 260ms var(--ease), transform 260ms var(--ease);
+      }
+
+      body.menu-open .nav-links {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .nav-links a {
+        display: flex;
+        min-height: 48px;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-action {
+        display: none;
+      }
+
+      .hero-grid,
+      .about-grid,
+      .why-wrap,
+      .contact-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 132px;
+      }
+
+      h1 {
+        font-size: 6.1rem;
+      }
+
+      h2 {
+        font-size: 4.15rem;
+      }
+
+      .hero-visual {
+        min-height: 620px;
+      }
+
+      .hero-image-wrap {
+        inset: 0 0 78px 0;
+      }
+
+      .section-header {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .services-grid,
+      .testimonials-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .project-card.large,
+      .project-card.medium,
+      .project-card.small {
+        grid-column: span 6;
+      }
+
+      .why-image-stack {
+        min-height: 560px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .section {
+        padding: 78px 0;
+      }
+
+      .nav {
+        top: 12px;
+        min-height: 62px;
+        padding: 9px 9px 9px 13px;
+      }
+
+      .brand-mark {
+        width: 40px;
+        height: 40px;
+      }
+
+      .brand-name span {
+        display: none;
+      }
+
+      .nav-links {
+        top: 74px;
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 4.7rem;
+      }
+
+      h2 {
+        font-size: 3.45rem;
+      }
+
+      h3 {
+        font-size: 2rem;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-bottom: 58px;
+      }
+
+      .hero-actions {
+        align-items: stretch;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .hero-meta,
+      .stats-grid,
+      .services-grid,
+      .testimonials-grid,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        min-height: 520px;
+      }
+
+      .floating-panel {
+        right: 0;
+        width: min(350px, 88%);
+      }
+
+      .vertical-label {
+        display: none;
+      }
+
+      .about-image {
+        aspect-ratio: 5 / 4;
+      }
+
+      .service-card {
+        min-height: 290px;
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card.large,
+      .project-card.medium,
+      .project-card.small {
+        grid-column: auto;
+        min-height: 430px;
+      }
+
+      .project-info {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .why-image-stack {
+        min-height: 490px;
+      }
+
+      .why-image-main {
+        inset: 0 0 92px 0;
+      }
+
+      .why-image-accent {
+        width: 62%;
+        height: 210px;
+      }
+
+      .material-note {
+        width: min(250px, 64%);
+        right: 12px;
+        bottom: 14px;
+      }
+
+      .stat-card strong {
+        font-size: 3.2rem;
+      }
+
+      .project-info h3 {
+        font-size: 1.95rem;
+      }
+
+      .quote {
+        font-size: 1.75rem;
+      }
+
+      .contact-shell {
+        padding: 12px;
+        border-radius: 30px;
+      }
+
+      .contact-form {
+        padding: 24px 18px;
+      }
+
+      .contact-side {
+        min-height: 560px;
+      }
+
+      .contact-details {
+        padding: 24px;
+      }
+
+      .map-card {
+        margin: 0 24px 24px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer p {
+        margin-inline: auto;
+      }
+
+      .socials {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        width: min(100% - 24px, 430px);
+      }
+
+      .hero-visual {
+        min-height: 470px;
+      }
+
+      h1 {
+        font-size: 3.7rem;
+      }
+
+      h2 {
+        font-size: 2.85rem;
+      }
+
+      .lead {
+        font-size: 1.04rem;
+      }
+
+      .floating-panel {
+        padding: 16px;
+        border-radius: 24px;
+      }
+
+      .floating-panel img {
+        height: 132px;
+        border-radius: 18px;
+      }
+
+      .hero-image-wrap {
+        border-radius: 34px;
+      }
+
+      .project-card.large,
+      .project-card.medium,
+      .project-card.small {
+        min-height: 370px;
+      }
+
+      .why-item {
+        grid-template-columns: 1fr;
+      }
+
+      .map-caption {
+        display: block;
+      }
+
+      .map-caption span + span {
+        display: block;
+        margin-top: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="#home" aria-label="WIN DESIGNER home">
+        <span class="brand-mark">WD</span>
+        <span class="brand-name">
+          <strong>WIN DESIGNER</strong>
+          <span>INTERIOR STUDIO</span>
+        </span>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#why">Why Us</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <a class="nav-action" href="#contact">Book Consultation</a>
+      <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-controls="navLinks" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow reveal">Modern Luxury Interior Studio</span>
+            <h1 class="reveal" style="--delay: 120ms;">Warm spaces, refined living.</h1>
+            <p class="lead reveal" style="--delay: 220ms;">WIN DESIGNER shapes elegant homes and commercial interiors with calm modern layouts, walnut woodwork, bespoke cabinetry and renovation craftsmanship built around the way you live.</p>
+            <div class="hero-actions reveal" style="--delay: 320ms;">
+              <a class="button primary" href="#projects">
+                View Projects
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+              <a class="button secondary" href="#contact">Start Your Design</a>
+            </div>
+
+            <div class="hero-meta">
+              <div class="hero-meta-card reveal" style="--delay: 420ms;">
+                <strong>120+</strong>
+                <span>Residential and commercial spaces completed</span>
+              </div>
+              <div class="hero-meta-card reveal" style="--delay: 500ms;">
+                <strong>10Y</strong>
+                <span>Interior renovation and custom woodwork expertise</span>
+              </div>
+              <div class="hero-meta-card reveal" style="--delay: 580ms;">
+                <strong>1:1</strong>
+                <span>Personal design direction from concept to handover</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual reveal" style="--delay: 180ms;">
+            <span class="vertical-label">Custom walnut woodwork</span>
+            <div class="hero-image-wrap" data-parallax="0.05">
+              <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1400&q=86" alt="Elegant warm modern living room with cream sofa and wood details" />
+            </div>
+            <div class="floating-panel" data-parallax="-0.035">
+              <img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?auto=format&fit=crop&w=900&q=84" alt="Luxury kitchen with custom wood cabinetry" />
+              <h3>Bespoke woodwork that feels built in, not added on.</h3>
+              <p>Cabinets, feature walls and storage systems crafted for a seamless interior language.</p>
+            </div>
+          </div>
+        </div>
+        <a class="scroll-cue" href="#about" aria-label="Scroll to about section"><span></span></a>
+      </section>
+
+      <section class="section about-band" id="about">
+        <div class="container about-grid">
+          <div class="about-image reveal">
+            <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=84" alt="Soft beige bedroom interior with wood texture and modern styling" />
+          </div>
+          <div class="about-copy">
+            <span class="eyebrow reveal">About WIN DESIGNER</span>
+            <h2 class="reveal" style="--delay: 110ms;">Interior design with a woodwork soul.</h2>
+            <p class="lead reveal" style="--delay: 190ms;">We create complete interiors where space planning, material choices, lighting and custom built-ins work together. Every project is designed to feel warm, practical and quietly luxurious, with cabinetry and woodwork produced to match the design precisely.</p>
+            <p class="reveal" style="--delay: 260ms;">From first moodboard to final installation, our team blends modern minimalist concepts with experienced renovation coordination and factory-direct craftsmanship. The result is a cohesive interior that looks premium, functions beautifully and ages with ease.</p>
+            <div class="signature-row reveal" style="--delay: 330ms;">
+              <span class="signature-pill">Interior design</span>
+              <span class="signature-pill">Custom cabinet</span>
+              <span class="signature-pill">Walnut wood aesthetic</span>
+              <span class="signature-pill">Complete renovation</span>
+            </div>
+            <div class="stats-grid">
+              <div class="stat-card reveal" style="--delay: 360ms;">
+                <strong>98%</strong>
+                <span>Client satisfaction across handover reviews</span>
+              </div>
+              <div class="stat-card reveal" style="--delay: 430ms;">
+                <strong>45</strong>
+                <span>Material and finish combinations curated yearly</span>
+              </div>
+              <div class="stat-card reveal" style="--delay: 500ms;">
+                <strong>30D</strong>
+                <span>Typical design concept and quotation timeline</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="services">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow reveal">Services</span>
+              <h2 class="reveal" style="--delay: 110ms;">Everything needed to create a complete interior.</h2>
+            </div>
+            <p class="lead reveal" style="--delay: 180ms;">A clear, end-to-end process for clients who want a refined look, practical storage and well-managed execution without juggling separate teams.</p>
+          </div>
+
+          <div class="services-grid">
+            <article class="service-card reveal">
+              <div class="service-icon">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <h3>Interior Design</h3>
+              <p>Concept direction, moodboards, space styling, lighting and material palettes tailored to your home or business.</p>
+              <a class="service-link" href="#contact">Discuss concept</a>
+            </article>
+
+            <article class="service-card reveal" style="--delay: 80ms;">
+              <div class="service-icon">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 4h14v16H5V4Zm0 8h14M12 4v16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <h3>Custom Cabinet</h3>
+              <p>Kitchen cabinets, wardrobes, TV consoles and storage systems designed to maximize every millimetre.</p>
+              <a class="service-link" href="#contact">Plan cabinetry</a>
+            </article>
+
+            <article class="service-card reveal" style="--delay: 160ms;">
+              <div class="service-icon">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 7h16M7 7v10m5-10v10m5-10v10M5 17h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <h3>Woodwork</h3>
+              <p>Feature walls, panels, counters and refined wood details in warm walnut, oak and natural textures.</p>
+              <a class="service-link" href="#contact">Explore finishes</a>
+            </article>
+
+            <article class="service-card reveal">
+              <div class="service-icon">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="m14 5 5 5-9 9H5v-5l9-9Zm-2 2 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <h3>Renovation</h3>
+              <p>Coordinated renovation works, site planning and finishing supervision from hacking to final styling.</p>
+              <a class="service-link" href="#contact">Request quote</a>
+            </article>
+
+            <article class="service-card reveal" style="--delay: 80ms;">
+              <div class="service-icon">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 5h16v14H4V5Zm8 0v14M4 12h8m4 0h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <h3>Space Planning</h3>
+              <p>Smart layouts that improve movement, storage, natural light and daily routines before renovation starts.</p>
+              <a class="service-link" href="#contact">Improve layout</a>
+            </article>
+
+            <article class="service-card reveal" style="--delay: 160ms;">
+              <div class="service-icon">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 21V6a2 2 0 0 1 2-2h8v17M14 9h4a2 2 0 0 1 2 2v10M8 8h2m-2 4h2m-2 4h2m7-3h1m-1 4h1M3 21h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <h3>Commercial Design</h3>
+              <p>Premium offices, showrooms, boutiques and hospitality interiors that feel branded, inviting and efficient.</p>
+              <a class="service-link" href="#contact">Create workplace</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow reveal">Project Showcase</span>
+              <h2 class="reveal" style="--delay: 110ms;">A gallery of calm luxury and custom detail.</h2>
+            </div>
+            <p class="lead reveal" style="--delay: 180ms;">Pinterest-worthy homes with a realistic, liveable polish: muted fabrics, cream walls, soft timber grain and thoughtful built-ins.</p>
+          </div>
+
+          <div class="project-grid">
+            <article class="project-card large reveal">
+              <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=1500&q=84" alt="Modern cream living room with natural wood and premium furniture" />
+              <div class="project-info">
+                <div>
+                  <span>Residential Suite</span>
+                  <h3>Serene Walnut Residence</h3>
+                </div>
+                <div class="project-arrow" aria-hidden="true">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none">
+                    <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card medium reveal" style="--delay: 110ms;">
+              <img src="https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?auto=format&fit=crop&w=1200&q=84" alt="Warm modern kitchen with wood cabinets and marble island" />
+              <div class="project-info">
+                <div>
+                  <span>Kitchen</span>
+                  <h3>Soft Stone Kitchen</h3>
+                </div>
+                <div class="project-arrow" aria-hidden="true">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none">
+                    <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card small reveal">
+              <img src="https://images.unsplash.com/photo-1617103996702-96ff29b1c467?auto=format&fit=crop&w=1000&q=84" alt="Modern bedroom interior with soft fabrics and wood accents" />
+              <div class="project-info">
+                <div>
+                  <span>Bedroom</span>
+                  <h3>Quiet Master Suite</h3>
+                </div>
+                <div class="project-arrow" aria-hidden="true">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none">
+                    <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card small reveal" style="--delay: 90ms;">
+              <img src="https://images.unsplash.com/photo-1600585153490-76fb20a32601?auto=format&fit=crop&w=1000&q=84" alt="Luxury lounge area with beige furniture and contemporary decor" />
+              <div class="project-info">
+                <div>
+                  <span>Lounge</span>
+                  <h3>Layered Living Room</h3>
+                </div>
+                <div class="project-arrow" aria-hidden="true">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none">
+                    <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card small reveal" style="--delay: 180ms;">
+              <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=1000&q=84" alt="Minimal modern dining room with wood textures and cream palette" />
+              <div class="project-info">
+                <div>
+                  <span>Dining</span>
+                  <h3>Warm Entertaining Space</h3>
+                </div>
+                <div class="project-arrow" aria-hidden="true">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none">
+                    <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section why-section" id="why">
+        <div class="container why-wrap">
+          <div>
+            <span class="eyebrow reveal">Why Choose Us</span>
+            <h2 class="reveal" style="--delay: 110ms;">Designed with taste. Built with control.</h2>
+            <p class="lead reveal" style="--delay: 180ms;">A premium interior is not only about a beautiful render. It depends on accurate measurements, disciplined finishing, good joinery and decisions that protect your budget.</p>
+
+            <div class="why-list">
+              <div class="why-item reveal">
+                <div class="service-icon">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 3 4 7v6c0 4.4 3.1 7 8 8 4.9-1 8-3.6 8-8V7l-8-4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                    <path d="m8.8 12.2 2.2 2.2 4.6-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+                <div>
+                  <h3>Premium quality</h3>
+                  <p>Refined finishes, balanced proportions and materials selected for beauty, durability and easy maintenance.</p>
+                </div>
+              </div>
+
+              <div class="why-item reveal" style="--delay: 80ms;">
+                <div class="service-icon">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M14.7 6.3a3 3 0 0 0-4 4L4 17v3h3l6.7-6.7a3 3 0 0 0 4-4l-2.1 2.1-3-3 2.1-2.1Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+                <div>
+                  <h3>Experienced craftsmanship</h3>
+                  <p>Cabinetry and installation handled with practical site knowledge, not just pretty design sketches.</p>
+                </div>
+              </div>
+
+              <div class="why-item reveal" style="--delay: 160ms;">
+                <div class="service-icon">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 2v5m0 10v5M4.9 4.9l3.5 3.5m7.2 7.2 3.5 3.5M2 12h5m10 0h5M4.9 19.1l3.5-3.5m7.2-7.2 3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  </svg>
+                </div>
+                <div>
+                  <h3>Modern concepts</h3>
+                  <p>Clean lines, warm palettes, calm storage and cinematic lighting for homes that feel current and timeless.</p>
+                </div>
+              </div>
+
+              <div class="why-item reveal" style="--delay: 240ms;">
+                <div class="service-icon">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-7h6v7M8 10h.01M12 10h.01M16 10h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+                <div>
+                  <h3>Factory direct woodwork</h3>
+                  <p>Direct control over custom woodwork helps align design, cost, quality and installation schedule.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="why-image-stack reveal" style="--delay: 180ms;">
+            <div class="why-image-main" data-parallax="0.035">
+              <img src="https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=1200&q=84" alt="Luxury interior with warm custom cabinetry and soft lighting" />
+            </div>
+            <div class="why-image-accent" data-parallax="-0.05">
+              <img src="https://images.unsplash.com/photo-1600489000022-c2086d79f9d4?auto=format&fit=crop&w=850&q=84" alt="Close view of warm wood cabinetry and modern shelves" />
+            </div>
+            <div class="material-note">
+              <strong>Finish first.</strong>
+              <span>We obsess over touch points, joins, shadow gaps and the small details clients notice every day.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="testimonials">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow reveal">Testimonials</span>
+              <h2 class="reveal" style="--delay: 110ms;">Clients remember the feeling of coming home.</h2>
+            </div>
+            <p class="lead reveal" style="--delay: 180ms;">Clean communication, elegant design taste and reliable craft support make the renovation process feel considered from the first meeting.</p>
+          </div>
+
+          <div class="testimonials-grid">
+            <article class="testimonial-card reveal">
+              <div>
+                <div class="stars" aria-label="Five star review">★★★★★</div>
+                <p class="quote">"The living room finally feels calm, warm and expensive without looking overdone."</p>
+              </div>
+              <div class="client">
+                <div class="client-avatar">JL</div>
+                <div>
+                  <strong>Jia Ling</strong>
+                  <span>Condominium owner</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-card reveal" style="--delay: 110ms;">
+              <div>
+                <div class="stars" aria-label="Five star review">★★★★★</div>
+                <p class="quote">"Their cabinet details are beautiful. The storage is practical and the walnut finish looks premium."</p>
+              </div>
+              <div class="client">
+                <div class="client-avatar">AR</div>
+                <div>
+                  <strong>Adam Rahman</strong>
+                  <span>Landed home client</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-card reveal" style="--delay: 220ms;">
+              <div>
+                <div class="stars" aria-label="Five star review">★★★★★</div>
+                <p class="quote">"Our showroom now feels like our brand. Visitors immediately understand the quality."</p>
+              </div>
+              <div class="client">
+                <div class="client-avatar">MS</div>
+                <div>
+                  <strong>Mei Studio</strong>
+                  <span>Commercial client</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact-section" id="contact">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow reveal">Contact</span>
+              <h2 class="reveal" style="--delay: 110ms;">Plan your next interior with WIN DESIGNER.</h2>
+            </div>
+            <p class="lead reveal" style="--delay: 180ms;">Share your property type, preferred style and renovation scope. We will recommend the next step for design, cabinetry or full project execution.</p>
+          </div>
+
+          <div class="contact-shell reveal">
+            <form class="contact-form" id="contactForm">
+              <span class="eyebrow">Start A Project</span>
+              <h3>Request a consultation</h3>
+              <div class="form-grid">
+                <label class="field">
+                  <input type="text" name="name" placeholder="Your name" required />
+                </label>
+                <label class="field">
+                  <input type="tel" name="phone" placeholder="Phone number" required />
+                </label>
+                <label class="field">
+                  <input type="email" name="email" placeholder="Email address" />
+                </label>
+                <label class="field">
+                  <input type="text" name="property" placeholder="Property type" />
+                </label>
+                <label class="field full">
+                  <textarea name="message" placeholder="Tell us about your interior, cabinet or renovation project"></textarea>
+                </label>
+              </div>
+              <div class="submit-row">
+                <button class="button primary" type="submit">Send Enquiry</button>
+                <a class="button whatsapp" href="https://wa.me/60123456789?text=Hi%20WIN%20DESIGNER%2C%20I%20would%20like%20to%20enquire%20about%20interior%20design." target="_blank" rel="noopener">WhatsApp Us</a>
+              </div>
+            </form>
+
+            <aside class="contact-side">
+              <div class="contact-details">
+                <div class="detail-card">
+                  <span>Email</span>
+                  <a href="mailto:hello@windesigner.com">hello@windesigner.com</a>
+                </div>
+                <div class="detail-card">
+                  <span>WhatsApp</span>
+                  <a href="https://wa.me/60123456789" target="_blank" rel="noopener">+60 12 345 6789</a>
+                </div>
+                <div class="detail-card">
+                  <span>Address</span>
+                  <strong>WIN DESIGNER Studio, Kuala Lumpur, Malaysia</strong>
+                </div>
+              </div>
+
+              <div class="map-card" aria-label="Styled map preview">
+                <div class="map-line"></div>
+                <div class="map-pin">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 21s7-5.2 7-12a7 7 0 1 0-14 0c0 6.8 7 12 7 12Z" stroke="currentColor" stroke-width="1.8" />
+                    <path d="M12 11.5a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4Z" stroke="currentColor" stroke-width="1.8" />
+                  </svg>
+                </div>
+                <div class="map-caption">
+                  <span>Studio appointment available</span>
+                  <span>KL and Selangor projects</span>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <a class="brand" href="#home" aria-label="WIN DESIGNER home">
+              <span class="brand-mark">WD</span>
+              <span class="brand-name">
+                <strong>WIN DESIGNER</strong>
+                <span>INTERIOR STUDIO</span>
+              </span>
+            </a>
+            <p>Modern interior design, custom cabinetry and walnut woodwork for refined residential and commercial spaces.</p>
+          </div>
+
+          <div class="footer-nav">
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+          </div>
+
+          <div class="socials" aria-label="Social media links">
+            <a href="#" aria-label="Instagram">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" stroke-width="1.8" />
+                <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" stroke="currentColor" stroke-width="1.8" />
+                <path d="M17.2 6.9h.01" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" />
+              </svg>
+            </a>
+            <a href="#" aria-label="Facebook">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M14 8h2V4h-2.4C10.9 4 9 5.9 9 8.6V11H6v4h3v5h4v-5h3l.7-4H13V8.8c0-.5.4-.8 1-.8Z" fill="currentColor" />
+              </svg>
+            </a>
+            <a href="#" aria-label="TikTok">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M14 4v10.2a4.2 4.2 0 1 1-4.2-4.2c.4 0 .8.1 1.2.2v3.1a1.4 1.4 0 1 0 1 1.3V4h2Zm0 0c.6 2.6 2.2 4.3 5 4.7v3.1c-2.2-.1-3.9-.9-5-2.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="copyright">Copyright <span id="year"></span> WIN DESIGNER. All rights reserved.</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const body = document.body;
+    const nav = document.querySelector(".nav");
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelectorAll(".nav-links a");
+    const revealEls = document.querySelectorAll(".reveal");
+    const parallaxEls = document.querySelectorAll("[data-parallax]");
+    const sections = [...document.querySelectorAll("main section[id]")];
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const closeMenu = () => {
+      body.classList.remove("menu-open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    };
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = body.classList.toggle("menu-open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    const onScroll = () => {
+      nav.classList.toggle("is-scrolled", window.scrollY > 16);
+
+      const center = window.scrollY + window.innerHeight * 0.36;
+      let activeId = "home";
+
+      sections.forEach((section) => {
+        if (center >= section.offsetTop) {
+          activeId = section.id;
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.toggle("is-active", link.getAttribute("href") === `#${activeId}`);
+      });
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return;
+      }
+
+      parallaxEls.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const speed = Number(el.dataset.parallax || 0);
+        if (rect.bottom > 0 && rect.top < window.innerHeight) {
+          const offset = (rect.top - window.innerHeight / 2) * speed;
+          el.style.transform = `translate3d(0, ${offset}px, 0)`;
+        }
+      });
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.16,
+      rootMargin: "0px 0px -60px 0px"
+    });
+
+    revealEls.forEach((el) => revealObserver.observe(el));
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    window.addEventListener("load", onScroll);
+    onScroll();
+
+    document.getElementById("contactForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const button = event.currentTarget.querySelector("button[type='submit']");
+      const originalText = button.textContent;
+      button.textContent = "Enquiry Received";
+      button.style.pointerEvents = "none";
+
+      window.setTimeout(() => {
+        button.textContent = originalText;
+        button.style.pointerEvents = "";
+        event.currentTarget.reset();
+      }, 2600);
+    });
+  </script>
+</body>
+</html>
