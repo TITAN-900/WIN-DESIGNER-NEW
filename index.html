@@ -797,6 +797,151 @@
       transform: translate(4px, -4px);
     }
 
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .material-card {
+      position: relative;
+      min-height: 640px;
+      border: 1px solid rgba(111, 74, 53, 0.12);
+      border-radius: 28px;
+      background: rgba(255, 253, 248, 0.72);
+      box-shadow: 0 12px 38px rgba(77, 56, 38, 0.08);
+      overflow: hidden;
+      transition: transform 330ms var(--ease), box-shadow 330ms var(--ease), border-color 330ms ease;
+    }
+
+    .material-card::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 5px;
+      background: linear-gradient(90deg, rgba(111, 74, 53, 0), rgba(111, 74, 53, 0.36), rgba(120, 128, 111, 0));
+      opacity: 0;
+      transform: scaleX(0.42);
+      transition: opacity 330ms ease, transform 330ms var(--ease);
+    }
+
+    .material-card:hover {
+      border-color: rgba(111, 74, 53, 0.24);
+      box-shadow: var(--shadow);
+      transform: translateY(-9px);
+    }
+
+    .material-card:hover::after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    .material-card:hover .material-image::before {
+      transform: scale(1.08) translateY(-4px);
+    }
+
+    .material-image {
+      position: relative;
+      height: 210px;
+      overflow: hidden;
+      background-color: var(--linen);
+    }
+
+    .material-image::before {
+      content: "";
+      position: absolute;
+      inset: -22px;
+      background-size: cover;
+      filter: saturate(1.08) contrast(1.02);
+      transition: transform 700ms var(--ease);
+    }
+
+    .material-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255, 253, 248, 0.04), rgba(38, 33, 29, 0.18));
+    }
+
+    .material-walnut::before {
+      background:
+        repeating-linear-gradient(94deg, rgba(42, 25, 17, 0.42) 0 5px, rgba(127, 75, 45, 0.32) 5px 12px, rgba(198, 142, 91, 0.2) 12px 19px),
+        linear-gradient(110deg, #4b2f21, #8c5c3c 34%, #c18a5d 58%, #5d3828);
+    }
+
+    .material-oak::before {
+      background:
+        repeating-linear-gradient(88deg, rgba(118, 82, 45, 0.2) 0 4px, rgba(243, 215, 171, 0.28) 4px 11px, rgba(164, 118, 72, 0.18) 11px 17px),
+        linear-gradient(112deg, #d7b986, #f0d9ae 42%, #b98f5e 72%, #ead1a3);
+    }
+
+    .material-ash::before {
+      background:
+        repeating-linear-gradient(92deg, rgba(128, 108, 80, 0.18) 0 3px, rgba(255, 241, 210, 0.32) 3px 10px, rgba(176, 147, 101, 0.15) 10px 16px),
+        linear-gradient(108deg, #eadcc4, #c8ae83 45%, #f6ead6 68%, #bfa57c);
+    }
+
+    .material-teak::before {
+      background:
+        repeating-linear-gradient(96deg, rgba(73, 42, 23, 0.26) 0 5px, rgba(195, 124, 55, 0.24) 5px 13px, rgba(240, 170, 84, 0.18) 13px 20px),
+        linear-gradient(112deg, #9a5c2f, #d99751 38%, #e7b06a 62%, #765034);
+    }
+
+    .material-engineered::before {
+      background:
+        repeating-linear-gradient(0deg, rgba(84, 57, 37, 0.24) 0 8px, rgba(225, 183, 129, 0.22) 8px 18px, rgba(111, 74, 53, 0.18) 18px 27px),
+        repeating-linear-gradient(90deg, rgba(255, 246, 230, 0.28) 0 22px, rgba(131, 91, 60, 0.2) 22px 44px),
+        linear-gradient(115deg, #b37848, #e2bd83 48%, #8a5b38);
+    }
+
+    .material-content {
+      padding: 24px;
+    }
+
+    .material-content h3 {
+      margin-top: 10px;
+      font-size: 1.85rem;
+      line-height: 1;
+    }
+
+    .material-origin {
+      display: inline-flex;
+      color: var(--walnut);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .material-details {
+      display: grid;
+      gap: 13px;
+      margin-top: 20px;
+    }
+
+    .material-details div {
+      padding-top: 12px;
+      border-top: 1px solid rgba(111, 74, 53, 0.11);
+    }
+
+    .material-details dt {
+      color: var(--walnut);
+      font-size: 0.68rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      line-height: 1.35;
+      text-transform: uppercase;
+    }
+
+    .material-details dd {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
     .why-section {
       background: linear-gradient(135deg, rgba(255, 253, 248, 0.68), rgba(238, 229, 216, 0.55));
     }
@@ -1383,6 +1528,10 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      .materials-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .project-card.large,
       .project-card.medium,
       .project-card.small {
@@ -1449,6 +1598,10 @@
       .services-grid,
       .testimonials-grid,
       .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .materials-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1594,6 +1747,14 @@
       .project-card.medium,
       .project-card.small {
         min-height: 370px;
+      }
+
+      .material-card {
+        min-height: auto;
+      }
+
+      .material-image {
+        height: 180px;
       }
 
       .why-item {
@@ -1884,6 +2045,170 @@
                     <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
                 </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="materials">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow reveal">Materials & Craftsmanship</span>
+              <h2 class="reveal" style="--delay: 110ms;">Premium woods selected for lasting interior character.</h2>
+            </div>
+            <p class="lead reveal" style="--delay: 180ms;">Every cabinet, feature wall and built-in detail begins with the right material. WIN DESIGNER pairs warm wood tones with Malaysian carpentry knowledge for interiors that feel refined, practical and beautifully finished.</p>
+          </div>
+
+          <div class="materials-grid">
+            <article class="material-card reveal">
+              <div class="material-image material-walnut" role="img" aria-label="American walnut wood grain texture"></div>
+              <div class="material-content">
+                <span class="material-origin">North America</span>
+                <h3>American Walnut</h3>
+                <dl class="material-details">
+                  <div>
+                    <dt>Characteristics</dt>
+                    <dd>Rich cocoa-brown tone with elegant natural variation.</dd>
+                  </div>
+                  <div>
+                    <dt>Texture</dt>
+                    <dd>Straight to softly waved grain with a smooth premium feel.</dd>
+                  </div>
+                  <div>
+                    <dt>Durability</dt>
+                    <dd>Stable hardwood for luxury interior cabinetry and panels.</dd>
+                  </div>
+                  <div>
+                    <dt>Recommended Usage</dt>
+                    <dd>TV walls, wardrobes, display cabinets and feature counters.</dd>
+                  </div>
+                  <div>
+                    <dt>Design Style</dt>
+                    <dd>Modern luxury, warm minimalist and hotel-inspired interiors.</dd>
+                  </div>
+                </dl>
+              </div>
+            </article>
+
+            <article class="material-card reveal" style="--delay: 80ms;">
+              <div class="material-image material-oak" role="img" aria-label="White oak wood grain texture"></div>
+              <div class="material-content">
+                <span class="material-origin">Europe & North America</span>
+                <h3>White Oak</h3>
+                <dl class="material-details">
+                  <div>
+                    <dt>Characteristics</dt>
+                    <dd>Light honey-beige colour with a calm, timeless appearance.</dd>
+                  </div>
+                  <div>
+                    <dt>Texture</dt>
+                    <dd>Defined open grain with subtle golden and grey undertones.</dd>
+                  </div>
+                  <div>
+                    <dt>Durability</dt>
+                    <dd>Dense, hard-wearing and reliable for daily-use built-ins.</dd>
+                  </div>
+                  <div>
+                    <dt>Recommended Usage</dt>
+                    <dd>Kitchen cabinets, dining storage, wall panels and shelves.</dd>
+                  </div>
+                  <div>
+                    <dt>Design Style</dt>
+                    <dd>Japandi, Scandinavian, contemporary and soft neutral homes.</dd>
+                  </div>
+                </dl>
+              </div>
+            </article>
+
+            <article class="material-card reveal" style="--delay: 160ms;">
+              <div class="material-image material-ash" role="img" aria-label="Ash wood grain texture"></div>
+              <div class="material-content">
+                <span class="material-origin">Europe & Asia</span>
+                <h3>Ash Wood</h3>
+                <dl class="material-details">
+                  <div>
+                    <dt>Characteristics</dt>
+                    <dd>Pale cream to light tan tone that keeps spaces bright.</dd>
+                  </div>
+                  <div>
+                    <dt>Texture</dt>
+                    <dd>Clean straight grain with a refined, lightly expressive surface.</dd>
+                  </div>
+                  <div>
+                    <dt>Durability</dt>
+                    <dd>Tough, flexible hardwood suitable for crafted interior details.</dd>
+                  </div>
+                  <div>
+                    <dt>Recommended Usage</dt>
+                    <dd>Open shelving, doors, fluted panels and custom furniture.</dd>
+                  </div>
+                  <div>
+                    <dt>Design Style</dt>
+                    <dd>Light luxury, minimalist, organic modern and family homes.</dd>
+                  </div>
+                </dl>
+              </div>
+            </article>
+
+            <article class="material-card reveal" style="--delay: 240ms;">
+              <div class="material-image material-teak" role="img" aria-label="Teak wood grain texture"></div>
+              <div class="material-content">
+                <span class="material-origin">Southeast Asia</span>
+                <h3>Teak Wood</h3>
+                <dl class="material-details">
+                  <div>
+                    <dt>Characteristics</dt>
+                    <dd>Golden brown colour with a naturally warm tropical character.</dd>
+                  </div>
+                  <div>
+                    <dt>Texture</dt>
+                    <dd>Oily, smooth grain with darker streaks and a luxurious sheen.</dd>
+                  </div>
+                  <div>
+                    <dt>Durability</dt>
+                    <dd>Highly durable and naturally resistant when properly finished.</dd>
+                  </div>
+                  <div>
+                    <dt>Recommended Usage</dt>
+                    <dd>Premium doors, vanities, counters and statement furniture.</dd>
+                  </div>
+                  <div>
+                    <dt>Design Style</dt>
+                    <dd>Resort luxury, tropical modern and warm contemporary spaces.</dd>
+                  </div>
+                </dl>
+              </div>
+            </article>
+
+            <article class="material-card reveal" style="--delay: 320ms;">
+              <div class="material-image material-engineered" role="img" aria-label="Engineered wood panel layered texture"></div>
+              <div class="material-content">
+                <span class="material-origin">Factory-crafted panels</span>
+                <h3>Engineered Wood Panels</h3>
+                <dl class="material-details">
+                  <div>
+                    <dt>Characteristics</dt>
+                    <dd>Consistent surface, flexible finishes and controlled production.</dd>
+                  </div>
+                  <div>
+                    <dt>Texture</dt>
+                    <dd>Smooth laminated, veneer or melamine faces with clean edges.</dd>
+                  </div>
+                  <div>
+                    <dt>Durability</dt>
+                    <dd>Stable for Malaysian interiors when selected by usage and area.</dd>
+                  </div>
+                  <div>
+                    <dt>Recommended Usage</dt>
+                    <dd>Cabinet carcasses, wardrobes, kitchens and large storage systems.</dd>
+                  </div>
+                  <div>
+                    <dt>Design Style</dt>
+                    <dd>Modern practical luxury, clean cabinetry and custom carpentry.</dd>
+                  </div>
+                </dl>
               </div>
             </article>
           </div>
