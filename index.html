@@ -863,17 +863,23 @@
       background: linear-gradient(180deg, rgba(255, 253, 248, 0.04), rgba(38, 33, 29, 0.18));
     }
 
-    .material-walnut::before {
-      background:
-        repeating-linear-gradient(94deg, rgba(42, 25, 17, 0.42) 0 5px, rgba(127, 75, 45, 0.32) 5px 12px, rgba(198, 142, 91, 0.2) 12px 19px),
-        linear-gradient(110deg, #4b2f21, #8c5c3c 34%, #c18a5d 58%, #5d3828);
-    }
+   .material-walnut::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("american-walnut.jpg.jpeg");
+    background-size: cover;
+    background-position: center;
+}
 
-    .material-oak::before {
-      background:
-        repeating-linear-gradient(88deg, rgba(118, 82, 45, 0.2) 0 4px, rgba(243, 215, 171, 0.28) 4px 11px, rgba(164, 118, 72, 0.18) 11px 17px),
-        linear-gradient(112deg, #d7b986, #f0d9ae 42%, #b98f5e 72%, #ead1a3);
-    }
+   .material-oak::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("white-oak.jpg.jpg");
+    background-size: cover;
+    background-position: center;
+}
 
     .material-ash::before {
       background:
