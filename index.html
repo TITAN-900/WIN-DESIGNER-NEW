@@ -799,7 +799,7 @@
 
     .materials-grid {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 18px;
     }
 
@@ -881,25 +881,23 @@
     background-position: center;
 }
 
-    .material-ash::before {
-      background:
-        repeating-linear-gradient(92deg, rgba(128, 108, 80, 0.18) 0 3px, rgba(255, 241, 210, 0.32) 3px 10px, rgba(176, 147, 101, 0.15) 10px 16px),
-        linear-gradient(108deg, #eadcc4, #c8ae83 45%, #f6ead6 68%, #bfa57c);
-    }
-
-    .material-teak::before {
-      background:
-        repeating-linear-gradient(96deg, rgba(73, 42, 23, 0.26) 0 5px, rgba(195, 124, 55, 0.24) 5px 13px, rgba(240, 170, 84, 0.18) 13px 20px),
-        linear-gradient(112deg, #9a5c2f, #d99751 38%, #e7b06a 62%, #765034);
-    }
-
-    .material-engineered::before {
-      background:
-        repeating-linear-gradient(0deg, rgba(84, 57, 37, 0.24) 0 8px, rgba(225, 183, 129, 0.22) 8px 18px, rgba(111, 74, 53, 0.18) 18px 27px),
-        repeating-linear-gradient(90deg, rgba(255, 246, 230, 0.28) 0 22px, rgba(131, 91, 60, 0.2) 22px 44px),
-        linear-gradient(115deg, #b37848, #e2bd83 48%, #8a5b38);
-    }
-
+     .material-ash::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("ash-wood.jpg.jpg");
+    background-size: cover;
+    background-position: center;
+}
+   .material-teak::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("teak-wood.jpg.jpg");
+    background-size: cover;
+    background-position: center;
+}
+   
     .material-content {
       padding: 24px;
     }
@@ -2188,35 +2186,7 @@
               </div>
             </article>
 
-            <article class="material-card reveal" style="--delay: 320ms;">
-              <div class="material-image material-engineered" role="img" aria-label="Engineered wood panel layered texture"></div>
-              <div class="material-content">
-                <span class="material-origin">Factory-crafted panels</span>
-                <h3>Engineered Wood Panels</h3>
-                <dl class="material-details">
-                  <div>
-                    <dt>Characteristics</dt>
-                    <dd>Consistent surface, flexible finishes and controlled production.</dd>
-                  </div>
-                  <div>
-                    <dt>Texture</dt>
-                    <dd>Smooth laminated, veneer or melamine faces with clean edges.</dd>
-                  </div>
-                  <div>
-                    <dt>Durability</dt>
-                    <dd>Stable for Malaysian interiors when selected by usage and area.</dd>
-                  </div>
-                  <div>
-                    <dt>Recommended Usage</dt>
-                    <dd>Cabinet carcasses, wardrobes, kitchens and large storage systems.</dd>
-                  </div>
-                  <div>
-                    <dt>Design Style</dt>
-                    <dd>Modern practical luxury, clean cabinetry and custom carpentry.</dd>
-                  </div>
-                </dl>
-              </div>
-            </article>
+            
           </div>
         </div>
       </section>
