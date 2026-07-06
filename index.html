@@ -75,13 +75,13 @@
     }
 
     .container {
-      width: min(1180px, calc(100% - 40px));
+      width: min(1240px, calc(100% - 40px));
       margin-inline: auto;
     }
 
     .section {
       position: relative;
-      padding: 108px 0;
+      padding: 118px 0;
     }
 
     .section-header {
@@ -537,17 +537,18 @@
 
     .about-grid {
       display: grid;
-      grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1fr);
-      gap: 64px;
-      align-items: center;
+      grid-template-columns: minmax(0, 1fr) minmax(340px, 0.68fr);
+      gap: 58px;
+      align-items: stretch;
     }
 
     .about-image {
       position: relative;
       overflow: hidden;
-      border-radius: var(--radius);
+      min-height: 680px;
+      border-radius: 42px;
       box-shadow: var(--shadow);
-      aspect-ratio: 4 / 5;
+      aspect-ratio: 5 / 4;
     }
 
     .about-image img {
@@ -563,9 +564,60 @@
       background: linear-gradient(180deg, transparent, rgba(38, 33, 29, 0.15));
     }
 
-    .about-copy p {
-      max-width: 680px;
-      margin-top: 20px;
+    .about-copy {
+      align-self: center;
+    }
+
+    .about-copy .lead {
+      max-width: 560px;
+      margin-top: 22px;
+    }
+
+    .about-points {
+      display: grid;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .about-point {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 18px;
+      align-items: start;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 24px;
+      background: rgba(255, 253, 248, 0.66);
+      box-shadow: 0 12px 38px rgba(77, 56, 38, 0.07);
+      backdrop-filter: blur(16px);
+    }
+
+    .about-point em {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(111, 74, 53, 0.1);
+      color: var(--walnut);
+      font-style: normal;
+      font-weight: 900;
+    }
+
+    .about-point strong {
+      display: block;
+      color: var(--ink);
+      font-size: 0.92rem;
+      line-height: 1.35;
+    }
+
+    .about-point span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 700;
+      line-height: 1.45;
     }
 
     .signature-row {
@@ -632,18 +684,19 @@
     .services-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
+      gap: 20px;
     }
 
     .service-card {
       position: relative;
-      min-height: 330px;
-      padding: 28px;
+      min-height: 440px;
+      padding: 0;
       border: 1px solid rgba(111, 74, 53, 0.12);
-      border-radius: 28px;
-      background: rgba(255, 253, 248, 0.72);
+      border-radius: 30px;
+      background: var(--linen);
       box-shadow: 0 12px 38px rgba(77, 56, 38, 0.08);
       overflow: hidden;
+      isolation: isolate;
       transition: transform 330ms var(--ease), box-shadow 330ms var(--ease), border-color 330ms ease;
     }
 
@@ -651,11 +704,51 @@
       content: "";
       position: absolute;
       inset: auto 0 0;
+      z-index: 3;
       height: 5px;
       background: linear-gradient(90deg, rgba(111, 74, 53, 0), rgba(111, 74, 53, 0.36), rgba(120, 128, 111, 0));
       opacity: 0;
       transform: scaleX(0.42);
       transition: opacity 330ms ease, transform 330ms var(--ease);
+    }
+
+    .service-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(180deg, rgba(35, 28, 22, 0.02) 20%, rgba(35, 28, 22, 0.76)),
+        linear-gradient(135deg, rgba(255, 253, 248, 0.12), transparent 46%);
+      pointer-events: none;
+    }
+
+    .service-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 760ms var(--ease), filter 760ms ease;
+    }
+
+    .service-content {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      z-index: 2;
+      color: #fffaf1;
+    }
+
+    .service-kicker {
+      display: inline-flex;
+      margin-bottom: 12px;
+      color: rgba(255, 250, 241, 0.76);
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
     }
 
     .service-card:hover {
@@ -669,6 +762,11 @@
       transform: scaleX(1);
     }
 
+    .service-card:hover img {
+      filter: saturate(1.04) contrast(1.04);
+      transform: scale(1.06);
+    }
+
     .service-icon {
       display: grid;
       place-items: center;
@@ -680,58 +778,249 @@
     }
 
     .service-card h3 {
-      margin-top: 38px;
+      font-size: 2.25rem;
+      line-height: 1;
     }
 
     .service-card p {
-      margin-top: 15px;
-      font-size: 0.95rem;
+      max-width: 280px;
+      margin-top: 10px;
+      color: rgba(255, 250, 241, 0.82);
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.45;
     }
 
     .service-link {
       display: inline-flex;
       align-items: center;
       gap: 9px;
-      margin-top: 28px;
-      color: var(--walnut);
+      margin-top: 18px;
+      color: #fffaf1;
       font-size: 0.82rem;
       font-weight: 900;
       letter-spacing: 0.02em;
     }
 
+    .before-after-section {
+      border-block: 1px solid rgba(111, 74, 53, 0.1);
+      background: linear-gradient(135deg, rgba(255, 253, 248, 0.74), rgba(238, 229, 216, 0.58));
+    }
+
+    .comparison-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.34fr);
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .comparison-frame {
+      --position: 52%;
+      position: relative;
+      min-height: 680px;
+      border-radius: 38px;
+      overflow: hidden;
+      background: var(--linen);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+      touch-action: none;
+    }
+
+    .compare-image,
+    .compare-before,
+    .compare-after {
+      position: absolute;
+      inset: 0;
+    }
+
+    .compare-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .compare-before img {
+      filter: saturate(0.62) contrast(0.92) brightness(0.78);
+      transform: scale(1.02);
+    }
+
+    .compare-after {
+      clip-path: inset(0 calc(100% - var(--position)) 0 0);
+      z-index: 2;
+    }
+
+    .compare-after img {
+      filter: saturate(1.04) contrast(1.04);
+    }
+
+    .compare-range {
+      position: absolute;
+      inset: 0;
+      z-index: 6;
+      width: 100%;
+      height: 100%;
+      cursor: ew-resize;
+      opacity: 0;
+      touch-action: none;
+    }
+
+    .compare-handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: var(--position);
+      z-index: 5;
+      width: 2px;
+      background: rgba(255, 250, 241, 0.88);
+      box-shadow: 0 0 0 1px rgba(38, 33, 29, 0.08);
+      pointer-events: none;
+      transform: translateX(-50%);
+    }
+
+    .compare-handle::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 72px;
+      height: 72px;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 50%;
+      background: rgba(255, 253, 248, 0.78);
+      box-shadow: 0 18px 55px rgba(38, 33, 29, 0.18);
+      backdrop-filter: blur(16px);
+      transform: translate(-50%, -50%);
+    }
+
+    .compare-handle::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 24px;
+      height: 24px;
+      border-top: 2px solid var(--walnut);
+      border-left: 2px solid var(--walnut);
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    .compare-label {
+      position: absolute;
+      z-index: 4;
+      top: 24px;
+      display: inline-flex;
+      min-height: 34px;
+      align-items: center;
+      padding: 0 14px;
+      border: 1px solid rgba(255, 255, 255, 0.46);
+      border-radius: 999px;
+      background: rgba(38, 33, 29, 0.38);
+      color: #fffaf1;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      backdrop-filter: blur(12px);
+    }
+
+    .compare-label.before {
+      left: 24px;
+    }
+
+    .compare-label.after {
+      right: 24px;
+    }
+
+    .comparison-note {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.74);
+      border-radius: 32px;
+      background: rgba(255, 253, 248, 0.68);
+      box-shadow: var(--soft-shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .comparison-note h3 {
+      font-size: 2.45rem;
+    }
+
+    .comparison-note p {
+      margin-top: 12px;
+      font-size: 0.94rem;
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    .comparison-stat {
+      display: grid;
+      gap: 12px;
+    }
+
+    .comparison-stat span {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(111, 74, 53, 0.12);
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .comparison-stat strong {
+      color: var(--walnut);
+    }
+
     .project-grid {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
-      gap: 18px;
+      gap: 22px;
     }
 
     .project-card {
       position: relative;
-      min-height: 430px;
-      border-radius: 30px;
+      min-height: 500px;
+      border-radius: 34px;
       overflow: hidden;
       background: var(--linen);
       box-shadow: var(--soft-shadow);
       isolation: isolate;
     }
 
+    .project-card.grand {
+      grid-column: span 12;
+      min-height: min(720px, 72vw);
+    }
+
     .project-card.large {
-      grid-column: span 7;
+      grid-column: span 8;
+      min-height: 620px;
     }
 
     .project-card.medium {
-      grid-column: span 5;
+      grid-column: span 4;
+      min-height: 620px;
     }
 
     .project-card.small {
       grid-column: span 4;
-      min-height: 360px;
+      min-height: 460px;
+    }
+
+    .project-card.wide {
+      grid-column: span 6;
+      min-height: 480px;
     }
 
     .project-card img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
-      min-height: inherit;
       object-fit: cover;
       transition: transform 700ms var(--ease), filter 700ms ease;
     }
@@ -741,16 +1030,16 @@
       position: absolute;
       inset: 0;
       z-index: 1;
-      background: linear-gradient(180deg, transparent 38%, rgba(26, 20, 16, 0.72));
+      background: linear-gradient(180deg, transparent 42%, rgba(26, 20, 16, 0.74));
       opacity: 0.96;
       transition: opacity 330ms ease;
     }
 
     .project-info {
       position: absolute;
-      left: 24px;
-      right: 24px;
-      bottom: 24px;
+      left: 28px;
+      right: 28px;
+      bottom: 28px;
       z-index: 2;
       display: flex;
       align-items: end;
@@ -760,7 +1049,8 @@
     }
 
     .project-info h3 {
-      font-size: 2.25rem;
+      max-width: 560px;
+      font-size: 2.55rem;
       line-height: 1;
     }
 
@@ -797,6 +1087,50 @@
       transform: translate(4px, -4px);
     }
 
+    .project-card.placeholder-card {
+      display: flex;
+      grid-column: span 3;
+      min-height: 460px;
+      align-items: end;
+      padding: 28px;
+      border: 1px dashed rgba(111, 74, 53, 0.28);
+      background:
+        linear-gradient(135deg, rgba(255, 253, 248, 0.76), rgba(238, 229, 216, 0.82)),
+        repeating-linear-gradient(135deg, rgba(111, 74, 53, 0.08) 0 1px, transparent 1px 18px);
+      box-shadow: 0 12px 38px rgba(77, 56, 38, 0.06);
+    }
+
+    .project-card.placeholder-card::after {
+      background: radial-gradient(circle at 24% 20%, rgba(255, 253, 248, 0.7), transparent 30%),
+        linear-gradient(180deg, transparent, rgba(111, 74, 53, 0.08));
+    }
+
+    .placeholder-content {
+      position: relative;
+      z-index: 2;
+      max-width: 270px;
+    }
+
+    .placeholder-content span {
+      color: var(--walnut);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .placeholder-content h3 {
+      margin-top: 12px;
+      font-size: 2.2rem;
+    }
+
+    .placeholder-content p {
+      margin-top: 10px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
     .materials-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -805,7 +1139,7 @@
 
     .material-card {
       position: relative;
-      min-height: 640px;
+      min-height: 410px;
       border: 1px solid rgba(111, 74, 53, 0.12);
       border-radius: 28px;
       background: rgba(255, 253, 248, 0.72);
@@ -842,7 +1176,7 @@
 
     .material-image {
       position: relative;
-      height: 210px;
+      height: 260px;
       overflow: hidden;
       background-color: var(--linen);
     }
@@ -906,6 +1240,14 @@
       margin-top: 10px;
       font-size: 1.85rem;
       line-height: 1;
+    }
+
+    .material-summary {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 700;
+      line-height: 1.5;
     }
 
     .material-origin {
@@ -1398,7 +1740,7 @@
 
 .kitchen-card img {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 100%;
   object-fit: cover;
   display: block;
 }
@@ -1498,7 +1840,8 @@
       .hero-grid,
       .about-grid,
       .why-wrap,
-      .contact-shell {
+      .contact-shell,
+      .comparison-shell {
         grid-template-columns: 1fr;
       }
 
@@ -1538,8 +1881,19 @@
 
       .project-card.large,
       .project-card.medium,
-      .project-card.small {
+      .project-card.small,
+      .project-card.wide {
         grid-column: span 6;
+      }
+
+      .project-card.grand {
+        grid-column: 1 / -1;
+        min-height: 560px;
+      }
+
+      .comparison-note {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(220px, 0.42fr);
       }
 
       .why-image-stack {
@@ -1624,10 +1978,11 @@
 
       .about-image {
         aspect-ratio: 5 / 4;
+        min-height: 420px;
       }
 
       .service-card {
-        min-height: 290px;
+        min-height: 390px;
       }
 
       .project-grid {
@@ -1636,9 +1991,21 @@
 
       .project-card.large,
       .project-card.medium,
-      .project-card.small {
+      .project-card.small,
+      .project-card.wide,
+      .project-card.grand,
+      .project-card.placeholder-card {
         grid-column: auto;
         min-height: 430px;
+      }
+
+      .comparison-frame {
+        min-height: 500px;
+      }
+
+      .comparison-note {
+        grid-template-columns: 1fr;
+        padding: 24px;
       }
 
       .project-info {
@@ -1753,6 +2120,34 @@
         min-height: 370px;
       }
 
+      .project-card.grand,
+      .project-card.wide,
+      .project-card.placeholder-card {
+        min-height: 370px;
+      }
+
+      .comparison-frame {
+        min-height: 430px;
+        border-radius: 30px;
+      }
+
+      .compare-label {
+        top: 16px;
+      }
+
+      .compare-label.before {
+        left: 16px;
+      }
+
+      .compare-label.after {
+        right: 16px;
+      }
+
+      .compare-handle::before {
+        width: 58px;
+        height: 58px;
+      }
+
       .material-card {
         min-height: auto;
       }
@@ -1790,9 +2185,8 @@
       <div class="nav-links" id="navLinks">
         <a href="#about">About</a>
         <a href="#services">Services</a>
-        <a href="#projects">Projects</a>
-        <a href="#why">Why Us</a>
-        <a href="#testimonials">Reviews</a>
+        <a href="#before-after">Before/After</a>
+        <a href="#projects">Portfolio</a>
         <a href="#contact">Contact</a>
       </div>
 
@@ -1810,7 +2204,7 @@
           <div class="hero-copy">
             <span class="eyebrow reveal">Modern Luxury Interior Studio</span>
             <h1 class="reveal" style="--delay: 120ms;">Warm spaces, refined living.</h1>
-            <p class="lead reveal" style="--delay: 220ms;">WIN DESIGNER shapes elegant homes and commercial interiors with calm modern layouts, walnut woodwork, bespoke cabinetry and renovation craftsmanship built around the way you live.</p>
+            <p class="lead reveal" style="--delay: 220ms;">Elegant interiors, warm walnut details, calm modern living.</p>
             <div class="hero-actions reveal" style="--delay: 320ms;">
               <a class="button primary" href="#projects">
                 View Projects
@@ -1824,15 +2218,15 @@
             <div class="hero-meta">
               <div class="hero-meta-card reveal" style="--delay: 420ms;">
                 <strong>120+</strong>
-                <span>Residential and commercial spaces completed</span>
+                <span>Spaces</span>
               </div>
               <div class="hero-meta-card reveal" style="--delay: 500ms;">
                 <strong>10Y</strong>
-                <span>Interior renovation and custom woodwork expertise</span>
+                <span>Woodwork</span>
               </div>
               <div class="hero-meta-card reveal" style="--delay: 580ms;">
                 <strong>1:1</strong>
-                <span>Personal design direction from concept to handover</span>
+                <span>Direction</span>
               </div>
             </div>
           </div>
@@ -1844,8 +2238,7 @@
             </div>
             <div class="floating-panel" data-parallax="-0.035">
               <img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?auto=format&fit=crop&w=900&q=84" alt="Luxury kitchen with custom wood cabinetry" />
-              <h3>Bespoke woodwork that feels built in, not added on.</h3>
-              <p>Cabinets, feature walls and storage systems crafted for a seamless interior language.</p>
+              <h3>Bespoke woodwork.</h3>
             </div>
           </div>
         </div>
@@ -1859,27 +2252,25 @@
           </div>
           <div class="about-copy">
             <span class="eyebrow reveal">About WIN DESIGNER</span>
-            <h2 class="reveal" style="--delay: 110ms;">Interior design with a woodwork soul.</h2>
-            <p class="lead reveal" style="--delay: 190ms;">We create complete interiors where space planning, material choices, lighting and custom built-ins work together. Every project is designed to feel warm, practical and quietly luxurious, with cabinetry and woodwork produced to match the design precisely.</p>
-            <p class="reveal" style="--delay: 260ms;">From first moodboard to final installation, our team blends modern minimalist concepts with experienced renovation coordination and factory-direct craftsmanship. The result is a cohesive interior that looks premium, functions beautifully and ages with ease.</p>
-            <div class="signature-row reveal" style="--delay: 330ms;">
-              <span class="signature-pill">Interior design</span>
-              <span class="signature-pill">Custom cabinet</span>
-              <span class="signature-pill">Walnut wood aesthetic</span>
-              <span class="signature-pill">Complete renovation</span>
-            </div>
-            <div class="stats-grid">
-              <div class="stat-card reveal" style="--delay: 360ms;">
-                <strong>98%</strong>
-                <span>Client satisfaction across handover reviews</span>
+            <h2 class="reveal" style="--delay: 110ms;">Calm design. Controlled build.</h2>
+            <div class="about-points">
+              <div class="about-point reveal" style="--delay: 260ms;">
+                <em>01</em>
+                <div>
+                  <strong>Premium direction</strong>
+                </div>
               </div>
-              <div class="stat-card reveal" style="--delay: 430ms;">
-                <strong>45</strong>
-                <span>Material and finish combinations curated yearly</span>
+              <div class="about-point reveal" style="--delay: 330ms;">
+                <em>02</em>
+                <div>
+                  <strong>Custom cabinetry</strong>
+                </div>
               </div>
-              <div class="stat-card reveal" style="--delay: 500ms;">
-                <strong>30D</strong>
-                <span>Typical design concept and quotation timeline</span>
+              <div class="about-point reveal" style="--delay: 400ms;">
+                <em>03</em>
+                <div>
+                  <strong>Coordinated execution</strong>
+                </div>
               </div>
             </div>
           </div>
@@ -1891,77 +2282,96 @@
           <div class="section-header">
             <div>
               <span class="eyebrow reveal">Services</span>
-              <h2 class="reveal" style="--delay: 110ms;">Everything needed to create a complete interior.</h2>
+              <h2 class="reveal" style="--delay: 110ms;">Designed, detailed, built.</h2>
             </div>
-            <p class="lead reveal" style="--delay: 180ms;">A clear, end-to-end process for clients who want a refined look, practical storage and well-managed execution without juggling separate teams.</p>
           </div>
 
           <div class="services-grid">
             <article class="service-card reveal">
-              <div class="service-icon">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
+              <img src="livingroom6.jpg.jpg" alt="Luxury lounge styled with soft beige tones and wood accents" />
+              <div class="service-content">
+                <span class="service-kicker">Interior</span>
+                <h3>Design Direction</h3>
               </div>
-              <h3>Interior Design</h3>
-              <p>Concept direction, moodboards, space styling, lighting and material palettes tailored to your home or business.</p>
-              <a class="service-link" href="#contact">Discuss concept</a>
             </article>
 
             <article class="service-card reveal" style="--delay: 80ms;">
-              <div class="service-icon">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M5 4h14v16H5V4Zm0 8h14M12 4v16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
+              <img src="livingroom2.jpg.jpg" alt="Warm kitchen interior with custom wood cabinets" />
+              <div class="service-content">
+                <span class="service-kicker">Cabinetry</span>
+                <h3>Custom Built-Ins</h3>
               </div>
-              <h3>Custom Cabinet</h3>
-              <p>Kitchen cabinets, wardrobes, TV consoles and storage systems designed to maximize every millimetre.</p>
-              <a class="service-link" href="#contact">Plan cabinetry</a>
             </article>
 
             <article class="service-card reveal" style="--delay: 160ms;">
-              <div class="service-icon">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M4 7h16M7 7v10m5-10v10m5-10v10M5 17h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
+              <img src="livingroom3.jpg.jpg" alt="Warm custom woodwork and cabinetry in a luxury interior" />
+              <div class="service-content">
+                <span class="service-kicker">Woodwork</span>
+                <h3>Feature Details</h3>
               </div>
-              <h3>Woodwork</h3>
-              <p>Feature walls, panels, counters and refined wood details in warm walnut, oak and natural textures.</p>
-              <a class="service-link" href="#contact">Explore finishes</a>
             </article>
 
             <article class="service-card reveal">
-              <div class="service-icon">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="m14 5 5 5-9 9H5v-5l9-9Zm-2 2 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
+              <img src="livingroom4.jpg.jpg" alt="Modern bedroom renovation with soft fabric and wood finishes" />
+              <div class="service-content">
+                <span class="service-kicker">Renovation</span>
+                <h3>Site Execution</h3>
               </div>
-              <h3>Renovation</h3>
-              <p>Coordinated renovation works, site planning and finishing supervision from hacking to final styling.</p>
-              <a class="service-link" href="#contact">Request quote</a>
             </article>
 
             <article class="service-card reveal" style="--delay: 80ms;">
-              <div class="service-icon">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M4 5h16v14H4V5Zm8 0v14M4 12h8m4 0h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
+              <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=84" alt="Elegant warm living room with open modern layout" />
+              <div class="service-content">
+                <span class="service-kicker">Planning</span>
+                <h3>Better Flow</h3>
               </div>
-              <h3>Space Planning</h3>
-              <p>Smart layouts that improve movement, storage, natural light and daily routines before renovation starts.</p>
-              <a class="service-link" href="#contact">Improve layout</a>
             </article>
 
             <article class="service-card reveal" style="--delay: 160ms;">
-              <div class="service-icon">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M4 21V6a2 2 0 0 1 2-2h8v17M14 9h4a2 2 0 0 1 2 2v10M8 8h2m-2 4h2m-2 4h2m7-3h1m-1 4h1M3 21h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
+              <img src="livingroom5.jpg.jpg" alt="Minimal dining and hospitality-style interior with warm wood tones" />
+              <div class="service-content">
+                <span class="service-kicker">Commercial</span>
+                <h3>Studio Spaces</h3>
               </div>
-              <h3>Commercial Design</h3>
-              <p>Premium offices, showrooms, boutiques and hospitality interiors that feel branded, inviting and efficient.</p>
-              <a class="service-link" href="#contact">Create workplace</a>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section before-after-section" id="before-after">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow reveal">Before & After</span>
+              <h2 class="reveal" style="--delay: 110ms;">Transformation preview.</h2>
+            </div>
+          </div>
+
+          <div class="comparison-shell">
+            <div class="comparison-frame reveal" style="--delay: 120ms;">
+              <div class="compare-image compare-before">
+                <img src="livingroom4.jpg.jpg" alt="Before renovation placeholder interior image" />
+              </div>
+              <div class="compare-image compare-after">
+                <img src="livingroom3.jpg.jpg" alt="After renovation placeholder interior image" />
+              </div>
+              <span class="compare-label before">Before</span>
+              <span class="compare-label after">After</span>
+              <span class="compare-handle" aria-hidden="true"></span>
+              <input class="compare-range" type="range" min="5" max="95" value="52" aria-label="Compare before and after renovation images" />
+            </div>
+
+            <aside class="comparison-note reveal" style="--delay: 220ms;">
+              <div>
+                <span class="eyebrow">Transformation</span>
+                <h3>Future renovation reveals.</h3>
+              </div>
+              <div class="comparison-stat">
+                <span><strong>Future</strong> condo</span>
+                <span><strong>Future</strong> kitchen</span>
+                <span><strong>Future</strong> wardrobe</span>
+              </div>
+            </aside>
           </div>
         </div>
       </section>
@@ -1970,18 +2380,17 @@
         <div class="container">
           <div class="section-header">
             <div>
-              <span class="eyebrow reveal">Project Showcase</span>
-              <h2 class="reveal" style="--delay: 110ms;">A gallery of calm luxury and custom detail.</h2>
+              <span class="eyebrow reveal">Portfolio</span>
+              <h2 class="reveal" style="--delay: 110ms;">Large-format interiors.</h2>
             </div>
-            <p class="lead reveal" style="--delay: 180ms;">Pinterest-worthy homes with a realistic, liveable polish: muted fabrics, cream walls, soft timber grain and thoughtful built-ins.</p>
           </div>
 
           <div class="project-grid">
-            <article class="project-card large reveal">
+            <article class="project-card grand reveal">
               <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=1500&q=84" alt="Modern cream living room with natural wood and premium furniture" />
               <div class="project-info">
                 <div>
-                  <span>Residential Suite</span>
+                  <span>Signature Residence</span>
                   <h3>Serene Walnut Residence</h3>
                 </div>
                 <div class="project-arrow" aria-hidden="true">
@@ -1992,12 +2401,27 @@
               </div>
             </article>
 
-            <article class="project-card medium kitchen-card reveal" style="--delay: 110ms;">
+            <article class="project-card large kitchen-card reveal" style="--delay: 90ms;">
               <img src="livingroom2.jpg.jpg" alt="Warm modern kitchen with wood cabinets and marble island" />
               <div class="project-info">
                 <div>
                   <span>Kitchen</span>
                   <h3>Soft Stone Kitchen</h3>
+                </div>
+                <div class="project-arrow" aria-hidden="true">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none">
+                    <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card medium reveal" style="--delay: 160ms;">
+              <img src="livingroom.jpg.jpg" alt="Soft beige interior with wood texture and modern styling" />
+              <div class="project-info">
+                <div>
+                  <span>Suite</span>
+                  <h3>Layered Neutral Room</h3>
                 </div>
                 <div class="project-arrow" aria-hidden="true">
                   <svg class="icon" viewBox="0 0 24 24" fill="none">
@@ -2051,6 +2475,35 @@
                 </div>
               </div>
             </article>
+
+            <article class="project-card wide reveal" style="--delay: 120ms;">
+              <img src="livingroom3.jpg.jpg" alt="Luxury interior with warm custom cabinetry and soft lighting" />
+              <div class="project-info">
+                <div>
+                  <span>Woodwork</span>
+                  <h3>Built-In Gallery Wall</h3>
+                </div>
+                <div class="project-arrow" aria-hidden="true">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none">
+                    <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card placeholder-card reveal" style="--delay: 200ms;">
+              <div class="placeholder-content">
+                <span>Future AI Photo</span>
+                <h3>Upcoming Residence</h3>
+              </div>
+            </article>
+
+            <article class="project-card placeholder-card reveal" style="--delay: 260ms;">
+              <div class="placeholder-content">
+                <span>Future AI Photo</span>
+                <h3>Upcoming Kitchen</h3>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -2060,129 +2513,36 @@
           <div class="section-header">
             <div>
               <span class="eyebrow reveal">Materials & Craftsmanship</span>
-              <h2 class="reveal" style="--delay: 110ms;">Premium woods selected for lasting interior character.</h2>
+              <h2 class="reveal" style="--delay: 110ms;">Warm finishes.</h2>
             </div>
-            <p class="lead reveal" style="--delay: 180ms;">Every cabinet, feature wall and built-in detail begins with the right material. WIN DESIGNER pairs warm wood tones with Malaysian carpentry knowledge for interiors that feel refined, practical and beautifully finished.</p>
           </div>
 
           <div class="materials-grid">
             <article class="material-card reveal">
               <div class="material-image material-walnut" role="img" aria-label="American walnut wood grain texture"></div>
               <div class="material-content">
-                <span class="material-origin">North America</span>
                 <h3>American Walnut</h3>
-                <dl class="material-details">
-                  <div>
-                    <dt>Characteristics</dt>
-                    <dd>Rich cocoa-brown tone with elegant natural variation.</dd>
-                  </div>
-                  <div>
-                    <dt>Texture</dt>
-                    <dd>Straight to softly waved grain with a smooth premium feel.</dd>
-                  </div>
-                  <div>
-                    <dt>Durability</dt>
-                    <dd>Stable hardwood for luxury interior cabinetry and panels.</dd>
-                  </div>
-                  <div>
-                    <dt>Recommended Usage</dt>
-                    <dd>TV walls, wardrobes, display cabinets and feature counters.</dd>
-                  </div>
-                  <div>
-                    <dt>Design Style</dt>
-                    <dd>Modern luxury, warm minimalist and hotel-inspired interiors.</dd>
-                  </div>
-                </dl>
               </div>
             </article>
 
             <article class="material-card reveal" style="--delay: 80ms;">
               <div class="material-image material-oak" role="img" aria-label="White oak wood grain texture"></div>
               <div class="material-content">
-                <span class="material-origin">Europe & North America</span>
                 <h3>White Oak</h3>
-                <dl class="material-details">
-                  <div>
-                    <dt>Characteristics</dt>
-                    <dd>Light honey-beige colour with a calm, timeless appearance.</dd>
-                  </div>
-                  <div>
-                    <dt>Texture</dt>
-                    <dd>Defined open grain with subtle golden and grey undertones.</dd>
-                  </div>
-                  <div>
-                    <dt>Durability</dt>
-                    <dd>Dense, hard-wearing and reliable for daily-use built-ins.</dd>
-                  </div>
-                  <div>
-                    <dt>Recommended Usage</dt>
-                    <dd>Kitchen cabinets, dining storage, wall panels and shelves.</dd>
-                  </div>
-                  <div>
-                    <dt>Design Style</dt>
-                    <dd>Japandi, Scandinavian, contemporary and soft neutral homes.</dd>
-                  </div>
-                </dl>
               </div>
             </article>
 
             <article class="material-card reveal" style="--delay: 160ms;">
               <div class="material-image material-ash" role="img" aria-label="Ash wood grain texture"></div>
               <div class="material-content">
-                <span class="material-origin">Europe & Asia</span>
                 <h3>Ash Wood</h3>
-                <dl class="material-details">
-                  <div>
-                    <dt>Characteristics</dt>
-                    <dd>Pale cream to light tan tone that keeps spaces bright.</dd>
-                  </div>
-                  <div>
-                    <dt>Texture</dt>
-                    <dd>Clean straight grain with a refined, lightly expressive surface.</dd>
-                  </div>
-                  <div>
-                    <dt>Durability</dt>
-                    <dd>Tough, flexible hardwood suitable for crafted interior details.</dd>
-                  </div>
-                  <div>
-                    <dt>Recommended Usage</dt>
-                    <dd>Open shelving, doors, fluted panels and custom furniture.</dd>
-                  </div>
-                  <div>
-                    <dt>Design Style</dt>
-                    <dd>Light luxury, minimalist, organic modern and family homes.</dd>
-                  </div>
-                </dl>
               </div>
             </article>
 
             <article class="material-card reveal" style="--delay: 240ms;">
               <div class="material-image material-teak" role="img" aria-label="Teak wood grain texture"></div>
               <div class="material-content">
-                <span class="material-origin">Southeast Asia</span>
                 <h3>Teak Wood</h3>
-                <dl class="material-details">
-                  <div>
-                    <dt>Characteristics</dt>
-                    <dd>Golden brown colour with a naturally warm tropical character.</dd>
-                  </div>
-                  <div>
-                    <dt>Texture</dt>
-                    <dd>Oily, smooth grain with darker streaks and a luxurious sheen.</dd>
-                  </div>
-                  <div>
-                    <dt>Durability</dt>
-                    <dd>Highly durable and naturally resistant when properly finished.</dd>
-                  </div>
-                  <div>
-                    <dt>Recommended Usage</dt>
-                    <dd>Premium doors, vanities, counters and statement furniture.</dd>
-                  </div>
-                  <div>
-                    <dt>Design Style</dt>
-                    <dd>Resort luxury, tropical modern and warm contemporary spaces.</dd>
-                  </div>
-                </dl>
               </div>
             </article>
 
@@ -2195,8 +2555,7 @@
         <div class="container why-wrap">
           <div>
             <span class="eyebrow reveal">Why Choose Us</span>
-            <h2 class="reveal" style="--delay: 110ms;">Designed with taste. Built with control.</h2>
-            <p class="lead reveal" style="--delay: 180ms;">A premium interior is not only about a beautiful render. It depends on accurate measurements, disciplined finishing, good joinery and decisions that protect your budget.</p>
+            <h2 class="reveal" style="--delay: 110ms;">Taste, control, finish.</h2>
 
             <div class="why-list">
               <div class="why-item reveal">
@@ -2207,8 +2566,7 @@
                   </svg>
                 </div>
                 <div>
-                  <h3>Premium quality</h3>
-                  <p>Refined finishes, balanced proportions and materials selected for beauty, durability and easy maintenance.</p>
+                  <h3>Premium finishes</h3>
                 </div>
               </div>
 
@@ -2219,8 +2577,7 @@
                   </svg>
                 </div>
                 <div>
-                  <h3>Experienced craftsmanship</h3>
-                  <p>Cabinetry and installation handled with practical site knowledge, not just pretty design sketches.</p>
+                  <h3>Measured cabinetry</h3>
                 </div>
               </div>
 
@@ -2231,8 +2588,7 @@
                   </svg>
                 </div>
                 <div>
-                  <h3>Modern concepts</h3>
-                  <p>Clean lines, warm palettes, calm storage and cinematic lighting for homes that feel current and timeless.</p>
+                  <h3>Modern layouts</h3>
                 </div>
               </div>
 
@@ -2243,8 +2599,7 @@
                   </svg>
                 </div>
                 <div>
-                  <h3>Factory direct woodwork</h3>
-                  <p>Direct control over custom woodwork helps align design, cost, quality and installation schedule.</p>
+                  <h3>Factory direct</h3>
                 </div>
               </div>
             </div>
@@ -2259,64 +2614,7 @@
             </div>
             <div class="material-note">
               <strong>Finish first.</strong>
-              <span>We obsess over touch points, joins, shadow gaps and the small details clients notice every day.</span>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="testimonials">
-        <div class="container">
-          <div class="section-header">
-            <div>
-              <span class="eyebrow reveal">Testimonials</span>
-              <h2 class="reveal" style="--delay: 110ms;">Clients remember the feeling of coming home.</h2>
-            </div>
-            <p class="lead reveal" style="--delay: 180ms;">Clean communication, elegant design taste and reliable craft support make the renovation process feel considered from the first meeting.</p>
-          </div>
-
-          <div class="testimonials-grid">
-            <article class="testimonial-card reveal">
-              <div>
-                <div class="stars" aria-label="Five star review">★★★★★</div>
-                <p class="quote">"The living room finally feels calm, warm and expensive without looking overdone."</p>
-              </div>
-              <div class="client">
-                <div class="client-avatar">JL</div>
-                <div>
-                  <strong>Jia Ling</strong>
-                  <span>Condominium owner</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="testimonial-card reveal" style="--delay: 110ms;">
-              <div>
-                <div class="stars" aria-label="Five star review">★★★★★</div>
-                <p class="quote">"Their cabinet details are beautiful. The storage is practical and the walnut finish looks premium."</p>
-              </div>
-              <div class="client">
-                <div class="client-avatar">AR</div>
-                <div>
-                  <strong>Adam Rahman</strong>
-                  <span>Landed home client</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="testimonial-card reveal" style="--delay: 220ms;">
-              <div>
-                <div class="stars" aria-label="Five star review">★★★★★</div>
-                <p class="quote">"Our showroom now feels like our brand. Visitors immediately understand the quality."</p>
-              </div>
-              <div class="client">
-                <div class="client-avatar">MS</div>
-                <div>
-                  <strong>Mei Studio</strong>
-                  <span>Commercial client</span>
-                </div>
-              </div>
-            </article>
           </div>
         </div>
       </section>
@@ -2326,9 +2624,8 @@
           <div class="section-header">
             <div>
               <span class="eyebrow reveal">Contact</span>
-              <h2 class="reveal" style="--delay: 110ms;">Plan your next interior with WIN DESIGNER.</h2>
+              <h2 class="reveal" style="--delay: 110ms;">Plan your interior.</h2>
             </div>
-            <p class="lead reveal" style="--delay: 180ms;">Share your property type, preferred style and renovation scope. We will recommend the next step for design, cabinetry or full project execution.</p>
           </div>
 
           <div class="contact-shell reveal">
@@ -2349,7 +2646,7 @@
                   <input type="text" name="property" placeholder="Property type" />
                 </label>
                 <label class="field full">
-                  <textarea name="message" placeholder="Tell us about your interior, cabinet or renovation project"></textarea>
+                  <textarea name="message" placeholder="Tell us about your project"></textarea>
                 </label>
               </div>
               <div class="submit-row">
@@ -2404,7 +2701,6 @@
                 <span>INTERIOR STUDIO</span>
               </span>
             </a>
-            <p>Modern interior design, custom cabinetry and walnut woodwork for refined residential and commercial spaces.</p>
           </div>
 
           <div class="footer-nav">
@@ -2448,6 +2744,8 @@
     const revealEls = document.querySelectorAll(".reveal");
     const parallaxEls = document.querySelectorAll("[data-parallax]");
     const sections = [...document.querySelectorAll("main section[id]")];
+    const comparisonFrame = document.querySelector(".comparison-frame");
+    const comparisonRange = document.querySelector(".compare-range");
 
     document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -2513,6 +2811,41 @@
     window.addEventListener("resize", onScroll);
     window.addEventListener("load", onScroll);
     onScroll();
+
+    if (comparisonFrame && comparisonRange) {
+      let isComparing = false;
+
+      const updateComparison = (value = comparisonRange.value) => {
+        comparisonRange.value = value;
+        comparisonFrame.style.setProperty("--position", `${value}%`);
+      };
+
+      const updateComparisonFromPointer = (event) => {
+        const rect = comparisonFrame.getBoundingClientRect();
+        const rawPosition = ((event.clientX - rect.left) / rect.width) * 100;
+        const position = Math.min(95, Math.max(5, Math.round(rawPosition)));
+        updateComparison(position);
+      };
+
+      comparisonRange.addEventListener("input", () => updateComparison());
+      comparisonFrame.addEventListener("pointerdown", (event) => {
+        isComparing = true;
+        comparisonFrame.setPointerCapture?.(event.pointerId);
+        updateComparisonFromPointer(event);
+      });
+      comparisonFrame.addEventListener("pointermove", (event) => {
+        if (isComparing) {
+          updateComparisonFromPointer(event);
+        }
+      });
+      comparisonFrame.addEventListener("pointerup", () => {
+        isComparing = false;
+      });
+      comparisonFrame.addEventListener("pointercancel", () => {
+        isComparing = false;
+      });
+      updateComparison();
+    }
 
     document.getElementById("contactForm").addEventListener("submit", (event) => {
       event.preventDefault();
