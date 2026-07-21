@@ -100,7 +100,8 @@
     .nav-links a,
     .project-meta,
     .service-index,
-    .contact-label {
+    .contact-label,
+    .micro-copy {
       letter-spacing: 0;
       text-transform: uppercase;
     }
@@ -134,18 +135,18 @@
 
     h1 {
       margin-top: 18px;
-      font-size: 3.55rem;
+      font-size: 4.8rem;
       color: var(--black);
     }
 
     h2 {
       margin-top: 16px;
-      font-size: 2.75rem;
+      font-size: 3.55rem;
       color: var(--black);
     }
 
     h3 {
-      font-size: 1.72rem;
+      font-size: 2.1rem;
     }
 
     p {
@@ -162,8 +163,8 @@
 
     .reveal {
       opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 620ms var(--ease), transform 620ms var(--ease);
+      transform: translateY(22px);
+      transition: opacity 900ms var(--ease), transform 900ms var(--ease);
       transition-delay: var(--delay, 0ms);
     }
 
@@ -186,6 +187,12 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 1200ms var(--ease), filter 1200ms ease;
+    }
+
+    .image-frame:hover img {
+      filter: saturate(1.04) contrast(1.03);
+      transform: scale(1.045);
     }
 
     .btn {
@@ -201,7 +208,11 @@
       font-size: 0.9rem;
       font-weight: 700;
       line-height: 1;
-      transition: background 220ms ease, border-color 220ms ease, color 220ms ease;
+      transition: transform 260ms var(--ease), background 260ms ease, border-color 260ms ease, color 260ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
     }
 
     .btn-primary {
@@ -242,25 +253,30 @@
     .brand {
       display: inline-flex;
       align-items: center;
-      flex-shrink: 0;
+      gap: 10px;
       min-width: 0;
     }
 
     .brand-logo {
-      display: block;
-      width: 118px;
-      height: 52px;
+      width: 82px;
+      height: 38px;
       object-fit: contain;
-      object-position: center;
-      background: transparent;
-      border: 0;
-      border-radius: 0;
-      box-shadow: none;
-      padding: 0;
-      margin: 0;
-      opacity: 1;
-      filter: none;
-      mix-blend-mode: normal;
+      mix-blend-mode: multiply;
+    }
+
+    .brand-word {
+      display: grid;
+      gap: 1px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--black);
+      line-height: 1.1;
+    }
+
+    .brand-word span {
+      color: var(--muted);
+      font-size: 0.68rem;
+      font-weight: 600;
     }
 
     .nav-links {
@@ -318,31 +334,47 @@
     }
 
     .hero {
-      min-height: auto;
-      padding: 116px 0 72px;
+      min-height: 100svh;
+      padding: 108px 0 52px;
       display: grid;
       align-items: center;
     }
 
     .hero-grid {
       display: grid;
-      max-width: 1060px;
-      gap: 26px;
-      justify-items: center;
-      text-align: center;
+      gap: 34px;
+    }
+
+    .hero-identity {
+      display: grid;
+      justify-items: start;
+      gap: 22px;
     }
 
     .hero-logo-wrap {
       position: relative;
-      width: 230px;
-      height: 158px;
+      width: min(78vw, 410px);
+      height: 248px;
       display: grid;
       place-items: center;
       overflow: hidden;
       border-radius: var(--radius);
-      background: transparent;
-      box-shadow: none;
+      background: rgba(255, 253, 248, 0.72);
+      box-shadow: 0 26px 80px rgba(69, 52, 38, 0.11);
       isolation: isolate;
+      animation: logoArrive 1400ms var(--ease) both 200ms;
+    }
+
+    .hero-logo-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: linear-gradient(100deg, transparent 0 40%, rgba(191, 148, 88, 0.46) 50%, transparent 60% 100%);
+      transform: translateX(-125%);
+      animation: lionLine 2200ms var(--ease) both 900ms;
+      mix-blend-mode: multiply;
+      pointer-events: none;
     }
 
     .hero-logo {
@@ -350,31 +382,267 @@
       height: 100%;
       object-fit: contain;
       mix-blend-mode: multiply;
-    }
-
-    .hero-image-frame {
-      width: 100%;
-      height: 390px;
-      margin-top: 4px;
+      clip-path: inset(0 100% 0 0);
+      animation: logoDraw 1700ms var(--ease) both 420ms;
     }
 
     .hero-copy {
       position: relative;
-      display: grid;
-      justify-items: center;
       z-index: 2;
     }
 
     .hero-copy h1 {
-      max-width: 640px;
+      max-width: 620px;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
       gap: 12px;
-      margin-top: 24px;
+      margin-top: 28px;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 460px;
+      margin-top: 28px;
+    }
+
+    .metric {
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--black);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .cinema-scene {
+      position: relative;
+      min-height: 600px;
+      perspective: 1100px;
+      isolation: isolate;
+    }
+
+    .scene-shell {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(255, 253, 248, 0.2), rgba(31, 25, 20, 0.12)),
+        url("assets/win20/hero-condo.webp") center / cover;
+      box-shadow: var(--shadow);
+      transform: rotateX(1.8deg) rotateY(-3deg);
+      transform-style: preserve-3d;
+    }
+
+    .scene-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(110deg, rgba(255, 255, 255, 0.5), transparent 30%, rgba(23, 21, 19, 0.12) 100%),
+        linear-gradient(180deg, rgba(255, 253, 248, 0.18), rgba(23, 21, 19, 0.28));
+      pointer-events: none;
+    }
+
+    .scene-layer {
+      position: absolute;
+      z-index: 2;
+      opacity: 0;
+      transform: translate3d(0, 26px, 0);
+      animation: assemble 1100ms var(--ease) forwards;
+      animation-delay: var(--scene-delay, 0ms);
+    }
+
+    .scene-wall {
+      inset: 11% 9% 26% 47%;
+      border-radius: var(--radius);
+      background:
+        linear-gradient(90deg, rgba(255, 253, 248, 0.18), rgba(255, 253, 248, 0.72)),
+        linear-gradient(90deg, rgba(107, 73, 52, 0.18) 0 1px, transparent 1px 18%);
+      border: 1px solid rgba(255, 253, 248, 0.36);
+      box-shadow: inset 0 0 0 1px rgba(107, 73, 52, 0.06);
+      --scene-delay: 450ms;
+    }
+
+    .scene-floor {
+      left: -8%;
+      right: -8%;
+      bottom: -3%;
+      height: 32%;
+      background:
+        linear-gradient(90deg, rgba(255, 253, 248, 0.08), rgba(255, 253, 248, 0.32)),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.15) 0 1px, transparent 1px 130px),
+        rgba(173, 157, 136, 0.54);
+      transform: rotateX(68deg) translateY(44px);
+      transform-origin: bottom;
+      --scene-delay: 240ms;
+    }
+
+    .scene-sofa {
+      left: 8%;
+      bottom: 15%;
+      width: 43%;
+      height: 20%;
+      border-radius: 8px 8px 18px 18px;
+      background: linear-gradient(145deg, #d6c5b2, #f2e7d8);
+      box-shadow: 0 24px 44px rgba(25, 20, 16, 0.18);
+      --scene-delay: 720ms;
+    }
+
+    .scene-sofa::before,
+    .scene-sofa::after {
+      content: "";
+      position: absolute;
+      top: 15%;
+      width: 28%;
+      height: 58%;
+      border-radius: var(--radius);
+      background: rgba(255, 253, 248, 0.42);
+      box-shadow: inset 0 0 0 1px rgba(107, 73, 52, 0.08);
+    }
+
+    .scene-sofa::before {
+      left: 8%;
+    }
+
+    .scene-sofa::after {
+      right: 10%;
+      background: rgba(44, 37, 32, 0.72);
+    }
+
+    .scene-table {
+      left: 42%;
+      bottom: 13%;
+      width: 24%;
+      height: 11%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 34% 24%, #3b3029, #141210 70%);
+      box-shadow: 0 28px 34px rgba(18, 14, 11, 0.24);
+      --scene-delay: 930ms;
+    }
+
+    .scene-light {
+      top: 8%;
+      left: 20%;
+      width: 26%;
+      height: 22%;
+      border-top: 2px solid rgba(23, 21, 19, 0.58);
+      --scene-delay: 1160ms;
+    }
+
+    .scene-light::before {
+      content: "";
+      position: absolute;
+      left: 22%;
+      top: 100%;
+      width: 58%;
+      height: 24px;
+      border: 4px solid rgba(23, 21, 19, 0.72);
+      border-radius: 50%;
+      box-shadow: 0 0 30px rgba(255, 224, 166, 0.72);
+    }
+
+    .scene-art {
+      right: 8%;
+      top: 28%;
+      width: 18%;
+      height: 24%;
+      border: 6px solid rgba(23, 21, 19, 0.72);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, transparent 0 48%, rgba(23, 21, 19, 0.76) 48% 63%, transparent 63%),
+        linear-gradient(45deg, #d1b28a, #f1dec4);
+      --scene-delay: 1320ms;
+    }
+
+    .scene-plant {
+      right: 7%;
+      bottom: 13%;
+      width: 11%;
+      height: 28%;
+      --scene-delay: 1500ms;
+    }
+
+    .scene-plant::before {
+      content: "";
+      position: absolute;
+      inset: 0 21% 28%;
+      border-radius: 50% 50% 44% 44%;
+      background:
+        radial-gradient(circle at 18% 24%, #6f7a61 0 12%, transparent 13%),
+        radial-gradient(circle at 68% 18%, #57664f 0 14%, transparent 15%),
+        radial-gradient(circle at 48% 45%, #778468 0 18%, transparent 19%),
+        radial-gradient(circle at 24% 68%, #4f5f49 0 14%, transparent 15%);
+    }
+
+    .scene-plant::after {
+      content: "";
+      position: absolute;
+      left: 24%;
+      right: 24%;
+      bottom: 0;
+      height: 32%;
+      border-radius: 0 0 8px 8px;
+      background: linear-gradient(145deg, #e7d7c4, #c6a782);
+    }
+
+    .scene-glass {
+      inset: 0;
+      z-index: 4;
+      background: linear-gradient(110deg, transparent 0 54%, rgba(255, 253, 248, 0.26) 62%, transparent 70%);
+      opacity: 0.76;
+      transform: translateX(-12%);
+      animation: lightMove 7200ms ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    .scene-caption {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.34);
+      border-radius: var(--radius);
+      padding: 14px;
+      background: rgba(23, 21, 19, 0.48);
+      color: var(--ivory);
+      backdrop-filter: blur(18px);
+    }
+
+    .scene-caption strong {
+      display: block;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.52rem;
+      line-height: 1;
+    }
+
+    .scene-caption span {
+      color: rgba(255, 253, 248, 0.76);
+      font-size: 0.78rem;
+      font-weight: 700;
     }
 
     .section-header {
@@ -422,6 +690,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 1200ms var(--ease), filter 1200ms ease;
     }
 
     .project-card::after {
@@ -433,19 +702,24 @@
       opacity: 0.92;
     }
 
+    .project-card:hover img {
+      filter: saturate(1.04) contrast(1.03);
+      transform: scale(1.045);
+    }
+
     .project-feature {
       grid-column: span 12;
-      min-height: 600px;
+      min-height: 640px;
     }
 
     .project-wide {
-      grid-column: span 6;
-      min-height: 500px;
+      grid-column: span 7;
+      min-height: 540px;
     }
 
     .project-tall {
-      grid-column: span 6;
-      min-height: 500px;
+      grid-column: span 5;
+      min-height: 660px;
     }
 
     .project-small {
@@ -505,12 +779,12 @@
 
     .service-item {
       position: relative;
-      min-height: 170px;
+      min-height: 210px;
       padding: 28px;
       background:
         linear-gradient(135deg, rgba(255, 253, 248, 0.08), rgba(255, 253, 248, 0.02)),
         var(--black);
-      transition: background 220ms ease;
+      transition: background 300ms ease, transform 300ms var(--ease);
     }
 
     .service-item:hover {
@@ -532,9 +806,9 @@
     }
 
     .service-item h3 {
-      margin-top: 32px;
+      margin-top: 34px;
       color: var(--ivory);
-      font-size: 2rem;
+      font-size: 2.35rem;
     }
 
     .service-item p {
@@ -554,7 +828,7 @@
 
     .craft-panel {
       display: grid;
-      gap: 14px;
+      gap: 18px;
       align-content: center;
       padding: 28px;
       border: 1px solid var(--line);
@@ -726,13 +1000,14 @@
       justify-items: center;
     }
 
-    .about-statement h2 {
-      max-width: 760px;
-      margin-top: 0;
+    .about-logo {
+      width: min(80vw, 360px);
+      mix-blend-mode: multiply;
     }
 
-    .about-statement p {
-      max-width: 620px;
+    .about-statement h2 {
+      max-width: 860px;
+      margin-top: 0;
     }
 
     .value-strip {
@@ -774,11 +1049,12 @@
       padding: 24px;
       background: rgba(255, 253, 248, 0.76);
       box-shadow: var(--soft-shadow);
-      transition: border-color 220ms ease;
+      transition: transform 260ms var(--ease), border-color 260ms ease;
     }
 
     .contact-card:hover {
       border-color: rgba(191, 148, 88, 0.34);
+      transform: translateY(-3px);
     }
 
     .contact-card.primary {
@@ -821,38 +1097,72 @@
       padding-top: 20px;
     }
 
+    @keyframes logoArrive {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes logoDraw {
+      to {
+        clip-path: inset(0 0 0 0);
+      }
+    }
+
+    @keyframes lionLine {
+      to {
+        transform: translateX(125%);
+      }
+    }
+
+    @keyframes assemble {
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes lightMove {
+      from {
+        transform: translateX(-18%);
+        opacity: 0.22;
+      }
+      to {
+        transform: translateX(18%);
+        opacity: 0.76;
+      }
+    }
+
     @media (min-width: 700px) {
       .container {
         width: min(100% - 48px, 1220px);
       }
 
       h1 {
-        font-size: 4.45rem;
+        font-size: 6.2rem;
       }
 
       h2 {
-        font-size: 3.35rem;
+        font-size: 4.45rem;
       }
 
       .hero {
-        padding-top: 126px;
+        padding-top: 128px;
       }
 
       .hero-grid {
         gap: 48px;
       }
 
-      .hero-image-frame {
-        height: 520px;
-      }
-
       .service-grid,
+      .contact-grid,
       .value-strip {
         grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .contact-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .service-grid {
@@ -866,15 +1176,28 @@
       }
 
       h1 {
-        font-size: 5.25rem;
+        font-size: 7.2rem;
       }
 
       h2 {
-        font-size: 3.9rem;
+        font-size: 5.25rem;
       }
 
-      .hero-image-frame {
-        height: 620px;
+      .hero-grid {
+        grid-template-columns: minmax(390px, 0.82fr) minmax(520px, 1fr);
+        align-items: center;
+        gap: 62px;
+      }
+
+      .cinema-scene {
+        min-height: 720px;
+      }
+
+      .scene-caption {
+        left: 22px;
+        right: 22px;
+        bottom: 22px;
+        padding: 18px;
       }
 
       .craft-layout {
@@ -888,7 +1211,7 @@
       }
 
       .contact-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: 1.2fr 0.9fr 0.9fr;
       }
     }
 
@@ -935,6 +1258,9 @@
         display: block;
       }
 
+      .brand-word {
+        display: none;
+      }
     }
 
     @media (max-width: 699px) {
@@ -943,11 +1269,11 @@
       }
 
       h1 {
-        font-size: 3.25rem;
+        font-size: 4.25rem;
       }
 
       h2 {
-        font-size: 2.55rem;
+        font-size: 3.1rem;
       }
 
       h3 {
@@ -960,21 +1286,34 @@
       }
 
       .brand-logo {
-        width: 96px;
-        height: 44px;
+        width: 76px;
+        height: 35px;
       }
 
       .hero-logo-wrap {
-        width: min(72vw, 220px);
-        height: 145px;
+        width: min(86vw, 330px);
+        height: 230px;
       }
 
       .hero-actions .btn {
         width: 100%;
       }
 
-      .hero-image-frame {
-        height: 360px;
+      .hero-metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .cinema-scene {
+        min-height: 520px;
+      }
+
+      .scene-shell {
+        transform: none;
+      }
+
+      .scene-caption {
+        align-items: start;
+        flex-direction: column;
       }
 
       .project-layout {
@@ -1021,19 +1360,19 @@
 
     @media (max-width: 430px) {
       h1 {
-        font-size: 2.95rem;
+        font-size: 3.55rem;
       }
 
       h2 {
-        font-size: 2.3rem;
+        font-size: 2.65rem;
       }
 
       .section {
         padding: 64px 0;
       }
 
-      .hero-image-frame {
-        height: 320px;
+      .cinema-scene {
+        min-height: 470px;
       }
 
       .project-card,
@@ -1074,7 +1413,8 @@
   <div class="page-shell">
     <header class="nav" aria-label="Primary navigation">
       <a class="brand" href="#home" aria-label="WIN DESIGN home">
-        <img class="brand-logo" src="assets/win20/win-design-logo-nav-compact.png" alt="WIN DESIGN logo" />
+        <img class="brand-logo" src="assets/win20/win-design-logo-cropped.webp" alt="WIN DESIGN official logo" width="963" height="742" />
+        <span class="brand-word">WIN DESIGN <span>Luxury interiors</span></span>
       </a>
 
       <nav class="nav-links" id="navLinks" aria-label="Site sections">
@@ -1096,19 +1436,54 @@
     <main>
       <section class="hero" id="home">
         <div class="container hero-grid">
-          <div class="hero-logo-wrap" aria-label="WIN DESIGN official logo">
-            <img class="hero-logo" src="assets/win20/win-design-logo-cropped.webp" alt="WIN DESIGN official lion logo" width="963" height="742" fetchpriority="high" />
+          <div class="hero-identity">
+            <div class="hero-logo-wrap" aria-label="WIN DESIGN official logo reveal">
+              <img class="hero-logo" src="assets/win20/win-design-logo-cropped.webp" alt="WIN DESIGN official lion logo" width="963" height="742" fetchpriority="high" />
+            </div>
+
+            <div class="hero-copy">
+              <span class="section-kicker reveal">Luxury Malaysian Interiors</span>
+              <h1 class="reveal" style="--delay: 120ms;">Design Spaces That Inspire Living</h1>
+              <p class="lead reveal" style="--delay: 220ms;">Premium interior design crafted around your lifestyle.</p>
+              <div class="hero-actions reveal" style="--delay: 320ms;">
+                <a class="btn btn-primary" href="#projects">Explore Projects</a>
+                <a class="btn btn-secondary" href="#before-after">View Transformations</a>
+              </div>
+
+              <div class="hero-metrics reveal" style="--delay: 420ms;">
+                <div class="metric">
+                  <strong>KL</strong>
+                  <span>Condo Living</span>
+                </div>
+                <div class="metric">
+                  <strong>1:1</strong>
+                  <span>Design Direction</span>
+                </div>
+                <div class="metric">
+                  <strong>Wood</strong>
+                  <span>Craft Focus</span>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="image-frame hero-image-frame reveal" style="--delay: 100ms;">
-            <img src="assets/win20/hero-condo.webp" alt="Luxury Malaysian condominium living room with warm walnut finishes" width="1536" height="1024" loading="eager" decoding="async" />
-          </div>
-
-          <div class="hero-copy">
-            <h1 class="reveal" style="--delay: 170ms;">Design Spaces<br>That Inspire Living</h1>
-            <p class="lead reveal" style="--delay: 240ms;">Premium interior design for Malaysian homes.</p>
-            <div class="hero-actions reveal" style="--delay: 300ms;">
-              <a class="btn btn-primary" href="https://wa.me/601172455699?text=Hi%20WIN%20DESIGN%2C%20I%20would%20like%20to%20discuss%20my%20interior%20project." target="_blank" rel="noopener">WhatsApp</a>
+          <div class="cinema-scene reveal" style="--delay: 180ms;" data-parallax-zone>
+            <div class="scene-shell" data-depth="14">
+              <div class="scene-layer scene-floor"></div>
+              <div class="scene-layer scene-wall"></div>
+              <div class="scene-layer scene-sofa"></div>
+              <div class="scene-layer scene-table"></div>
+              <div class="scene-layer scene-light"></div>
+              <div class="scene-layer scene-art"></div>
+              <div class="scene-layer scene-plant"></div>
+              <div class="scene-glass"></div>
+              <div class="scene-caption">
+                <div>
+                  <strong>Mont Kiara Mood</strong>
+                  <span>Walnut, cream stone, quiet light</span>
+                </div>
+                <span class="micro-copy">2.5D Interior Study</span>
+              </div>
             </div>
           </div>
         </div>
@@ -1118,7 +1493,7 @@
         <div class="container">
           <div class="section-header">
             <span class="section-kicker reveal">Project Showcase</span>
-            <h2 class="reveal" style="--delay: 90ms;">Featured Malaysian homes.</h2>
+            <h2 class="reveal" style="--delay: 90ms;">Images first. Stories implied.</h2>
           </div>
 
           <div class="project-layout">
@@ -1145,6 +1520,30 @@
                 <h3>Calm Master Room</h3>
               </div>
             </article>
+
+            <article class="project-card project-small reveal">
+              <img src="assets/win20/project-foyer.webp" alt="Walnut foyer and display cabinetry for Malaysian landed home" width="1536" height="1024" loading="lazy" decoding="async" data-project-placeholder="04" />
+              <div class="project-info">
+                <div class="project-meta"><span>Setia Alam</span><span>Carpentry</span></div>
+                <h3>Display Foyer</h3>
+              </div>
+            </article>
+
+            <article class="project-card project-small reveal" style="--delay: 80ms;">
+              <img src="assets/win20/project-study.webp" alt="Malaysian study lounge with walnut built-ins and soft lighting" width="1586" height="992" loading="lazy" decoding="async" data-project-placeholder="05" />
+              <div class="project-info">
+                <div class="project-meta"><span>PJ</span><span>Study</span></div>
+                <h3>Private Lounge</h3>
+              </div>
+            </article>
+
+            <article class="project-card project-small reveal" style="--delay: 160ms;">
+              <img src="assets/win20/after-same-room.webp" alt="Completed Malaysian condominium living room after renovation" width="1280" height="853" loading="lazy" decoding="async" data-project-placeholder="06" />
+              <div class="project-info">
+                <div class="project-meta"><span>Eco Sanctuary</span><span>Renovation</span></div>
+                <h3>Finished Living</h3>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -1154,24 +1553,29 @@
           <div class="section-header centered">
             <span class="section-kicker reveal">Services</span>
             <h2 class="reveal" style="--delay: 90ms;">Clear scope. Quiet confidence.</h2>
+            <p class="lead reveal" style="--delay: 170ms;">Design, renovation and carpentry shaped for refined Malaysian homes.</p>
           </div>
 
           <div class="service-grid reveal" style="--delay: 240ms;">
             <article class="service-item">
               <span class="service-index">01</span>
               <h3>Interior Design</h3>
+              <p>Atmospheric concepts with precise material direction.</p>
             </article>
             <article class="service-item">
               <span class="service-index">02</span>
               <h3>Renovation</h3>
+              <p>From bare unit to finished lifestyle space.</p>
             </article>
             <article class="service-item">
               <span class="service-index">03</span>
               <h3>Space Planning</h3>
+              <p>Layouts that feel calm, generous and usable.</p>
             </article>
             <article class="service-item">
               <span class="service-index">04</span>
               <h3>Custom Carpentry</h3>
+              <p>Built-ins, wardrobes and walnut feature walls.</p>
             </article>
           </div>
         </div>
@@ -1186,26 +1590,29 @@
           <div class="craft-panel reveal" style="--delay: 120ms;">
             <div>
               <span class="section-kicker">Crafted With Precision</span>
-              <h2>Woodwork, cabinetry and refined finishing.</h2>
-              <p class="lead">Premium carpentry for warm, practical Malaysian interiors.</p>
+              <h2>Where design meets craftsmanship.</h2>
+              <p class="lead">Clean workshop discipline, premium wood selection and measured details.</p>
             </div>
             <div class="craft-list">
               <div class="craft-point">
                 <em>01</em>
                 <div>
                   <strong>Measured cabinetry</strong>
+                  <span>Every panel is planned before production.</span>
                 </div>
               </div>
               <div class="craft-point">
                 <em>02</em>
                 <div>
-                  <strong>Workshop precision</strong>
+                  <strong>Walnut warmth</strong>
+                  <span>Natural grain, soft light and refined finishing.</span>
                 </div>
               </div>
               <div class="craft-point">
                 <em>03</em>
                 <div>
-                  <strong>Clean installation</strong>
+                  <strong>Professional build</strong>
+                  <span>Organized execution from workshop to site.</span>
                 </div>
               </div>
             </div>
@@ -1231,7 +1638,7 @@
               <span class="compare-label before">Before</span>
               <span class="compare-label after">After</span>
               <span class="compare-handle" aria-hidden="true"></span>
-              <input class="compare-range" type="range" min="5" max="95" value="52" autocomplete="off" aria-label="Compare the same room before and after renovation" />
+              <input class="compare-range" type="range" min="5" max="95" value="52" aria-label="Compare the same room before and after renovation" />
             </div>
 
             <aside class="comparison-note reveal" style="--delay: 240ms;">
@@ -1245,8 +1652,14 @@
 
       <section class="section about" id="about">
         <div class="container about-statement">
+          <img class="about-logo reveal" src="assets/win20/win-design-logo-cropped.webp" alt="WIN DESIGN official logo" width="963" height="742" loading="lazy" decoding="async" />
           <span class="section-kicker reveal" style="--delay: 90ms;">About WIN DESIGN</span>
-          <h2 class="reveal" style="--delay: 170ms;">A Malaysian interior design studio focused on calm homes, precise carpentry and warm modern living.</h2>
+          <h2 class="reveal" style="--delay: 170ms;">We craft interiors with confidence, precision and quiet strength.</h2>
+          <div class="value-strip reveal" style="--delay: 260ms;">
+            <span>Confidence</span>
+            <span>Leadership</span>
+            <span>Craftsmanship</span>
+          </div>
         </div>
       </section>
 
@@ -1268,6 +1681,11 @@
               <strong>+60 1172455699</strong>
               <p>Speak directly with the studio.</p>
             </a>
+            <a class="contact-card reveal" href="mailto:hello@windesigner.com" style="--delay: 160ms;">
+              <span class="contact-label">Email</span>
+              <strong>hello@windesigner.com</strong>
+              <p>Send drawings, references or project details.</p>
+            </a>
           </div>
         </div>
       </section>
@@ -1281,6 +1699,8 @@
     </footer>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
   <script>
     const body = document.body;
     const menuToggle = document.querySelector(".menu-toggle");
@@ -1339,10 +1759,48 @@
       if (event.buttons === 1) updateComparisonFromPointer(event);
     });
 
-    if (compareRange) {
-      setComparisonPosition(compareRange.value);
-    }
+    const parallaxZones = document.querySelectorAll("[data-parallax-zone]");
+    parallaxZones.forEach((zone) => {
+      const target = zone.querySelector("[data-depth]");
+      if (!target) return;
+      zone.addEventListener("pointermove", (event) => {
+        const rect = zone.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        target.style.transform = `rotateX(${1.8 - y * 3}deg) rotateY(${-3 + x * 5}deg) translate3d(${x * 10}px, ${y * 10}px, 0)`;
+      });
+      zone.addEventListener("pointerleave", () => {
+        target.style.transform = "rotateX(1.8deg) rotateY(-3deg)";
+      });
+    });
 
+    window.addEventListener("load", () => {
+      if (window.gsap && window.ScrollTrigger) {
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.to(".scene-shell", {
+          yPercent: -4,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.8
+          }
+        });
+        gsap.utils.toArray(".project-card").forEach((card) => {
+          gsap.fromTo(card.querySelector("img"), { yPercent: -3 }, {
+            yPercent: 3,
+            ease: "none",
+            scrollTrigger: {
+              trigger: card,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 0.7
+            }
+          });
+        });
+      }
+    });
   </script>
 </body>
 </html>
