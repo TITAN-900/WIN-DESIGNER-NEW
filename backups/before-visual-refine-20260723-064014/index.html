@@ -1686,576 +1686,6 @@
       }
     }
 
-    /* Visual portfolio refinement: more photography, less brochure copy */
-    h1 {
-      font-size: 5.4rem;
-    }
-
-    h2 {
-      font-size: 3.7rem;
-    }
-
-    .hero-copy {
-      max-width: 950px;
-    }
-
-    .hero-copy h1 {
-      max-width: 950px;
-    }
-
-    .hero {
-      display: block;
-      min-height: auto;
-      padding: 112px 0 90px;
-      background: var(--warm-white);
-      color: var(--ink);
-      overflow: visible;
-    }
-
-    .hero::after {
-      display: none;
-    }
-
-    .hero-media {
-      position: relative;
-      inset: auto;
-      z-index: 0;
-      width: min(100% - 40px, 1240px);
-      height: 52vh;
-      min-height: 460px;
-      max-height: 620px;
-      margin: 0 auto;
-      border-radius: 12px;
-      background: var(--linen);
-      box-shadow: var(--soft-shadow);
-    }
-
-    .hero-media img {
-      transform: none;
-    }
-
-    .hero-grid {
-      margin-top: 34px;
-    }
-
-    .hero-copy {
-      padding-bottom: 0;
-    }
-
-    .hero .section-kicker,
-    .hero h1 {
-      color: var(--black);
-    }
-
-    .hero .lead {
-      max-width: 410px;
-      font-size: 1.02rem;
-      color: var(--muted);
-    }
-
-    .hero .section-kicker::before {
-      background: var(--gold);
-    }
-
-    .hero-actions {
-      margin-top: 22px;
-    }
-
-    .section-header.split {
-      grid-template-columns: minmax(0, 0.86fr) minmax(260px, 0.36fr);
-      align-items: end;
-      max-width: none;
-      gap: 56px;
-      margin-bottom: 48px;
-    }
-
-    .section-header.split p {
-      max-width: 380px;
-      margin-left: auto;
-      font-size: 0.96rem;
-    }
-
-    .project-layout {
-      gap: 22px;
-    }
-
-    .project-card {
-      border-radius: 12px;
-    }
-
-    .project-feature {
-      grid-column: span 12;
-      min-height: 760px;
-    }
-
-    .project-wide {
-      grid-column: span 7;
-      min-height: 560px;
-    }
-
-    .project-tall {
-      grid-column: span 5;
-      min-height: 560px;
-    }
-
-    .project-medium,
-    .project-compact {
-      grid-column: span 4;
-      min-height: 470px;
-    }
-
-    .project-info h3 {
-      font-size: 3.05rem;
-    }
-
-    .project-feature .project-info h3 {
-      font-size: 3.85rem;
-    }
-
-    .about-layout.about-visual {
-      grid-template-columns: minmax(0, 0.86fr) minmax(360px, 0.46fr);
-      align-items: center;
-      gap: 64px;
-    }
-
-    .about-image {
-      min-height: 680px;
-      overflow: hidden;
-      border-radius: 12px;
-      background: var(--linen);
-      box-shadow: var(--soft-shadow);
-    }
-
-    .about-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .about-copy {
-      display: grid;
-      gap: 24px;
-    }
-
-    .about-copy h2 {
-      max-width: 510px;
-    }
-
-    .about-points {
-      margin-top: 6px;
-      border-radius: 12px;
-      box-shadow: none;
-    }
-
-    .about-points div {
-      padding: 22px;
-    }
-
-    .about-points span {
-      max-width: 260px;
-      line-height: 1.55;
-    }
-
-    .about-points strong {
-      line-height: 1.16;
-    }
-
-    .service-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 18px;
-      border: 0;
-      border-radius: 0;
-      background: transparent;
-    }
-
-    .service-item {
-      display: grid;
-      min-height: 450px;
-      align-content: end;
-      overflow: hidden;
-      border-radius: 12px;
-      padding: 24px;
-      background: var(--linen);
-      isolation: isolate;
-    }
-
-    .service-item img {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 700ms var(--ease);
-    }
-
-    .service-item::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      background: linear-gradient(180deg, rgba(18, 15, 13, 0.05), rgba(18, 15, 13, 0.78));
-    }
-
-    .service-item:hover img {
-      transform: scale(1.035);
-    }
-
-    .service-item > :not(img) {
-      position: relative;
-      z-index: 2;
-    }
-
-    .service-index {
-      background: rgba(255, 253, 248, 0.12);
-    }
-
-    .service-item h3 {
-      margin-top: 42px;
-      font-size: 1.78rem;
-    }
-
-    .service-item p {
-      max-width: 210px;
-      line-height: 1.55;
-    }
-
-    .process-visual {
-      display: grid;
-      grid-template-columns: minmax(0, 0.82fr) minmax(360px, 0.44fr);
-      gap: 22px;
-      align-items: stretch;
-    }
-
-    .process-visual figure {
-      min-height: 590px;
-      overflow: hidden;
-      border-radius: 12px;
-      background: var(--linen);
-    }
-
-    .process-visual img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .process-track {
-      display: grid;
-      grid-template-columns: 1fr;
-      border: 1px solid var(--line);
-      border-top: 1px solid var(--line);
-      border-radius: 12px;
-      overflow: hidden;
-      background: rgba(255, 253, 248, 0.62);
-    }
-
-    .process-track article {
-      grid-template-columns: auto 1fr;
-      min-height: auto;
-      align-content: center;
-      align-items: center;
-      gap: 18px;
-      border-right: 0;
-      border-bottom: 1px solid var(--line);
-      padding: 24px;
-    }
-
-    .process-track article:last-child {
-      border-bottom: 0;
-    }
-
-    .process-track h3 {
-      font-size: 1.85rem;
-    }
-
-    .craft-panel .lead {
-      max-width: 340px;
-    }
-
-    .comparison-wrap {
-      grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.32fr);
-      gap: 22px;
-    }
-
-    .comparison-frame {
-      min-height: 690px;
-      border-radius: 12px;
-    }
-
-    .comparison-note {
-      border-radius: 12px;
-      padding: 30px;
-    }
-
-    .comparison-note h3 {
-      font-size: 2.45rem;
-    }
-
-    .comparison-pair-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 22px;
-    }
-
-    .comparison-pair-grid figure {
-      position: relative;
-      min-height: 430px;
-      overflow: hidden;
-      border-radius: 12px;
-      background: var(--linen);
-    }
-
-    .comparison-pair-grid img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .comparison-pair-grid figcaption {
-      position: absolute;
-      left: 16px;
-      bottom: 16px;
-      border-radius: 999px;
-      padding: 8px 12px;
-      background: rgba(23, 21, 19, 0.56);
-      color: var(--ivory);
-      font-size: 0.76rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      backdrop-filter: blur(12px);
-    }
-
-    .client-trust.future-projects {
-      background: var(--black);
-      color: var(--ivory);
-    }
-
-    .client-trust.future-projects h2,
-    .client-trust.future-projects p,
-    .client-trust.future-projects .section-kicker {
-      color: var(--ivory);
-    }
-
-    .client-trust.future-projects p {
-      color: rgba(255, 253, 248, 0.68);
-    }
-
-    .future-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 18px;
-    }
-
-    .future-card {
-      position: relative;
-      grid-column: span 3;
-      min-height: 560px;
-      overflow: hidden;
-      border-radius: 12px;
-      background: rgba(255, 253, 248, 0.1);
-    }
-
-    .future-large {
-      grid-column: span 6;
-    }
-
-    .future-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.94;
-      transition: transform 700ms var(--ease), opacity 700ms var(--ease);
-    }
-
-    .future-card:hover img {
-      opacity: 1;
-      transform: scale(1.03);
-    }
-
-    .future-card figcaption {
-      position: absolute;
-      left: 16px;
-      bottom: 16px;
-      border-radius: 999px;
-      padding: 8px 12px;
-      background: rgba(23, 21, 19, 0.58);
-      color: var(--ivory);
-      font-size: 0.76rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      backdrop-filter: blur(12px);
-    }
-
-    .gallery-grid {
-      gap: 22px;
-    }
-
-    .gallery-item {
-      grid-column: span 5;
-      min-height: 520px;
-      border-radius: 12px;
-    }
-
-    .gallery-large {
-      grid-column: span 7;
-      min-height: 720px;
-    }
-
-    .gallery-wide {
-      grid-column: span 6;
-      min-height: 580px;
-    }
-
-    @media (max-width: 1060px) {
-      h1 {
-        font-size: 4.75rem;
-      }
-
-      h2 {
-        font-size: 3.42rem;
-      }
-
-      .section-header.split,
-      .about-layout.about-visual,
-      .process-visual,
-      .comparison-wrap {
-        grid-template-columns: 1fr;
-      }
-
-      .section-header.split p {
-        margin-left: 0;
-      }
-
-      .project-wide,
-      .project-tall,
-      .project-medium,
-      .project-compact,
-      .gallery-item,
-      .gallery-wide,
-      .future-card {
-        grid-column: span 6;
-      }
-
-      .service-grid,
-      .comparison-pair-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .process-track {
-        grid-template-columns: repeat(5, minmax(0, 1fr));
-      }
-
-      .process-track article {
-        grid-template-columns: 1fr;
-        align-content: start;
-        align-items: start;
-        min-height: 170px;
-        border-right: 1px solid var(--line);
-        border-bottom: 0;
-      }
-
-      .process-track article:last-child {
-        border-right: 0;
-      }
-    }
-
-    @media (max-width: 699px) {
-      h1 {
-        font-size: 2.92rem;
-      }
-
-      h2 {
-        font-size: 2.62rem;
-      }
-
-      .section-header.split {
-        gap: 18px;
-        margin-bottom: 30px;
-      }
-
-      .hero {
-        min-height: auto;
-        padding-top: 96px;
-        padding-bottom: 72px;
-      }
-
-      .hero-media {
-        width: min(100% - 28px, 1240px);
-        height: 46vh;
-        min-height: 330px;
-      }
-
-      .project-feature,
-      .project-wide,
-      .project-tall,
-      .project-medium,
-      .project-compact,
-      .gallery-item,
-      .gallery-wide,
-      .gallery-large,
-      .future-card,
-      .future-large {
-        grid-column: auto;
-      }
-
-      .project-feature {
-        min-height: 500px;
-      }
-
-      .project-wide,
-      .project-tall,
-      .project-medium,
-      .project-compact {
-        min-height: 390px;
-      }
-
-      .project-feature .project-info h3,
-      .project-info h3 {
-        font-size: 2.28rem;
-      }
-
-      .about-image,
-      .process-visual figure,
-      .comparison-frame,
-      .future-card,
-      .gallery-item,
-      .gallery-wide,
-      .gallery-large {
-        min-height: 380px;
-      }
-
-      .service-grid,
-      .comparison-pair-grid,
-      .future-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .service-item {
-        min-height: 360px;
-      }
-
-      .process-track {
-        grid-template-columns: 1fr;
-      }
-
-      .process-track article {
-        grid-template-columns: auto 1fr;
-        min-height: auto;
-        border-right: 0;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .process-track article:last-child {
-        border-bottom: 0;
-      }
-
-      .comparison-pair-grid figure {
-        min-height: 330px;
-      }
-    }
-
     @media (prefers-reduced-motion: reduce) {
       *,
       *::before,
@@ -2307,9 +1737,10 @@
           <div class="hero-copy">
             <span class="section-kicker reveal">Malaysian Interior Studio</span>
             <h1 class="reveal" style="--delay: 100ms;">Design Spaces<br>That Inspire Living</h1>
-            <p class="lead reveal" style="--delay: 170ms;">Premium interior design for Malaysian homes.</p>
+            <p class="lead reveal" style="--delay: 170ms;">Warm modern interiors, thoughtful renovation and custom carpentry for refined Malaysian homes.</p>
             <div class="hero-actions reveal" style="--delay: 240ms;">
-              <a class="btn btn-primary" href="https://wa.me/601172455699?text=Hi%20WIN%20DESIGN%2C%20I%20would%20like%20to%20discuss%20my%20interior%20project." target="_blank" rel="noopener">WhatsApp</a>
+              <a class="btn btn-primary" href="#projects">View Portfolio</a>
+              <a class="btn btn-secondary" href="#contact">Contact Us</a>
             </div>
           </div>
         </div>
@@ -2320,9 +1751,9 @@
           <div class="section-header split">
             <div>
               <span class="section-kicker reveal">Featured Projects</span>
-              <h2 class="reveal" style="--delay: 90ms;">Completed spaces, viewed slowly.</h2>
+              <h2 class="reveal" style="--delay: 90ms;">A quieter kind of luxury.</h2>
             </div>
-            <p class="reveal" style="--delay: 150ms;">Large project photography for real client work and future replacements.</p>
+            <p class="reveal" style="--delay: 150ms;">Selected spaces prepared for future client photography, with a portfolio rhythm built around scale, proportion and material detail.</p>
           </div>
 
           <div class="project-layout">
@@ -2349,55 +1780,29 @@
                 <h3>Private Suite</h3>
               </div>
             </a>
-
-            <a class="project-card project-medium reveal" href="project.html?project=open-living" aria-label="View Open Living project page" style="--delay: 120ms;">
-              <img src="livingroom3.jpg.jpg" alt="Open Malaysian condominium living and dining space with warm walnut accents" width="1280" height="960" loading="lazy" decoding="async" data-project-placeholder="04" />
-              <div class="project-info">
-                <div class="project-meta"><span>Bangsar</span><span>Living</span></div>
-                <h3>Open Living</h3>
-              </div>
-            </a>
-
-            <a class="project-card project-compact reveal" href="project.html?project=foyer-cabinetry" aria-label="View Foyer Cabinetry project page" style="--delay: 150ms;">
-              <img src="assets/win20/project-foyer.webp" alt="Malaysian luxury foyer with walnut cabinetry and stone detail" width="1536" height="1024" loading="lazy" decoding="async" data-project-placeholder="05" />
-              <div class="project-info">
-                <div class="project-meta"><span>Damansara Heights</span><span>Foyer</span></div>
-                <h3>Foyer Cabinetry</h3>
-              </div>
-            </a>
-
-            <a class="project-card project-medium reveal" href="project.html?project=built-in-study" aria-label="View Built-In Study project page" style="--delay: 180ms;">
-              <img src="assets/win20/project-study.webp" alt="Elegant Malaysian study with warm built-in cabinetry and hidden LED lighting" width="1586" height="992" loading="lazy" decoding="async" data-project-placeholder="06" />
-              <div class="project-info">
-                <div class="project-meta"><span>Setia Alam</span><span>Study</span></div>
-                <h3>Built-In Study</h3>
-              </div>
-            </a>
           </div>
         </div>
       </section>
 
       <section class="section about" id="about">
-        <div class="container about-layout about-visual">
-          <figure class="about-image reveal">
-            <img src="assets/projects/malaysia-study-lounge.png" alt="Warm Malaysian luxury study lounge with walnut cabinetry and beige upholstery" width="1024" height="1024" loading="lazy" decoding="async" />
-          </figure>
+        <div class="container about-layout">
           <div class="about-copy">
             <span class="section-kicker reveal">About WIN DESIGN</span>
             <h2 class="reveal" style="--delay: 90ms;">Warm modern homes, planned with discipline.</h2>
-            <div class="about-points reveal" style="--delay: 150ms;">
-              <div>
-                <strong>Clear planning</strong>
-                <span>Layout, scope and materials aligned early.</span>
-              </div>
-              <div>
-                <strong>Refined palette</strong>
-                <span>Walnut, stone and warm neutral layers.</span>
-              </div>
-              <div>
-                <strong>Built-in detail</strong>
-                <span>Cabinetry shaped around daily living.</span>
-              </div>
+            <p class="lead reveal" style="--delay: 150ms;">WIN DESIGN creates refined Malaysian interiors shaped by clear planning, thoughtful detailing and practical site execution.</p>
+          </div>
+          <div class="about-points reveal" style="--delay: 220ms;">
+            <div>
+              <strong>Design clarity</strong>
+              <span>Confident concepts before work begins.</span>
+            </div>
+            <div>
+              <strong>Material control</strong>
+              <span>Walnut, stone and soft finishes composed with restraint.</span>
+            </div>
+            <div>
+              <strong>Built-in precision</strong>
+              <span>Custom cabinetry planned around daily living.</span>
             </div>
           </div>
         </div>
@@ -2408,35 +1813,41 @@
           <div class="section-header split inverted">
             <div>
               <span class="section-kicker reveal">Services</span>
-              <h2 class="reveal" style="--delay: 90ms;">Focused interior work.</h2>
+              <h2 class="reveal" style="--delay: 90ms;">Design, build and refine.</h2>
             </div>
-            <p class="reveal" style="--delay: 150ms;">Four core services, kept simple.</p>
+            <p class="reveal" style="--delay: 150ms;">A complete interior scope for homeowners who want a calm process and a polished result.</p>
           </div>
 
           <div class="service-grid reveal" style="--delay: 240ms;">
             <article class="service-item">
-              <img src="livingroom.jpg.jpg" alt="Walnut living room interior design direction" width="1280" height="854" loading="lazy" decoding="async" />
               <span class="service-index">01</span>
               <h3>Interior Design</h3>
-              <p>Concept, palette and spatial direction.</p>
+              <p>Concepts, layout direction and finish selection.</p>
             </article>
             <article class="service-item">
-              <img src="assets/win20/before-same-room.webp" alt="Empty Malaysian condominium before renovation" width="1537" height="1023" loading="lazy" decoding="async" />
               <span class="service-index">02</span>
               <h3>Renovation</h3>
-              <p>From bare unit to finished home.</p>
+              <p>Site work coordinated for a cleaner handover.</p>
             </article>
             <article class="service-item">
-              <img src="livingroom3.jpg.jpg" alt="Open living and dining layout for space planning" width="1280" height="960" loading="lazy" decoding="async" />
               <span class="service-index">03</span>
-              <h3>Space Planning</h3>
-              <p>Better flow for Malaysian homes.</p>
+              <h3>Custom Furniture</h3>
+              <p>Built pieces matched to the home.</p>
             </article>
             <article class="service-item">
-              <img src="assets/win20/craft-workshop.webp" alt="Premium carpentry workshop for custom cabinetry" width="1690" height="931" loading="lazy" decoding="async" />
               <span class="service-index">04</span>
+              <h3>Space Planning</h3>
+              <p>Better flow for compact and generous homes.</p>
+            </article>
+            <article class="service-item">
+              <span class="service-index">05</span>
+              <h3>3D Visualization</h3>
+              <p>Preview key spaces before renovation begins.</p>
+            </article>
+            <article class="service-item">
+              <span class="service-index">06</span>
               <h3>Custom Carpentry</h3>
-              <p>Cabinetry, storage and finishing.</p>
+              <p>Cabinetry, storage and detailing with restraint.</p>
             </article>
           </div>
         </div>
@@ -2447,37 +1858,37 @@
           <div class="section-header split">
             <div>
               <span class="section-kicker reveal">Process</span>
-              <h2 class="reveal" style="--delay: 90ms;">A calm route to handover.</h2>
+              <h2 class="reveal" style="--delay: 90ms;">A clear path from idea to handover.</h2>
             </div>
-            <p class="reveal" style="--delay: 150ms;">Simple stages. Clean decisions.</p>
+            <p class="reveal" style="--delay: 150ms;">Luxury feels effortless when the work behind it is organized, transparent and carefully sequenced.</p>
           </div>
 
-          <div class="process-visual reveal" style="--delay: 220ms;">
-            <figure>
-              <img src="assets/projects/malaysia-walnut-foyer-cabinetry.png" alt="Warm walnut Malaysian foyer cabinetry detail" width="1024" height="1024" loading="lazy" decoding="async" />
-            </figure>
-            <div class="process-track" aria-label="WIN DESIGN project process">
-              <article>
-                <span>01</span>
-                <h3>Consult</h3>
-              </article>
-              <article>
-                <span>02</span>
-                <h3>Design</h3>
-              </article>
-              <article>
-                <span>03</span>
-                <h3>Plan</h3>
-              </article>
-              <article>
-                <span>04</span>
-                <h3>Build</h3>
-              </article>
-              <article>
-                <span>05</span>
-                <h3>Handover</h3>
-              </article>
-            </div>
+          <div class="process-track reveal" style="--delay: 220ms;">
+            <article>
+              <span>01</span>
+              <h3>Consultation</h3>
+              <p>Understand lifestyle, scope and budget direction.</p>
+            </article>
+            <article>
+              <span>02</span>
+              <h3>Design</h3>
+              <p>Set the mood, materials and spatial approach.</p>
+            </article>
+            <article>
+              <span>03</span>
+              <h3>Planning</h3>
+              <p>Translate ideas into workable site details.</p>
+            </article>
+            <article>
+              <span>04</span>
+              <h3>Construction</h3>
+              <p>Coordinate renovation, cabinetry and finishing.</p>
+            </article>
+            <article>
+              <span>05</span>
+              <h3>Completion</h3>
+              <p>Review the final space before handover.</p>
+            </article>
           </div>
         </div>
       </section>
@@ -2492,7 +1903,7 @@
             <div>
               <span class="section-kicker">Crafted With Precision</span>
               <h2>Cabinetry that makes the home feel resolved.</h2>
-              <p class="lead">Workshop detail for premium built-ins.</p>
+              <p class="lead">Material detail, storage and finishing handled with calm precision.</p>
             </div>
             <div class="craft-list">
               <div class="craft-point">
@@ -2541,51 +1952,20 @@
 
             <aside class="comparison-note reveal" style="--delay: 240ms;">
               <span class="section-kicker">Renovation Reveal</span>
-              <h3>Same room. Same angle.</h3>
-              <p>Prepared for real renovation pairs.</p>
+              <h3>Proof is easiest to trust when the angle stays honest.</h3>
+              <p>Prepared for same-room transformation photos from future client projects.</p>
             </aside>
-          </div>
-
-          <div class="comparison-pair-grid reveal" style="--delay: 280ms;" aria-label="Before and after image slots">
-            <!-- Future client project: replace only the two image paths below with matching same-room photos. -->
-            <figure>
-              <img src="assets/win20/before-same-room.webp" alt="Before image slot for an empty or unfinished Malaysian home" width="1537" height="1023" loading="lazy" decoding="async" data-placeholder="future-before-image" />
-              <figcaption>Before image slot</figcaption>
-            </figure>
-            <figure>
-              <img src="assets/win20/after-same-room.webp" alt="After image slot for the completed matching Malaysian interior" width="1280" height="853" loading="lazy" decoding="async" data-placeholder="future-after-image" />
-              <figcaption>After image slot</figcaption>
-            </figure>
           </div>
         </div>
       </section>
 
-      <section class="section client-trust future-projects" id="testimonials">
-        <div class="container">
-          <div class="section-header split inverted">
-            <div>
-              <span class="section-kicker reveal">Future Client Projects</span>
-              <h2 class="reveal" style="--delay: 90ms;">Ready for real homes.</h2>
-            </div>
-            <p class="reveal" style="--delay: 150ms;">Replace images here as client project photos become available.</p>
-          </div>
-          <div class="future-grid reveal" style="--delay: 210ms;">
-            <!-- Future client project photo slot 01: replace src only. -->
-            <figure class="future-card future-large">
-              <img src="assets/projects/malaysia-luxury-condo-living.png" alt="Future client project placeholder: completed Malaysian luxury condo living room" width="1024" height="1024" loading="lazy" decoding="async" data-client-project-slot="01" />
-              <figcaption>Client Project 01</figcaption>
-            </figure>
-            <!-- Future client project photo slot 02: replace src only. -->
-            <figure class="future-card">
-              <img src="assets/projects/malaysia-luxury-kitchen-dining.png" alt="Future client project placeholder: Malaysian luxury kitchen and dining" width="1024" height="1024" loading="lazy" decoding="async" data-client-project-slot="02" />
-              <figcaption>Client Project 02</figcaption>
-            </figure>
-            <!-- Future client project photo slot 03: replace src only. -->
-            <figure class="future-card">
-              <img src="assets/projects/malaysia-luxury-bedroom.png" alt="Future client project placeholder: completed Malaysian luxury bedroom" width="1024" height="1024" loading="lazy" decoding="async" data-client-project-slot="03" />
-              <figcaption>Client Project 03</figcaption>
-            </figure>
-          </div>
+      <section class="section client-trust" id="testimonials">
+        <div class="container trust-layout">
+          <span class="section-kicker reveal">Client Experience</span>
+          <blockquote class="reveal" style="--delay: 90ms;">
+            A premium renovation should feel clear from first conversation to final handover.
+          </blockquote>
+          <p class="reveal" style="--delay: 150ms;">This section is ready for approved client testimonials when real project feedback is available.</p>
         </div>
       </section>
 
@@ -2594,9 +1974,9 @@
           <div class="section-header split">
             <div>
               <span class="section-kicker reveal">Gallery Preview</span>
-              <h2 class="reveal" style="--delay: 90ms;">Material, light, proportion.</h2>
+              <h2 class="reveal" style="--delay: 90ms;">Material, light and proportion.</h2>
             </div>
-            <p class="reveal" style="--delay: 150ms;">A quiet visual library for future project photography.</p>
+            <p class="reveal" style="--delay: 150ms;">A visual preview of the warm walnut, stone and soft neutral palette clients can expect.</p>
           </div>
 
           <div class="gallery-grid reveal" style="--delay: 220ms;">
@@ -2612,18 +1992,6 @@
             <figure class="gallery-item gallery-wide">
               <img src="assets/win20/project-study.webp" alt="Elegant study area with built-in cabinetry and warm Malaysian luxury styling" width="1586" height="992" loading="lazy" decoding="async" />
             </figure>
-            <figure class="gallery-item gallery-wide">
-              <img src="assets/projects/malaysia-luxury-condo-living.png" alt="Completed Malaysian luxury condominium living room with walnut and warm lighting" width="1024" height="1024" loading="lazy" decoding="async" />
-            </figure>
-            <figure class="gallery-item">
-              <img src="assets/projects/malaysia-luxury-kitchen-dining.png" alt="Malaysian luxury kitchen and dining with cream marble and walnut cabinetry" width="1024" height="1024" loading="lazy" decoding="async" />
-            </figure>
-            <figure class="gallery-item">
-              <img src="assets/projects/malaysia-luxury-bedroom.png" alt="Completed Malaysian bedroom with beige fabrics and walnut feature wall" width="1024" height="1024" loading="lazy" decoding="async" />
-            </figure>
-            <figure class="gallery-item gallery-large">
-              <img src="assets/projects/malaysia-walnut-foyer-cabinetry.png" alt="Walnut foyer cabinetry detail for a Malaysian luxury home" width="1024" height="1024" loading="lazy" decoding="async" />
-            </figure>
           </div>
         </div>
       </section>
@@ -2633,21 +2001,21 @@
           <div class="section-header split">
             <div>
               <span class="section-kicker reveal">Contact</span>
-              <h2 class="reveal" style="--delay: 90ms;">Start with WhatsApp.</h2>
+              <h2 class="reveal" style="--delay: 90ms;">Begin with a calm project conversation.</h2>
             </div>
-            <p class="reveal" style="--delay: 150ms;">Share your home, location and scope.</p>
+            <p class="reveal" style="--delay: 150ms;">Share your home type, location and preferred scope. WIN DESIGN will guide the next step.</p>
           </div>
 
           <div class="contact-grid">
             <a class="contact-card primary reveal" href="https://wa.me/601172455699?text=Hi%20WIN%20DESIGN%2C%20I%20would%20like%20to%20discuss%20my%20interior%20project." target="_blank" rel="noopener">
               <span class="contact-label">WhatsApp</span>
               <strong>+60 1172455699</strong>
-              <p>Fastest project enquiry.</p>
+              <p>Fastest way to start a project enquiry.</p>
             </a>
             <a class="contact-card reveal" href="tel:+601172455699" style="--delay: 80ms;">
               <span class="contact-label">Phone</span>
               <strong>+60 1172455699</strong>
-              <p>Speak with the studio.</p>
+              <p>Speak directly with the studio.</p>
             </a>
           </div>
         </div>

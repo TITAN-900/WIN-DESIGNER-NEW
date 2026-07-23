@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WIN DESIGN | Project Portfolio</title>
+  <meta name="description" content="Selected WIN DESIGN project portfolio page with large interiors, project overview and transformation photography." />
+  <meta name="theme-color" content="#f7f1e8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #f7f1e8;
+      --ivory: #fffdf8;
+      --warm-white: #fbf7f0;
+      --linen: #e9ddcd;
+      --walnut: #6b4934;
+      --gold: #bf9458;
+      --black: #171513;
+      --ink: #211d19;
+      --muted: #6f675d;
+      --line: rgba(69, 52, 38, 0.14);
+      --shadow: 0 24px 70px rgba(70, 49, 31, 0.13);
+      --radius: 10px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      color: var(--ink);
+      background: var(--warm-white);
+      font-family: "Inter", Arial, sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(100% - 40px, 1240px);
+      margin-inline: auto;
+    }
+
+    .nav {
+      position: fixed;
+      top: 14px;
+      left: 50%;
+      z-index: 20;
+      display: flex;
+      width: min(100% - 24px, 1240px);
+      min-height: 74px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.68);
+      border-radius: 999px;
+      padding: 10px 10px 10px 16px;
+      background: rgba(255, 253, 248, 0.82);
+      box-shadow: 0 18px 62px rgba(58, 43, 30, 0.11);
+      backdrop-filter: blur(20px);
+      transform: translateX(-50%);
+    }
+
+    .brand-logo {
+      display: block;
+      width: 118px;
+      height: 52px;
+      object-fit: contain;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #50473f;
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .nav-actions a {
+      border-radius: 999px;
+      padding: 13px 14px;
+      transition: background 220ms ease;
+    }
+
+    .nav-actions a:hover {
+      background: rgba(107, 73, 52, 0.08);
+    }
+
+    .btn {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 0 22px;
+      background: var(--black);
+      color: var(--ivory);
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .project-hero {
+      position: relative;
+      min-height: 92svh;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      isolation: isolate;
+      color: var(--ivory);
+      padding: 126px 0 72px;
+    }
+
+    .project-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(90deg, rgba(18, 15, 13, 0.72), rgba(18, 15, 13, 0.18) 58%, rgba(18, 15, 13, 0.08)),
+        linear-gradient(180deg, rgba(18, 15, 13, 0.08), rgba(18, 15, 13, 0.62));
+    }
+
+    .project-hero img {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--gold);
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-weight: 600;
+      line-height: 1.04;
+      letter-spacing: 0;
+      padding-bottom: 0.06em;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin-top: 18px;
+      color: var(--ivory);
+      font-size: 7rem;
+    }
+
+    h2 {
+      color: var(--black);
+      font-size: 4.7rem;
+    }
+
+    h3 {
+      color: var(--black);
+      font-size: 2rem;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .hero-copy p {
+      max-width: 540px;
+      margin-top: 16px;
+      color: rgba(255, 253, 248, 0.82);
+    }
+
+    .section {
+      padding: 108px 0;
+    }
+
+    .overview {
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(320px, 0.42fr);
+      gap: 70px;
+      align-items: start;
+    }
+
+    .overview-copy p {
+      max-width: 620px;
+      margin-top: 18px;
+    }
+
+    .project-facts {
+      display: grid;
+      gap: 1px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--line);
+    }
+
+    .project-facts div {
+      display: grid;
+      gap: 8px;
+      padding: 24px;
+      background: rgba(255, 253, 248, 0.78);
+    }
+
+    .project-facts span {
+      color: var(--muted);
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .project-facts strong {
+      color: var(--black);
+      font-size: 1rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+
+    .gallery figure {
+      min-height: 470px;
+      grid-column: span 6;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: var(--linen);
+      box-shadow: var(--shadow);
+    }
+
+    .gallery .wide {
+      grid-column: span 12;
+      min-height: 640px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .before-after {
+      background: var(--cream);
+    }
+
+    .ba-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .ba-card {
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: var(--linen);
+      box-shadow: var(--shadow);
+    }
+
+    .ba-card img {
+      width: 100%;
+      height: 440px;
+      object-fit: cover;
+    }
+
+    .ba-card figcaption {
+      padding: 18px 20px;
+      color: var(--walnut);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .next-step {
+      background: var(--black);
+      color: var(--ivory);
+      text-align: center;
+    }
+
+    .next-step h2,
+    .next-step p {
+      color: var(--ivory);
+    }
+
+    .next-step p {
+      max-width: 520px;
+      margin: 14px auto 28px;
+      color: rgba(255, 253, 248, 0.72);
+    }
+
+    .footer {
+      padding: 28px 0 36px;
+      background: var(--black);
+      color: rgba(255, 253, 248, 0.62);
+      font-size: 0.86rem;
+    }
+
+    @media (max-width: 900px) {
+      .overview,
+      .ba-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 5rem;
+      }
+
+      h2 {
+        font-size: 3.6rem;
+      }
+
+      .gallery figure,
+      .gallery .wide {
+        grid-column: span 12;
+      }
+    }
+
+    @media (max-width: 699px) {
+      .container {
+        width: min(100% - 28px, 1240px);
+      }
+
+      .nav {
+        min-height: 68px;
+      }
+
+      .brand-logo {
+        width: 96px;
+        height: 44px;
+      }
+
+      .nav-actions a:not(.btn) {
+        display: none;
+      }
+
+      .project-hero {
+        min-height: 88svh;
+        padding: 108px 0 48px;
+      }
+
+      h1 {
+        font-size: 3.6rem;
+      }
+
+      h2 {
+        font-size: 3rem;
+      }
+
+      .section {
+        padding: 78px 0;
+      }
+
+      .gallery figure,
+      .gallery .wide,
+      .ba-card img {
+        min-height: 360px;
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav" aria-label="Project navigation">
+    <a href="index.html#home" aria-label="WIN DESIGN home">
+      <img class="brand-logo" src="assets/win20/win-design-logo-nav-compact.png" alt="WIN DESIGN logo" />
+    </a>
+    <div class="nav-actions">
+      <a href="index.html#projects">Portfolio</a>
+      <a href="index.html#contact">Contact</a>
+      <a class="btn" href="https://wa.me/601172455699?text=Hi%20WIN%20DESIGN%2C%20I%20would%20like%20to%20discuss%20my%20interior%20project." target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="project-hero">
+      <img id="coverImage" src="livingroom.jpg.jpg" alt="" width="1280" height="854" />
+      <div class="container hero-copy">
+        <span class="kicker" id="heroKicker">Mont Kiara Residence</span>
+        <h1 id="projectTitle">Walnut Residence</h1>
+        <p id="projectIntro">Walnut cabinetry, soft light and calm neutral layering.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container overview">
+        <div class="overview-copy">
+          <span class="kicker">Project Overview</span>
+          <h2 id="overviewTitle">Measured warmth for daily living.</h2>
+          <p id="overviewText">A premium project page built for large client photography.</p>
+        </div>
+        <aside class="project-facts" aria-label="Project facts">
+          <div>
+            <span>Location</span>
+            <strong id="projectLocation">Mont Kiara</strong>
+          </div>
+          <div>
+            <span>Project Type</span>
+            <strong id="projectType">Condominium Living</strong>
+          </div>
+          <div>
+            <span>Completion Year</span>
+            <strong>To be confirmed</strong>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="gallery" id="projectGallery" aria-label="Project image gallery">
+          <figure class="wide">
+            <img src="livingroom.jpg.jpg" alt="Walnut living room cover image" width="1280" height="854" loading="lazy" decoding="async" />
+          </figure>
+          <figure>
+            <img src="livingroom3.jpg.jpg" alt="Open living and dining with warm lighting" width="1280" height="960" loading="lazy" decoding="async" />
+          </figure>
+          <figure>
+            <img src="assets/win20/project-study.webp" alt="Built-in study cabinetry detail" width="1586" height="992" loading="lazy" decoding="async" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section before-after">
+      <div class="container">
+        <div class="overview">
+          <div class="overview-copy">
+            <span class="kicker">Before & After</span>
+            <h2>Transformation evidence.</h2>
+            <p>Same room. Same angle. Real renovation proof.</p>
+          </div>
+          <div class="ba-grid">
+            <figure class="ba-card">
+              <img src="assets/win20/before-same-room.webp" alt="Before renovation empty condominium living room" width="1537" height="1023" loading="lazy" decoding="async" />
+              <figcaption>Before</figcaption>
+            </figure>
+            <figure class="ba-card">
+              <img src="assets/win20/after-same-room.webp" alt="After renovation completed condominium living room" width="1280" height="853" loading="lazy" decoding="async" />
+              <figcaption>After</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section next-step">
+      <div class="container">
+        <span class="kicker">Start A Project</span>
+        <h2>Bring this level of calm detail into your home.</h2>
+        <p>Share your property, location and scope.</p>
+        <a class="btn" href="https://wa.me/601172455699?text=Hi%20WIN%20DESIGN%2C%20I%20would%20like%20to%20discuss%20my%20interior%20project." target="_blank" rel="noopener">WhatsApp WIN DESIGN</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">WIN DESIGN. Crafting spaces, creating stories.</div>
+  </footer>
+
+  <script>
+    const projects = {
+      "walnut-residence": {
+        title: "Walnut Residence",
+        kicker: "Mont Kiara Residence",
+        intro: "Walnut cabinetry, soft light and calm neutral layering.",
+        overview: "Measured warmth for daily living.",
+        description: "A composed Malaysian condominium living room shaped by walnut, upholstery and warm concealed lighting.",
+        location: "Mont Kiara",
+        type: "Condominium Living",
+        cover: "livingroom.jpg.jpg",
+        gallery: [
+          ["livingroom.jpg.jpg", "Warm walnut living room with custom cabinetry"],
+          ["livingroom3.jpg.jpg", "Open living and dining with warm lighting"],
+          ["assets/win20/project-study.webp", "Built-in study cabinetry detail"]
+        ]
+      },
+      "stone-kitchen": {
+        title: "Stone Kitchen",
+        kicker: "Bukit Jalil Kitchen",
+        intro: "Stone surfaces, walnut cabinetry and quiet lighting.",
+        overview: "A kitchen designed as the centre of the home.",
+        description: "A warm Malaysian kitchen and dining direction with practical circulation and polished built-ins.",
+        location: "Bukit Jalil",
+        type: "Kitchen And Dining",
+        cover: "livingroom2.jpg.jpg",
+        gallery: [
+          ["livingroom2.jpg.jpg", "Stone kitchen island with walnut cabinetry"],
+          ["assets/win20/project-kitchen.webp", "Cream marble dining and kitchen detail"],
+          ["livingroom3.jpg.jpg", "Open living and dining perspective"]
+        ]
+      },
+      "private-suite": {
+        title: "Private Suite",
+        kicker: "Desa ParkCity Suite",
+        intro: "Soft fabrics, walnut accents and layered warm light.",
+        overview: "A private room made quieter through proportion.",
+        description: "A restful suite focused on calm storage, warm light and a composed material palette.",
+        location: "Desa ParkCity",
+        type: "Bedroom Suite",
+        cover: "livingroom4.jpg.jpg",
+        gallery: [
+          ["livingroom4.jpg.jpg", "Luxury bedroom with walnut feature wall"],
+          ["assets/win20/project-bedroom.webp", "Premium bedroom with wardrobe wall"],
+          ["livingroom5.jpg.jpg", "Warm modern neutral interior detail"]
+        ]
+      },
+      "open-living": {
+        title: "Open Living",
+        kicker: "Bangsar Residence",
+        intro: "Open living and dining with warm walnut rhythm.",
+        overview: "A connected room for everyday hosting.",
+        description: "A Malaysian living and dining concept with soft neutral upholstery, walnut accents and generous breathing space.",
+        location: "Bangsar",
+        type: "Living And Dining",
+        cover: "livingroom3.jpg.jpg",
+        gallery: [
+          ["livingroom3.jpg.jpg", "Open Malaysian living and dining room"],
+          ["assets/projects/malaysia-luxury-condo-living.png", "Completed Malaysian luxury condo living room"],
+          ["assets/win20/project-foyer.webp", "Walnut foyer detail"]
+        ]
+      },
+      "foyer-cabinetry": {
+        title: "Foyer Cabinetry",
+        kicker: "Damansara Heights Home",
+        intro: "A composed entry with walnut storage and stone detail.",
+        overview: "A first impression built around cabinetry.",
+        description: "A warm entry direction prepared for future real client photos, with storage, stone and hidden lighting.",
+        location: "Damansara Heights",
+        type: "Foyer And Built-Ins",
+        cover: "assets/win20/project-foyer.webp",
+        gallery: [
+          ["assets/win20/project-foyer.webp", "Luxury Malaysian foyer cabinetry"],
+          ["assets/projects/malaysia-walnut-foyer-cabinetry.png", "Walnut cabinetry detail"],
+          ["assets/win20/project-study.webp", "Built-in study detail"]
+        ]
+      },
+      "built-in-study": {
+        title: "Built-In Study",
+        kicker: "Setia Alam Residence",
+        intro: "A quiet work area with warm cabinetry and hidden lighting.",
+        overview: "A compact room made more intentional.",
+        description: "A Malaysian study concept with built-in storage, warm walnut surfaces and soft task lighting.",
+        location: "Setia Alam",
+        type: "Study And Carpentry",
+        cover: "assets/win20/project-study.webp",
+        gallery: [
+          ["assets/win20/project-study.webp", "Built-in study cabinetry"],
+          ["assets/projects/malaysia-study-lounge.png", "Warm Malaysian study lounge"],
+          ["livingroom5.jpg.jpg", "Neutral interior detail"]
+        ]
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const current = projects[params.get("project")] || projects["walnut-residence"];
+    document.title = `WIN DESIGN | ${current.title}`;
+    document.getElementById("coverImage").src = current.cover;
+    document.getElementById("coverImage").alt = current.intro;
+    document.getElementById("heroKicker").textContent = current.kicker;
+    document.getElementById("projectTitle").textContent = current.title;
+    document.getElementById("projectIntro").textContent = current.intro;
+    document.getElementById("overviewTitle").textContent = current.overview;
+    document.getElementById("overviewText").textContent = current.description;
+    document.getElementById("projectLocation").textContent = current.location;
+    document.getElementById("projectType").textContent = current.type;
+
+    const gallery = document.getElementById("projectGallery");
+    gallery.innerHTML = current.gallery.map(([src, alt], index) => `
+      <figure class="${index === 0 ? "wide" : ""}">
+        <img src="${src}" alt="${alt}" width="1280" height="854" loading="lazy" decoding="async" />
+      </figure>
+    `).join("");
+  </script>
+</body>
+</html>
