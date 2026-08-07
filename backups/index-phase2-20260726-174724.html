@@ -1,0 +1,2729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WIN DESIGN | Luxury Malaysian Interior Design Studio</title>
+  <meta name="description" content="WIN DESIGN creates premium Malaysian interiors, renovation planning, space planning and custom carpentry for luxury condominiums and refined homes." />
+  <meta name="theme-color" content="#f7f1e8" />
+  <meta property="og:title" content="WIN DESIGN | Luxury Malaysian Interior Design Studio" />
+  <meta property="og:description" content="Design spaces that inspire living. Premium interior design crafted around your lifestyle." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/win20/hero-condo.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #f7f1e8;
+      --ivory: #fffdf8;
+      --warm-white: #fbf7f0;
+      --linen: #e9ddcd;
+      --stone: #847b70;
+      --concrete: #bbb0a3;
+      --walnut: #6b4934;
+      --wood: #a77951;
+      --gold: #bf9458;
+      --black: #171513;
+      --ink: #211d19;
+      --muted: #6f675d;
+      --line: rgba(69, 52, 38, 0.14);
+      --glass: rgba(255, 253, 248, 0.72);
+      --glass-dark: rgba(23, 21, 19, 0.62);
+      --shadow: 0 28px 90px rgba(70, 49, 31, 0.16);
+      --soft-shadow: 0 14px 45px rgba(70, 49, 31, 0.1);
+      --radius: 8px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255, 253, 248, 0.95), rgba(247, 241, 232, 0.98)),
+        repeating-linear-gradient(90deg, rgba(107, 73, 52, 0.035) 0 1px, transparent 1px 92px);
+      font-family: "Inter", Arial, sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+      text-rendering: geometricPrecision;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .page-shell {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .container {
+      width: min(100% - 28px, 1220px);
+      margin-inline: auto;
+    }
+
+    .section {
+      position: relative;
+      padding: 88px 0;
+    }
+
+    .section-kicker,
+    .nav-links a,
+    .project-meta,
+    .service-index,
+    .contact-label {
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--walnut);
+      font-size: 0.74rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .section-kicker::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.62;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-weight: 600;
+      line-height: 0.96;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin-top: 18px;
+      font-size: 3.55rem;
+      color: var(--black);
+    }
+
+    h2 {
+      margin-top: 16px;
+      font-size: 2.75rem;
+      color: var(--black);
+    }
+
+    h3 {
+      font-size: 1.72rem;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .lead {
+      max-width: 470px;
+      margin-top: 18px;
+      color: #4d453e;
+      font-size: 1.03rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 620ms var(--ease), transform 620ms var(--ease);
+      transition-delay: var(--delay, 0ms);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .image-frame {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 253, 248, 0.5);
+      border-radius: var(--radius);
+      background: var(--linen);
+      box-shadow: var(--soft-shadow);
+      isolation: isolate;
+    }
+
+    .image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .btn {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 0 22px;
+      color: var(--black);
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1;
+      transition: background 220ms ease, border-color 220ms ease, color 220ms ease;
+    }
+
+    .btn-primary {
+      background: var(--black);
+      color: var(--ivory);
+    }
+
+    .btn-primary:hover {
+      background: #2b241f;
+    }
+
+    .btn-secondary {
+      border-color: rgba(107, 73, 52, 0.24);
+      background: rgba(255, 253, 248, 0.66);
+      color: var(--walnut);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav {
+      position: fixed;
+      top: 14px;
+      left: 50%;
+      z-index: 30;
+      display: grid;
+      width: min(100% - 24px, 1180px);
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 18px;
+      padding: 10px 10px 10px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.68);
+      border-radius: 999px;
+      background: rgba(255, 253, 248, 0.76);
+      box-shadow: 0 18px 62px rgba(58, 43, 30, 0.11);
+      backdrop-filter: blur(20px);
+      transform: translateX(-50%);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      display: block;
+      width: 118px;
+      height: 52px;
+      object-fit: contain;
+      object-position: center;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0;
+      margin: 0;
+      opacity: 1;
+      filter: none;
+      mix-blend-mode: normal;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .nav-links a {
+      border-radius: 999px;
+      padding: 11px 13px;
+      color: #50473f;
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1;
+      transition: background 220ms ease, color 220ms ease;
+    }
+
+    .nav-links a:hover {
+      background: rgba(107, 73, 52, 0.08);
+      color: var(--black);
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(107, 73, 52, 0.16);
+      border-radius: 50%;
+      background: rgba(255, 253, 248, 0.72);
+      color: var(--black);
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      margin: 4px auto;
+      border-radius: 999px;
+      background: currentColor;
+      transition: transform 260ms var(--ease), opacity 260ms ease;
+    }
+
+    body.menu-open .menu-toggle span:first-child {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    body.menu-open .menu-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+
+    body.menu-open .menu-toggle span:last-child {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .hero {
+      min-height: auto;
+      padding: 116px 0 72px;
+      display: grid;
+      align-items: center;
+    }
+
+    .hero-grid {
+      display: grid;
+      max-width: 1060px;
+      gap: 26px;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .hero-logo-wrap {
+      position: relative;
+      width: 230px;
+      height: 158px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: transparent;
+      box-shadow: none;
+      isolation: isolate;
+    }
+
+    .hero-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+    }
+
+    .hero-image-frame {
+      width: 100%;
+      height: 390px;
+      margin-top: 4px;
+    }
+
+    .hero-copy {
+      position: relative;
+      display: grid;
+      justify-items: center;
+      z-index: 2;
+    }
+
+    .hero-copy h1 {
+      max-width: 640px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .section-header {
+      display: grid;
+      gap: 18px;
+      max-width: 680px;
+      margin-bottom: 34px;
+    }
+
+    .section-header.centered {
+      margin-inline: auto;
+      text-align: center;
+      justify-items: center;
+    }
+
+    .section-header.centered .section-kicker::before {
+      display: none;
+    }
+
+    .project-showcase {
+      background:
+        linear-gradient(180deg, rgba(255, 253, 248, 0), rgba(233, 221, 205, 0.42)),
+        linear-gradient(90deg, rgba(23, 21, 19, 0.03) 0 1px, transparent 1px 92px);
+    }
+
+    .project-layout {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+
+    .project-card {
+      position: relative;
+      min-height: 390px;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: var(--linen);
+      box-shadow: var(--soft-shadow);
+      isolation: isolate;
+    }
+
+    .project-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .project-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, transparent 34%, rgba(18, 15, 13, 0.7));
+      opacity: 0.92;
+    }
+
+    .project-feature {
+      grid-column: span 12;
+      min-height: 600px;
+    }
+
+    .project-wide {
+      grid-column: span 6;
+      min-height: 500px;
+    }
+
+    .project-tall {
+      grid-column: span 6;
+      min-height: 500px;
+    }
+
+    .project-small {
+      grid-column: span 4;
+      min-height: 420px;
+    }
+
+    .project-info {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      z-index: 2;
+      color: var(--ivory);
+    }
+
+    .project-info h3 {
+      max-width: 560px;
+      color: var(--ivory);
+      font-size: 2.55rem;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+      color: rgba(255, 253, 248, 0.8);
+      font-size: 0.74rem;
+      font-weight: 800;
+    }
+
+    .services {
+      background: var(--black);
+      color: var(--ivory);
+    }
+
+    .services .section-kicker,
+    .services h2,
+    .services p {
+      color: var(--ivory);
+    }
+
+    .services p {
+      opacity: 0.72;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1px;
+      border: 1px solid rgba(255, 253, 248, 0.12);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: rgba(255, 253, 248, 0.12);
+    }
+
+    .service-item {
+      position: relative;
+      min-height: 170px;
+      padding: 28px;
+      background:
+        linear-gradient(135deg, rgba(255, 253, 248, 0.08), rgba(255, 253, 248, 0.02)),
+        var(--black);
+      transition: background 220ms ease;
+    }
+
+    .service-item:hover {
+      background:
+        linear-gradient(135deg, rgba(191, 148, 88, 0.18), rgba(255, 253, 248, 0.04)),
+        var(--black);
+    }
+
+    .service-index {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border: 1px solid rgba(191, 148, 88, 0.42);
+      border-radius: 50%;
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .service-item h3 {
+      margin-top: 32px;
+      color: var(--ivory);
+      font-size: 2rem;
+    }
+
+    .service-item p {
+      max-width: 290px;
+      margin-top: 12px;
+      font-size: 0.94rem;
+    }
+
+    .craft-layout {
+      display: grid;
+      gap: 22px;
+    }
+
+    .craft-image {
+      min-height: 520px;
+    }
+
+    .craft-panel {
+      display: grid;
+      gap: 14px;
+      align-content: center;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 253, 248, 0.72);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .craft-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .craft-point {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      align-items: center;
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+    }
+
+    .craft-point em {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(191, 148, 88, 0.15);
+      color: var(--walnut);
+      font-style: normal;
+      font-weight: 800;
+    }
+
+    .craft-point strong {
+      display: block;
+      color: var(--black);
+      font-size: 0.96rem;
+    }
+
+    .craft-point span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .comparison-section {
+      border-block: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(255, 253, 248, 0.86), rgba(233, 221, 205, 0.58)),
+        repeating-linear-gradient(90deg, rgba(107, 73, 52, 0.03) 0 1px, transparent 1px 120px);
+    }
+
+    .comparison-wrap {
+      display: grid;
+      gap: 24px;
+    }
+
+    .comparison-frame {
+      --position: 52%;
+      position: relative;
+      min-height: 560px;
+      overflow: hidden;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background: var(--linen);
+      touch-action: none;
+      isolation: isolate;
+    }
+
+    .compare-image {
+      position: absolute;
+      inset: 0;
+    }
+
+    .compare-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .compare-after {
+      clip-path: inset(0 0 0 var(--position));
+    }
+
+    .compare-label {
+      position: absolute;
+      top: 14px;
+      z-index: 4;
+      border: 1px solid rgba(255, 253, 248, 0.42);
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: rgba(23, 21, 19, 0.54);
+      color: var(--ivory);
+      font-size: 0.78rem;
+      font-weight: 800;
+      backdrop-filter: blur(14px);
+    }
+
+    .compare-label.before {
+      left: 14px;
+    }
+
+    .compare-label.after {
+      right: 14px;
+    }
+
+    .compare-handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: var(--position);
+      z-index: 5;
+      width: 2px;
+      background: rgba(255, 253, 248, 0.92);
+      box-shadow: 0 0 30px rgba(23, 21, 19, 0.32);
+      pointer-events: none;
+    }
+
+    .compare-handle::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 58px;
+      height: 58px;
+      border: 1px solid rgba(255, 253, 248, 0.72);
+      border-radius: 50%;
+      background:
+        linear-gradient(90deg, transparent 0 42%, rgba(23, 21, 19, 0.48) 42% 58%, transparent 58%),
+        rgba(255, 253, 248, 0.82);
+      box-shadow: 0 14px 40px rgba(23, 21, 19, 0.24);
+      transform: translate(-50%, -50%);
+      backdrop-filter: blur(12px);
+    }
+
+    .compare-range {
+      position: absolute;
+      inset: 0;
+      z-index: 6;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: ew-resize;
+      touch-action: none;
+    }
+
+    .comparison-note {
+      display: grid;
+      align-content: center;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+      background: rgba(255, 253, 248, 0.72);
+    }
+
+    .comparison-note h3 {
+      max-width: 390px;
+      font-size: 2.4rem;
+    }
+
+    .about-statement {
+      display: grid;
+      gap: 24px;
+      text-align: center;
+      justify-items: center;
+    }
+
+    .about-statement h2 {
+      max-width: 760px;
+      margin-top: 0;
+    }
+
+    .about-statement p {
+      max-width: 620px;
+    }
+
+    .value-strip {
+      display: grid;
+      width: 100%;
+      max-width: 820px;
+      grid-template-columns: 1fr;
+      gap: 1px;
+      margin-top: 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--line);
+    }
+
+    .value-strip span {
+      padding: 18px;
+      background: rgba(255, 253, 248, 0.72);
+      color: var(--walnut);
+      font-weight: 800;
+    }
+
+    .contact {
+      padding-bottom: 44px;
+      background:
+        linear-gradient(180deg, rgba(247, 241, 232, 0), rgba(23, 21, 19, 0.05));
+    }
+
+    .contact-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .contact-card {
+      display: grid;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      background: rgba(255, 253, 248, 0.76);
+      box-shadow: var(--soft-shadow);
+      transition: border-color 220ms ease;
+    }
+
+    .contact-card:hover {
+      border-color: rgba(191, 148, 88, 0.34);
+    }
+
+    .contact-card.primary {
+      background: var(--black);
+      color: var(--ivory);
+    }
+
+    .contact-card.primary p,
+    .contact-card.primary .contact-label {
+      color: rgba(255, 253, 248, 0.72);
+    }
+
+    .contact-label {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .contact-card strong {
+      color: inherit;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .footer {
+      padding: 28px 0 36px;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+    }
+
+    @media (min-width: 700px) {
+      .container {
+        width: min(100% - 48px, 1220px);
+      }
+
+      h1 {
+        font-size: 4.45rem;
+      }
+
+      h2 {
+        font-size: 3.35rem;
+      }
+
+      .hero {
+        padding-top: 126px;
+      }
+
+      .hero-grid {
+        gap: 48px;
+      }
+
+      .hero-image-frame {
+        height: 520px;
+      }
+
+      .service-grid,
+      .value-strip {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .contact-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .service-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 980px) {
+      .section {
+        padding: 118px 0;
+      }
+
+      h1 {
+        font-size: 5.25rem;
+      }
+
+      h2 {
+        font-size: 3.9rem;
+      }
+
+      .hero-image-frame {
+        height: 620px;
+      }
+
+      .craft-layout {
+        grid-template-columns: minmax(0, 1fr) minmax(340px, 0.48fr);
+        align-items: stretch;
+      }
+
+      .comparison-wrap {
+        grid-template-columns: minmax(0, 1fr) minmax(300px, 0.36fr);
+        align-items: stretch;
+      }
+
+      .contact-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 920px) {
+      .nav {
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 76px;
+        left: 12px;
+        right: 12px;
+        display: grid;
+        gap: 8px;
+        padding: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.72);
+        border-radius: var(--radius);
+        background: rgba(255, 253, 248, 0.94);
+        box-shadow: var(--shadow);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-12px);
+        transition: opacity 260ms var(--ease), transform 260ms var(--ease);
+      }
+
+      body.menu-open .nav-links {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .nav-links a {
+        min-height: 46px;
+        text-align: center;
+      }
+
+      .nav .btn {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+    }
+
+    @media (max-width: 699px) {
+      .section {
+        padding: 76px 0;
+      }
+
+      h1 {
+        font-size: 3.25rem;
+      }
+
+      h2 {
+        font-size: 2.55rem;
+      }
+
+      h3 {
+        font-size: 1.9rem;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 98px;
+      }
+
+      .brand-logo {
+        width: 96px;
+        height: 44px;
+      }
+
+      .hero-logo-wrap {
+        width: min(72vw, 220px);
+        height: 145px;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .hero-image-frame {
+        height: 360px;
+      }
+
+      .project-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .project-feature,
+      .project-wide,
+      .project-tall,
+      .project-small {
+        grid-column: auto;
+        min-height: 390px;
+      }
+
+      .project-feature {
+        min-height: 470px;
+      }
+
+      .project-info h3 {
+        font-size: 2rem;
+      }
+
+      .service-item {
+        min-height: 185px;
+        padding: 24px;
+      }
+
+      .craft-image {
+        min-height: 420px;
+      }
+
+      .comparison-frame {
+        min-height: 430px;
+      }
+
+      .comparison-note h3 {
+        font-size: 2rem;
+      }
+
+      .contact-card strong {
+        font-size: 1.82rem;
+      }
+    }
+
+    @media (max-width: 430px) {
+      h1 {
+        font-size: 2.95rem;
+      }
+
+      h2 {
+        font-size: 2.3rem;
+      }
+
+      .section {
+        padding: 64px 0;
+      }
+
+      .hero-image-frame {
+        height: 320px;
+      }
+
+      .project-card,
+      .project-feature,
+      .project-wide,
+      .project-tall,
+      .project-small {
+        min-height: 350px;
+      }
+
+      .project-feature {
+        min-height: 430px;
+      }
+
+      .comparison-frame {
+        min-height: 360px;
+      }
+    }
+
+    /* Product Design refresh: premium editorial homepage */
+    body {
+      background: var(--warm-white);
+    }
+
+    .container {
+      width: min(100% - 40px, 1240px);
+    }
+
+    .section {
+      padding: 112px 0;
+    }
+
+    h1 {
+      font-size: 7.2rem;
+      line-height: 1.02;
+    }
+
+    h2 {
+      font-size: 5.15rem;
+      line-height: 1.02;
+    }
+
+    h3 {
+      line-height: 1.08;
+    }
+
+    h1,
+    h2,
+    h3 {
+      padding-bottom: 0.08em;
+    }
+
+    .lead {
+      max-width: 560px;
+      font-size: 1.08rem;
+      line-height: 1.75;
+    }
+
+    .section-header.split {
+      max-width: none;
+      grid-template-columns: minmax(0, 0.95fr) minmax(280px, 0.42fr);
+      align-items: end;
+      gap: 42px;
+    }
+
+    .section-header.split p {
+      max-width: 430px;
+      margin-left: auto;
+      line-height: 1.75;
+    }
+
+    .section-header.inverted p,
+    .section-header.inverted .section-kicker,
+    .section-header.inverted h2 {
+      color: var(--ivory);
+    }
+
+    .nav {
+      width: min(100% - 24px, 1240px);
+      gap: 14px;
+    }
+
+    .nav-links {
+      gap: 2px;
+    }
+
+    .nav-links a {
+      padding-inline: 10px;
+      font-size: 0.72rem;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      padding: 120px 0 72px;
+      align-items: end;
+      color: var(--ivory);
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(90deg, rgba(18, 15, 13, 0.72), rgba(18, 15, 13, 0.28) 44%, rgba(18, 15, 13, 0.08)),
+        linear-gradient(180deg, rgba(18, 15, 13, 0.2), rgba(18, 15, 13, 0.58));
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+      background: var(--black);
+    }
+
+    .hero-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transform: scale(1.02);
+    }
+
+    .hero-grid {
+      max-width: 1240px;
+      justify-items: start;
+      text-align: left;
+    }
+
+    .hero-copy {
+      max-width: 760px;
+      justify-items: start;
+      padding-bottom: 30px;
+    }
+
+    .hero .section-kicker,
+    .hero .lead,
+    .hero h1 {
+      color: var(--ivory);
+    }
+
+    .hero .reveal {
+      opacity: 1;
+      transform: none;
+    }
+
+    .hero .section-kicker::before {
+      background: var(--gold);
+      opacity: 1;
+    }
+
+    .hero .lead {
+      color: rgba(255, 253, 248, 0.82);
+    }
+
+    .hero-actions {
+      justify-content: flex-start;
+    }
+
+    .hero .btn-secondary {
+      border-color: rgba(255, 253, 248, 0.42);
+      background: rgba(255, 253, 248, 0.12);
+      color: var(--ivory);
+    }
+
+    .project-showcase {
+      background: var(--ivory);
+    }
+
+    .project-layout {
+      gap: 20px;
+    }
+
+    .project-card {
+      min-height: 420px;
+      border-radius: 10px;
+      box-shadow: none;
+      transition: transform 360ms var(--ease), box-shadow 360ms var(--ease);
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .project-card img {
+      transition: transform 700ms var(--ease);
+    }
+
+    .project-card:hover img {
+      transform: scale(1.035);
+    }
+
+    .project-card::after {
+      background: linear-gradient(180deg, transparent 40%, rgba(18, 15, 13, 0.76));
+    }
+
+    .project-feature {
+      min-height: 680px;
+    }
+
+    .project-wide,
+    .project-tall {
+      min-height: 520px;
+    }
+
+    .project-info {
+      left: 26px;
+      right: 26px;
+      bottom: 26px;
+    }
+
+    .project-info h3 {
+      font-size: 3.65rem;
+    }
+
+    .about {
+      background:
+        linear-gradient(180deg, var(--ivory), var(--cream));
+    }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.78fr) minmax(320px, 0.5fr);
+      align-items: end;
+      gap: 70px;
+    }
+
+    .about-copy .lead {
+      max-width: 610px;
+    }
+
+    .about-points {
+      display: grid;
+      gap: 1px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--line);
+    }
+
+    .about-points div {
+      padding: 28px;
+      background: rgba(255, 253, 248, 0.74);
+    }
+
+    .about-points strong {
+      display: block;
+      color: var(--black);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.65rem;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .about-points span {
+      display: block;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    .services {
+      background:
+        linear-gradient(135deg, rgba(23, 21, 19, 0.96), rgba(45, 35, 28, 0.98)),
+        var(--black);
+    }
+
+    .service-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      border-radius: 10px;
+    }
+
+    .service-item {
+      min-height: 220px;
+      padding: 30px;
+    }
+
+    .service-item h3 {
+      margin-top: 34px;
+      font-size: 1.72rem;
+    }
+
+    .service-item p {
+      display: block;
+      max-width: 260px;
+      color: rgba(255, 253, 248, 0.64);
+      line-height: 1.65;
+    }
+
+    .process {
+      background: var(--warm-white);
+    }
+
+    .process-track {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      border-top: 1px solid var(--line);
+    }
+
+    .process-track article {
+      display: grid;
+      align-content: start;
+      min-height: 260px;
+      gap: 18px;
+      padding: 26px 22px 0 0;
+      border-right: 1px solid var(--line);
+    }
+
+    .process-track article:last-child {
+      border-right: 0;
+    }
+
+    .process-track span {
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .process-track h3 {
+      font-size: 2rem;
+    }
+
+    .process-track p {
+      max-width: 190px;
+      line-height: 1.65;
+    }
+
+    .craft-layout {
+      gap: 0;
+      background: var(--ivory);
+      border-radius: 10px;
+      box-shadow: var(--soft-shadow);
+      overflow: hidden;
+    }
+
+    .craft-image,
+    .craft-panel {
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .craft-image {
+      min-height: 620px;
+    }
+
+    .craft-panel {
+      padding: 44px;
+      background: var(--ivory);
+    }
+
+    .comparison-section {
+      background: var(--cream);
+    }
+
+    .comparison-frame {
+      min-height: 640px;
+      border-radius: 10px;
+      box-shadow: var(--soft-shadow);
+    }
+
+    .comparison-note {
+      border-radius: 10px;
+      background: rgba(255, 253, 248, 0.82);
+    }
+
+    .client-trust {
+      background: var(--black);
+      color: var(--ivory);
+    }
+
+    .trust-layout {
+      display: grid;
+      gap: 28px;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .client-trust .section-kicker,
+    .client-trust p {
+      color: rgba(255, 253, 248, 0.72);
+    }
+
+    .client-trust .section-kicker::before {
+      background: var(--gold);
+    }
+
+    .client-trust blockquote {
+      max-width: 940px;
+      color: var(--ivory);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 5rem;
+      font-weight: 600;
+      line-height: 1.04;
+    }
+
+    .client-trust p {
+      max-width: 520px;
+      line-height: 1.75;
+    }
+
+    .gallery-preview {
+      background: var(--ivory);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+
+    .gallery-item {
+      grid-column: span 4;
+      min-height: 420px;
+      overflow: hidden;
+      border-radius: 10px;
+      background: var(--linen);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-large {
+      grid-column: span 7;
+      min-height: 650px;
+    }
+
+    .gallery-wide {
+      grid-column: span 5;
+      min-height: 650px;
+    }
+
+    .contact {
+      padding-bottom: 76px;
+      background: var(--cream);
+    }
+
+    .contact-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .contact-card {
+      min-height: 230px;
+      border-radius: 10px;
+      padding: 34px;
+      box-shadow: none;
+    }
+
+    .contact-card strong {
+      font-size: 3.15rem;
+    }
+
+    @media (max-width: 1060px) {
+      .nav {
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 76px;
+        left: 12px;
+        right: 12px;
+        display: grid;
+        gap: 8px;
+        padding: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.72);
+        border-radius: var(--radius);
+        background: rgba(255, 253, 248, 0.96);
+        box-shadow: var(--shadow);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-12px);
+        transition: opacity 260ms var(--ease), transform 260ms var(--ease);
+      }
+
+      body.menu-open .nav-links {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .nav-links a {
+        min-height: 46px;
+        padding: 14px 12px;
+        text-align: center;
+      }
+
+      .nav .btn {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .section-header.split,
+      .about-layout,
+      .comparison-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .section-header.split p {
+        margin-left: 0;
+      }
+
+      .process-track {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .process-track article {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .gallery-large,
+      .gallery-wide,
+      .gallery-item {
+        grid-column: span 6;
+      }
+
+      h1 {
+        font-size: 5.6rem;
+      }
+
+      h2 {
+        font-size: 4.2rem;
+      }
+
+      .client-trust blockquote {
+        font-size: 4.25rem;
+      }
+    }
+
+    @media (max-width: 699px) {
+      .container {
+        width: min(100% - 28px, 1240px);
+      }
+
+      .section {
+        padding: 82px 0;
+      }
+
+      h1 {
+        font-size: 3.45rem;
+      }
+
+      h2 {
+        font-size: 3.25rem;
+      }
+
+      .hero {
+        min-height: 100svh;
+        padding: 104px 0 42px;
+        align-items: center;
+      }
+
+      .hero-copy {
+        padding-bottom: 0;
+      }
+
+      .hero .lead {
+        font-size: 0.98rem;
+        line-height: 1.65;
+      }
+
+      .hero-actions {
+        width: 100%;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .project-feature,
+      .project-wide,
+      .project-tall {
+        min-height: 430px;
+      }
+
+      .service-grid,
+      .contact-grid,
+      .process-track {
+        grid-template-columns: 1fr;
+      }
+
+      .service-item {
+        min-height: 190px;
+      }
+
+      .project-info h3,
+      .client-trust blockquote {
+        font-size: 3rem;
+      }
+
+      .contact-card strong {
+        font-size: 2.1rem;
+      }
+
+      .craft-image,
+      .comparison-frame {
+        min-height: 430px;
+      }
+
+      .craft-panel {
+        padding: 28px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-large,
+      .gallery-wide,
+      .gallery-item {
+        grid-column: auto;
+        min-height: 390px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      h1 {
+        font-size: 3.05rem;
+      }
+
+      h2 {
+        font-size: 2.8rem;
+      }
+
+      .project-feature,
+      .project-wide,
+      .project-tall,
+      .gallery-item {
+        min-height: 350px;
+      }
+
+      .craft-image,
+      .comparison-frame {
+        min-height: 360px;
+      }
+    }
+
+    /* Visual portfolio refinement: more photography, less brochure copy */
+    h1 {
+      font-size: 5.4rem;
+    }
+
+    h2 {
+      font-size: 3.7rem;
+    }
+
+    .hero-copy {
+      max-width: 950px;
+    }
+
+    .hero-copy h1 {
+      max-width: 950px;
+    }
+
+    .hero {
+      display: block;
+      min-height: auto;
+      padding: 112px 0 90px;
+      background: var(--warm-white);
+      color: var(--ink);
+      overflow: visible;
+    }
+
+    .hero::after {
+      display: none;
+    }
+
+    .hero-media {
+      position: relative;
+      inset: auto;
+      z-index: 0;
+      width: min(100% - 40px, 1240px);
+      height: 52vh;
+      min-height: 460px;
+      max-height: 620px;
+      margin: 0 auto;
+      border-radius: 12px;
+      background: var(--linen);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .hero-media img {
+      transform: none;
+    }
+
+    .hero-grid {
+      margin-top: 34px;
+    }
+
+    .hero-copy {
+      padding-bottom: 0;
+    }
+
+    .hero .section-kicker,
+    .hero h1 {
+      color: var(--black);
+    }
+
+    .hero .lead {
+      max-width: 410px;
+      font-size: 1.02rem;
+      color: var(--muted);
+    }
+
+    .hero .section-kicker::before {
+      background: var(--gold);
+    }
+
+    .hero-actions {
+      margin-top: 22px;
+    }
+
+    .section-header.split {
+      grid-template-columns: minmax(0, 0.86fr) minmax(260px, 0.36fr);
+      align-items: end;
+      max-width: none;
+      gap: 56px;
+      margin-bottom: 48px;
+    }
+
+    .section-header.split p {
+      max-width: 380px;
+      margin-left: auto;
+      font-size: 0.96rem;
+    }
+
+    .project-layout {
+      gap: 22px;
+    }
+
+    .project-card {
+      border-radius: 12px;
+    }
+
+    .project-feature {
+      grid-column: span 12;
+      min-height: 760px;
+    }
+
+    .project-wide {
+      grid-column: span 7;
+      min-height: 560px;
+    }
+
+    .project-tall {
+      grid-column: span 5;
+      min-height: 560px;
+    }
+
+    .project-medium,
+    .project-compact {
+      grid-column: span 4;
+      min-height: 470px;
+    }
+
+    .project-info h3 {
+      font-size: 3.05rem;
+    }
+
+    .project-feature .project-info h3 {
+      font-size: 3.85rem;
+    }
+
+    .about-layout.about-visual {
+      grid-template-columns: minmax(0, 0.86fr) minmax(360px, 0.46fr);
+      align-items: center;
+      gap: 64px;
+    }
+
+    .about-image {
+      min-height: 680px;
+      overflow: hidden;
+      border-radius: 12px;
+      background: var(--linen);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-copy {
+      display: grid;
+      gap: 24px;
+    }
+
+    .about-copy h2 {
+      max-width: 510px;
+    }
+
+    .about-points {
+      margin-top: 6px;
+      border-radius: 12px;
+      box-shadow: none;
+    }
+
+    .about-points div {
+      padding: 22px;
+    }
+
+    .about-points span {
+      max-width: 260px;
+      line-height: 1.55;
+    }
+
+    .about-points strong {
+      line-height: 1.16;
+    }
+
+    .service-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+    }
+
+    .service-item {
+      display: grid;
+      min-height: 450px;
+      align-content: end;
+      overflow: hidden;
+      border-radius: 12px;
+      padding: 24px;
+      background: var(--linen);
+      isolation: isolate;
+    }
+
+    .service-item img {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 700ms var(--ease);
+    }
+
+    .service-item::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, rgba(18, 15, 13, 0.05), rgba(18, 15, 13, 0.78));
+    }
+
+    .service-item:hover img {
+      transform: scale(1.035);
+    }
+
+    .service-item > :not(img) {
+      position: relative;
+      z-index: 2;
+    }
+
+    .service-index {
+      background: rgba(255, 253, 248, 0.12);
+    }
+
+    .service-item h3 {
+      margin-top: 42px;
+      font-size: 1.78rem;
+    }
+
+    .service-item p {
+      max-width: 210px;
+      line-height: 1.55;
+    }
+
+    .process-visual {
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(360px, 0.44fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .process-visual figure {
+      min-height: 590px;
+      overflow: hidden;
+      border-radius: 12px;
+      background: var(--linen);
+    }
+
+    .process-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .process-track {
+      display: grid;
+      grid-template-columns: 1fr;
+      border: 1px solid var(--line);
+      border-top: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(255, 253, 248, 0.62);
+    }
+
+    .process-track article {
+      grid-template-columns: auto 1fr;
+      min-height: auto;
+      align-content: center;
+      align-items: center;
+      gap: 18px;
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+      padding: 24px;
+    }
+
+    .process-track article:last-child {
+      border-bottom: 0;
+    }
+
+    .process-track h3 {
+      font-size: 1.85rem;
+    }
+
+    .craft-panel .lead {
+      max-width: 340px;
+    }
+
+    .comparison-wrap {
+      grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.32fr);
+      gap: 22px;
+    }
+
+    .comparison-frame {
+      min-height: 690px;
+      border-radius: 12px;
+    }
+
+    .comparison-note {
+      border-radius: 12px;
+      padding: 30px;
+    }
+
+    .comparison-note h3 {
+      font-size: 2.45rem;
+    }
+
+    .comparison-pair-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .comparison-pair-grid figure {
+      position: relative;
+      min-height: 430px;
+      overflow: hidden;
+      border-radius: 12px;
+      background: var(--linen);
+    }
+
+    .comparison-pair-grid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .comparison-pair-grid figcaption {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: rgba(23, 21, 19, 0.56);
+      color: var(--ivory);
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      backdrop-filter: blur(12px);
+    }
+
+    .client-trust.future-projects {
+      background: var(--black);
+      color: var(--ivory);
+    }
+
+    .client-trust.future-projects h2,
+    .client-trust.future-projects p,
+    .client-trust.future-projects .section-kicker {
+      color: var(--ivory);
+    }
+
+    .client-trust.future-projects p {
+      color: rgba(255, 253, 248, 0.68);
+    }
+
+    .future-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+
+    .future-card {
+      position: relative;
+      grid-column: span 3;
+      min-height: 560px;
+      overflow: hidden;
+      border-radius: 12px;
+      background: rgba(255, 253, 248, 0.1);
+    }
+
+    .future-large {
+      grid-column: span 6;
+    }
+
+    .future-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.94;
+      transition: transform 700ms var(--ease), opacity 700ms var(--ease);
+    }
+
+    .future-card:hover img {
+      opacity: 1;
+      transform: scale(1.03);
+    }
+
+    .future-card figcaption {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: rgba(23, 21, 19, 0.58);
+      color: var(--ivory);
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      backdrop-filter: blur(12px);
+    }
+
+    .gallery-grid {
+      gap: 22px;
+    }
+
+    .gallery-item {
+      grid-column: span 5;
+      min-height: 520px;
+      border-radius: 12px;
+    }
+
+    .gallery-large {
+      grid-column: span 7;
+      min-height: 720px;
+    }
+
+    .gallery-wide {
+      grid-column: span 6;
+      min-height: 580px;
+    }
+
+    @media (max-width: 1060px) {
+      h1 {
+        font-size: 4.75rem;
+      }
+
+      h2 {
+        font-size: 3.42rem;
+      }
+
+      .section-header.split,
+      .about-layout.about-visual,
+      .process-visual,
+      .comparison-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .section-header.split p {
+        margin-left: 0;
+      }
+
+      .project-wide,
+      .project-tall,
+      .project-medium,
+      .project-compact,
+      .gallery-item,
+      .gallery-wide,
+      .future-card {
+        grid-column: span 6;
+      }
+
+      .service-grid,
+      .comparison-pair-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .process-track {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+
+      .process-track article {
+        grid-template-columns: 1fr;
+        align-content: start;
+        align-items: start;
+        min-height: 170px;
+        border-right: 1px solid var(--line);
+        border-bottom: 0;
+      }
+
+      .process-track article:last-child {
+        border-right: 0;
+      }
+    }
+
+    @media (max-width: 699px) {
+      h1 {
+        font-size: 2.92rem;
+      }
+
+      h2 {
+        font-size: 2.62rem;
+      }
+
+      .section-header.split {
+        gap: 18px;
+        margin-bottom: 30px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 96px;
+        padding-bottom: 72px;
+      }
+
+      .hero-media {
+        width: min(100% - 28px, 1240px);
+        height: 46vh;
+        min-height: 330px;
+      }
+
+      .project-feature,
+      .project-wide,
+      .project-tall,
+      .project-medium,
+      .project-compact,
+      .gallery-item,
+      .gallery-wide,
+      .gallery-large,
+      .future-card,
+      .future-large {
+        grid-column: auto;
+      }
+
+      .project-feature {
+        min-height: 500px;
+      }
+
+      .project-wide,
+      .project-tall,
+      .project-medium,
+      .project-compact {
+        min-height: 390px;
+      }
+
+      .project-feature .project-info h3,
+      .project-info h3 {
+        font-size: 2.28rem;
+      }
+
+      .about-image,
+      .process-visual figure,
+      .comparison-frame,
+      .future-card,
+      .gallery-item,
+      .gallery-wide,
+      .gallery-large {
+        min-height: 380px;
+      }
+
+      .service-grid,
+      .comparison-pair-grid,
+      .future-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-item {
+        min-height: 360px;
+      }
+
+      .process-track {
+        grid-template-columns: 1fr;
+      }
+
+      .process-track article {
+        grid-template-columns: auto 1fr;
+        min-height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .process-track article:last-child {
+        border-bottom: 0;
+      }
+
+      .comparison-pair-grid figure {
+        min-height: 330px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="nav" aria-label="Primary navigation">
+      <a class="brand" href="#home" aria-label="WIN DESIGN home">
+        <img class="brand-logo" src="assets/win20/win-design-logo-nav-compact.png" alt="WIN DESIGN logo" />
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Site sections">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#craft">Craft</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <a class="btn btn-primary" href="https://wa.me/601172455699?text=Hi%20WIN%20DESIGN%2C%20I%20would%20like%20to%20discuss%20my%20interior%20project." target="_blank" rel="noopener">WhatsApp</a>
+      <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-controls="navLinks" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="hero-media" aria-hidden="true">
+          <img src="livingroom.jpg.jpg" alt="" width="1280" height="854" fetchpriority="high" />
+        </div>
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <span class="section-kicker reveal">Malaysian Interior Studio</span>
+            <h1 class="reveal" style="--delay: 100ms;">Design Spaces<br>That Inspire Living</h1>
+            <p class="lead reveal" style="--delay: 170ms;">Premium interior design for Malaysian homes.</p>
+            <div class="hero-actions reveal" style="--delay: 240ms;">
+              <a class="btn btn-primary" href="https://wa.me/601172455699?text=Hi%20WIN%20DESIGN%2C%20I%20would%20like%20to%20discuss%20my%20interior%20project." target="_blank" rel="noopener">WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section project-showcase" id="projects">
+        <div class="container">
+          <div class="section-header split">
+            <div>
+              <span class="section-kicker reveal">Featured Projects</span>
+              <h2 class="reveal" style="--delay: 90ms;">Completed spaces, viewed slowly.</h2>
+            </div>
+            <p class="reveal" style="--delay: 150ms;">Large project photography for real client work and future replacements.</p>
+          </div>
+
+          <div class="project-layout">
+            <a class="project-card project-feature reveal" href="project.html?project=walnut-residence" aria-label="View Walnut Residence project page">
+              <img src="livingroom.jpg.jpg" alt="Warm walnut living room with custom cabinetry and concealed lighting" width="1280" height="854" loading="eager" decoding="async" data-project-placeholder="01" />
+              <div class="project-info">
+                <div class="project-meta"><span>Mont Kiara</span><span>Living</span></div>
+                <h3>Walnut Residence</h3>
+              </div>
+            </a>
+
+            <a class="project-card project-wide reveal" href="project.html?project=stone-kitchen" aria-label="View Stone Kitchen project page">
+              <img src="livingroom2.jpg.jpg" alt="Luxury kitchen with stone island, walnut cabinetry and warm lighting" width="1280" height="720" loading="lazy" decoding="async" data-project-placeholder="02" />
+              <div class="project-info">
+                <div class="project-meta"><span>Bukit Jalil</span><span>Kitchen</span></div>
+                <h3>Stone Kitchen</h3>
+              </div>
+            </a>
+
+            <a class="project-card project-tall reveal" href="project.html?project=private-suite" aria-label="View Private Suite project page" style="--delay: 90ms;">
+              <img src="livingroom4.jpg.jpg" alt="Calm luxury bedroom with walnut feature wall and soft beige fabrics" width="1280" height="960" loading="lazy" decoding="async" data-project-placeholder="03" />
+              <div class="project-info">
+                <div class="project-meta"><span>Desa ParkCity</span><span>Suite</span></div>
+                <h3>Private Suite</h3>
+              </div>
+            </a>
+
+            <a class="project-card project-medium reveal" href="project.html?project=open-living" aria-label="View Open Living project page" style="--delay: 120ms;">
+              <img src="livingroom3.jpg.jpg" alt="Open Malaysian condominium living and dining space with warm walnut accents" width="1280" height="960" loading="lazy" decoding="async" data-project-placeholder="04" />
+              <div class="project-info">
+                <div class="project-meta"><span>Bangsar</span><span>Living</span></div>
+                <h3>Open Living</h3>
+              </div>
+            </a>
+
+            <a class="project-card project-compact reveal" href="project.html?project=foyer-cabinetry" aria-label="View Foyer Cabinetry project page" style="--delay: 150ms;">
+              <img src="assets/win20/project-foyer.webp" alt="Malaysian luxury foyer with walnut cabinetry and stone detail" width="1536" height="1024" loading="lazy" decoding="async" data-project-placeholder="05" />
+              <div class="project-info">
+                <div class="project-meta"><span>Damansara Heights</span><span>Foyer</span></div>
+                <h3>Foyer Cabinetry</h3>
+              </div>
+            </a>
+
+            <a class="project-card project-medium reveal" href="project.html?project=built-in-study" aria-label="View Built-In Study project page" style="--delay: 180ms;">
+              <img src="assets/win20/project-study.webp" alt="Elegant Malaysian study with warm built-in cabinetry and hidden LED lighting" width="1586" height="992" loading="lazy" decoding="async" data-project-placeholder="06" />
+              <div class="project-info">
+                <div class="project-meta"><span>Setia Alam</span><span>Study</span></div>
+                <h3>Built-In Study</h3>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section about" id="about">
+        <div class="container about-layout about-visual">
+          <figure class="about-image reveal">
+            <img src="assets/projects/malaysia-study-lounge.png" alt="Warm Malaysian luxury study lounge with walnut cabinetry and beige upholstery" width="1024" height="1024" loading="lazy" decoding="async" />
+          </figure>
+          <div class="about-copy">
+            <span class="section-kicker reveal">About WIN DESIGN</span>
+            <h2 class="reveal" style="--delay: 90ms;">Warm modern homes, planned with discipline.</h2>
+            <div class="about-points reveal" style="--delay: 150ms;">
+              <div>
+                <strong>Clear planning</strong>
+                <span>Layout, scope and materials aligned early.</span>
+              </div>
+              <div>
+                <strong>Refined palette</strong>
+                <span>Walnut, stone and warm neutral layers.</span>
+              </div>
+              <div>
+                <strong>Built-in detail</strong>
+                <span>Cabinetry shaped around daily living.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section services" id="services">
+        <div class="container">
+          <div class="section-header split inverted">
+            <div>
+              <span class="section-kicker reveal">Services</span>
+              <h2 class="reveal" style="--delay: 90ms;">Focused interior work.</h2>
+            </div>
+            <p class="reveal" style="--delay: 150ms;">Four core services, kept simple.</p>
+          </div>
+
+          <div class="service-grid reveal" style="--delay: 240ms;">
+            <article class="service-item">
+              <img src="livingroom.jpg.jpg" alt="Walnut living room interior design direction" width="1280" height="854" loading="lazy" decoding="async" />
+              <span class="service-index">01</span>
+              <h3>Interior Design</h3>
+              <p>Concept, palette and spatial direction.</p>
+            </article>
+            <article class="service-item">
+              <img src="assets/win20/before-same-room.webp" alt="Empty Malaysian condominium before renovation" width="1537" height="1023" loading="lazy" decoding="async" />
+              <span class="service-index">02</span>
+              <h3>Renovation</h3>
+              <p>From bare unit to finished home.</p>
+            </article>
+            <article class="service-item">
+              <img src="livingroom3.jpg.jpg" alt="Open living and dining layout for space planning" width="1280" height="960" loading="lazy" decoding="async" />
+              <span class="service-index">03</span>
+              <h3>Space Planning</h3>
+              <p>Better flow for Malaysian homes.</p>
+            </article>
+            <article class="service-item">
+              <img src="assets/win20/craft-workshop.webp" alt="Premium carpentry workshop for custom cabinetry" width="1690" height="931" loading="lazy" decoding="async" />
+              <span class="service-index">04</span>
+              <h3>Custom Carpentry</h3>
+              <p>Cabinetry, storage and finishing.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section process" id="process">
+        <div class="container">
+          <div class="section-header split">
+            <div>
+              <span class="section-kicker reveal">Process</span>
+              <h2 class="reveal" style="--delay: 90ms;">A calm route to handover.</h2>
+            </div>
+            <p class="reveal" style="--delay: 150ms;">Simple stages. Clean decisions.</p>
+          </div>
+
+          <div class="process-visual reveal" style="--delay: 220ms;">
+            <figure>
+              <img src="assets/projects/malaysia-walnut-foyer-cabinetry.png" alt="Warm walnut Malaysian foyer cabinetry detail" width="1024" height="1024" loading="lazy" decoding="async" />
+            </figure>
+            <div class="process-track" aria-label="WIN DESIGN project process">
+              <article>
+                <span>01</span>
+                <h3>Consult</h3>
+              </article>
+              <article>
+                <span>02</span>
+                <h3>Design</h3>
+              </article>
+              <article>
+                <span>03</span>
+                <h3>Plan</h3>
+              </article>
+              <article>
+                <span>04</span>
+                <h3>Build</h3>
+              </article>
+              <article>
+                <span>05</span>
+                <h3>Handover</h3>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section craftsmanship" id="craft">
+        <div class="container craft-layout">
+          <div class="image-frame craft-image reveal">
+            <img src="assets/win20/craft-workshop.webp" alt="Premium Malaysian carpentry workshop with craftsman sanding walnut cabinetry" width="1690" height="931" loading="lazy" decoding="async" />
+          </div>
+
+          <div class="craft-panel reveal" style="--delay: 120ms;">
+            <div>
+              <span class="section-kicker">Crafted With Precision</span>
+              <h2>Cabinetry that makes the home feel resolved.</h2>
+              <p class="lead">Workshop detail for premium built-ins.</p>
+            </div>
+            <div class="craft-list">
+              <div class="craft-point">
+                <em>01</em>
+                <div>
+                  <strong>Woodworking</strong>
+                </div>
+              </div>
+              <div class="craft-point">
+                <em>02</em>
+                <div>
+                  <strong>Sanding and finishing</strong>
+                </div>
+              </div>
+              <div class="craft-point">
+                <em>03</em>
+                <div>
+                  <strong>Built-in cabinetry</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section comparison-section" id="before-after">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-kicker reveal">Before & After</span>
+            <h2 class="reveal" style="--delay: 90ms;">The same room, transformed.</h2>
+          </div>
+
+          <div class="comparison-wrap">
+            <div class="comparison-frame reveal" style="--delay: 150ms;">
+              <div class="compare-image compare-before">
+                <img src="assets/win20/before-same-room.webp" alt="Before renovation: unfinished Malaysian condominium living room, same perspective" width="1537" height="1023" loading="eager" decoding="async" data-placeholder="before-image" />
+              </div>
+              <div class="compare-image compare-after">
+                <img src="assets/win20/after-same-room.webp" alt="After renovation: completed Malaysian condominium living room, same perspective" width="1280" height="853" loading="eager" decoding="async" data-placeholder="after-image" />
+              </div>
+              <span class="compare-label before">Before</span>
+              <span class="compare-label after">After</span>
+              <span class="compare-handle" aria-hidden="true"></span>
+              <input class="compare-range" type="range" min="5" max="95" value="52" autocomplete="off" aria-label="Compare the same room before and after renovation" />
+            </div>
+
+            <aside class="comparison-note reveal" style="--delay: 240ms;">
+              <span class="section-kicker">Renovation Reveal</span>
+              <h3>Same room. Same angle.</h3>
+              <p>Prepared for real renovation pairs.</p>
+            </aside>
+          </div>
+
+          <div class="comparison-pair-grid reveal" style="--delay: 280ms;" aria-label="Before and after image slots">
+            <!-- Future client project: replace only the two image paths below with matching same-room photos. -->
+            <figure>
+              <img src="assets/win20/before-same-room.webp" alt="Before image slot for an empty or unfinished Malaysian home" width="1537" height="1023" loading="lazy" decoding="async" data-placeholder="future-before-image" />
+              <figcaption>Before image slot</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/win20/after-same-room.webp" alt="After image slot for the completed matching Malaysian interior" width="1280" height="853" loading="lazy" decoding="async" data-placeholder="future-after-image" />
+              <figcaption>After image slot</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section client-trust future-projects" id="testimonials">
+        <div class="container">
+          <div class="section-header split inverted">
+            <div>
+              <span class="section-kicker reveal">Future Client Projects</span>
+              <h2 class="reveal" style="--delay: 90ms;">Ready for real homes.</h2>
+            </div>
+            <p class="reveal" style="--delay: 150ms;">Replace images here as client project photos become available.</p>
+          </div>
+          <div class="future-grid reveal" style="--delay: 210ms;">
+            <!-- Future client project photo slot 01: replace src only. -->
+            <figure class="future-card future-large">
+              <img src="assets/projects/malaysia-luxury-condo-living.png" alt="Future client project placeholder: completed Malaysian luxury condo living room" width="1024" height="1024" loading="lazy" decoding="async" data-client-project-slot="01" />
+              <figcaption>Client Project 01</figcaption>
+            </figure>
+            <!-- Future client project photo slot 02: replace src only. -->
+            <figure class="future-card">
+              <img src="assets/projects/malaysia-luxury-kitchen-dining.png" alt="Future client project placeholder: Malaysian luxury kitchen and dining" width="1024" height="1024" loading="lazy" decoding="async" data-client-project-slot="02" />
+              <figcaption>Client Project 02</figcaption>
+            </figure>
+            <!-- Future client project photo slot 03: replace src only. -->
+            <figure class="future-card">
+              <img src="assets/projects/malaysia-luxury-bedroom.png" alt="Future client project placeholder: completed Malaysian luxury bedroom" width="1024" height="1024" loading="lazy" decoding="async" data-client-project-slot="03" />
+              <figcaption>Client Project 03</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section gallery-preview" id="gallery">
+        <div class="container">
+          <div class="section-header split">
+            <div>
+              <span class="section-kicker reveal">Gallery Preview</span>
+              <h2 class="reveal" style="--delay: 90ms;">Material, light, proportion.</h2>
+            </div>
+            <p class="reveal" style="--delay: 150ms;">A quiet visual library for future project photography.</p>
+          </div>
+
+          <div class="gallery-grid reveal" style="--delay: 220ms;">
+            <figure class="gallery-item gallery-large">
+              <img src="livingroom3.jpg.jpg" alt="Open Malaysian condominium living and dining space with warm lighting" width="1280" height="960" loading="lazy" decoding="async" />
+            </figure>
+            <figure class="gallery-item">
+              <img src="assets/win20/project-foyer.webp" alt="Luxury Malaysian entry foyer with walnut and stone details" width="1536" height="1024" loading="lazy" decoding="async" />
+            </figure>
+            <figure class="gallery-item">
+              <img src="livingroom5.jpg.jpg" alt="Modern Malaysian interior with soft neutral finishes and walnut accents" width="1280" height="854" loading="lazy" decoding="async" />
+            </figure>
+            <figure class="gallery-item gallery-wide">
+              <img src="assets/win20/project-study.webp" alt="Elegant study area with built-in cabinetry and warm Malaysian luxury styling" width="1586" height="992" loading="lazy" decoding="async" />
+            </figure>
+            <figure class="gallery-item gallery-wide">
+              <img src="assets/projects/malaysia-luxury-condo-living.png" alt="Completed Malaysian luxury condominium living room with walnut and warm lighting" width="1024" height="1024" loading="lazy" decoding="async" />
+            </figure>
+            <figure class="gallery-item">
+              <img src="assets/projects/malaysia-luxury-kitchen-dining.png" alt="Malaysian luxury kitchen and dining with cream marble and walnut cabinetry" width="1024" height="1024" loading="lazy" decoding="async" />
+            </figure>
+            <figure class="gallery-item">
+              <img src="assets/projects/malaysia-luxury-bedroom.png" alt="Completed Malaysian bedroom with beige fabrics and walnut feature wall" width="1024" height="1024" loading="lazy" decoding="async" />
+            </figure>
+            <figure class="gallery-item gallery-large">
+              <img src="assets/projects/malaysia-walnut-foyer-cabinetry.png" alt="Walnut foyer cabinetry detail for a Malaysian luxury home" width="1024" height="1024" loading="lazy" decoding="async" />
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact" id="contact">
+        <div class="container">
+          <div class="section-header split">
+            <div>
+              <span class="section-kicker reveal">Contact</span>
+              <h2 class="reveal" style="--delay: 90ms;">Start with WhatsApp.</h2>
+            </div>
+            <p class="reveal" style="--delay: 150ms;">Share your home, location and scope.</p>
+          </div>
+
+          <div class="contact-grid">
+            <a class="contact-card primary reveal" href="https://wa.me/601172455699?text=Hi%20WIN%20DESIGN%2C%20I%20would%20like%20to%20discuss%20my%20interior%20project." target="_blank" rel="noopener">
+              <span class="contact-label">WhatsApp</span>
+              <strong>+60 1172455699</strong>
+              <p>Fastest project enquiry.</p>
+            </a>
+            <a class="contact-card reveal" href="tel:+601172455699" style="--delay: 80ms;">
+              <span class="contact-label">Phone</span>
+              <strong>+60 1172455699</strong>
+              <p>Speak with the studio.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <span>WIN DESIGN. Crafting spaces, creating stories.</span>
+        <span>Luxury Malaysian interiors and custom carpentry.</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const body = document.body;
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelectorAll(".nav-links a");
+
+    menuToggle?.addEventListener("click", () => {
+      const isOpen = body.classList.toggle("menu-open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        body.classList.remove("menu-open");
+        menuToggle?.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const revealEls = document.querySelectorAll(".reveal");
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+
+    revealEls.forEach((el) => revealObserver.observe(el));
+
+    const comparisonFrame = document.querySelector(".comparison-frame");
+    const compareRange = document.querySelector(".compare-range");
+
+    function setComparisonPosition(value) {
+      comparisonFrame?.style.setProperty("--position", `${value}%`);
+      if (compareRange) compareRange.value = value;
+    }
+
+    function updateComparisonFromPointer(event) {
+      if (!comparisonFrame) return;
+      const rect = comparisonFrame.getBoundingClientRect();
+      const x = Math.min(Math.max(event.clientX - rect.left, 0), rect.width);
+      const value = Math.round((x / rect.width) * 100);
+      setComparisonPosition(Math.min(Math.max(value, 5), 95));
+    }
+
+    compareRange?.addEventListener("input", (event) => {
+      setComparisonPosition(event.target.value);
+    });
+
+    comparisonFrame?.addEventListener("pointerdown", (event) => {
+      comparisonFrame.setPointerCapture(event.pointerId);
+      updateComparisonFromPointer(event);
+    });
+
+    comparisonFrame?.addEventListener("pointermove", (event) => {
+      if (event.buttons === 1) updateComparisonFromPointer(event);
+    });
+
+    if (compareRange) {
+      setComparisonPosition(compareRange.value);
+    }
+
+  </script>
+</body>
+</html>

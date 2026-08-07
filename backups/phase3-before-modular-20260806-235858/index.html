@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WIN DESIGN | Luxury Malaysian Interior Design Studio</title>
+  <meta name="description" content="WIN DESIGN creates refined Malaysian interiors, renovation planning and custom cabinetry for modern homes." />
+  <meta name="theme-color" content="#f7f1e8" />
+  <meta property="og:title" content="WIN DESIGN | Luxury Malaysian Interior Design Studio" />
+  <meta property="og:description" content="Modern spaces designed for living. Interior design, renovation and custom cabinetry for Malaysian homes." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/win20/hero-condo.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="assets/win20/hero-condo.webp" />
+  <style>
+    :root {
+      --cream: #f7f1e8;
+      --ivory: #fffdf8;
+      --warm-white: #fbf7f0;
+      --linen: #e9ddcd;
+      --walnut: #6b4934;
+      --wood: #a77951;
+      --gold: #bf9458;
+      --black: #171513;
+      --ink: #211d19;
+      --muted: #6f675d;
+      --line: rgba(69, 52, 38, 0.14);
+      --line-strong: rgba(69, 52, 38, 0.22);
+      --shadow: 0 22px 60px rgba(70, 49, 31, 0.12);
+      --radius: 10px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--ink);
+      background: var(--warm-white);
+      font-family: "Inter", Arial, sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+      text-rendering: geometricPrecision;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    img,
+    video {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      border: 0;
+      background: none;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(calc(100% - clamp(32px, 6vw, 96px)), 1320px);
+      margin-inline: auto;
+    }
+
+    .site-nav {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      z-index: 30;
+      display: grid;
+      width: min(calc(100% - 28px), 1260px);
+      min-height: 70px;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 24px;
+      border: 1px solid rgba(255, 253, 248, 0.34);
+      border-radius: 999px;
+      padding: 9px 10px 9px 18px;
+      background: rgba(255, 253, 248, 0.18);
+      color: var(--ivory);
+      backdrop-filter: blur(18px);
+      transform: translateX(-50%);
+      transition: background 240ms ease, color 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+    }
+
+    .site-nav.is-solid,
+    body.menu-open .site-nav {
+      border-color: rgba(69, 52, 38, 0.12);
+      background: rgba(255, 253, 248, 0.92);
+      color: var(--ink);
+      box-shadow: 0 18px 52px rgba(55, 38, 24, 0.1);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+    }
+
+    .brand-logo {
+      width: 122px;
+      height: 52px;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .nav-links a {
+      border-radius: 999px;
+      padding: 12px 14px;
+      color: currentColor;
+      opacity: 0.88;
+      transition: opacity 180ms ease, background 180ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      background: rgba(255, 253, 248, 0.16);
+      opacity: 1;
+      outline: none;
+    }
+
+    .site-nav.is-solid .nav-links a:hover,
+    .site-nav.is-solid .nav-links a:focus-visible,
+    body.menu-open .nav-links a:hover,
+    body.menu-open .nav-links a:focus-visible {
+      background: rgba(107, 73, 52, 0.08);
+    }
+
+    .btn {
+      display: inline-flex;
+      min-height: 46px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 0 22px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      white-space: nowrap;
+      transition: transform 180ms ease, background 180ms ease, color 180ms ease, border-color 180ms ease;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-dark {
+      background: var(--black);
+      color: var(--ivory);
+    }
+
+    .btn-dark:hover,
+    .btn-dark:focus-visible {
+      background: #2b241f;
+      outline: none;
+    }
+
+    .btn-light {
+      border-color: rgba(255, 253, 248, 0.64);
+      background: rgba(255, 253, 248, 0.14);
+      color: var(--ivory);
+    }
+
+    .btn-light:hover,
+    .btn-light:focus-visible {
+      background: rgba(255, 253, 248, 0.94);
+      color: var(--ink);
+      outline: none;
+    }
+
+    .nav-cta {
+      min-height: 48px;
+      padding-inline: 24px;
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 48px;
+      height: 48px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      border: 1px solid rgba(69, 52, 38, 0.14);
+      border-radius: 999px;
+      background: rgba(255, 253, 248, 0.64);
+      color: var(--ink);
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: currentColor;
+      transition: transform 220ms var(--ease), opacity 180ms ease;
+    }
+
+    .menu-toggle span + span {
+      margin-top: 4px;
+    }
+
+    body.menu-open .menu-toggle span:first-child {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    body.menu-open .menu-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+
+    body.menu-open .menu-toggle span:last-child {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      min-height: clamp(680px, 90svh, 900px);
+      align-items: end;
+      overflow: hidden;
+      color: var(--ivory);
+      isolation: isolate;
+      padding: 124px 0 72px;
+    }
+
+    .hero-media,
+    .hero-video,
+    .hero-poster,
+    .hero-poster img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-media {
+      z-index: -2;
+      background: var(--linen);
+    }
+
+    .hero-video {
+      display: none;
+      object-fit: cover;
+    }
+
+    .hero-media[data-video-ready="true"] .hero-video {
+      display: block;
+    }
+
+    .hero-media[data-video-ready="true"] .hero-poster {
+      display: none;
+    }
+
+    .hero-poster img {
+      object-fit: cover;
+      object-position: center;
+      transform: scale(1.02);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(90deg, rgba(16, 13, 11, 0.76) 0%, rgba(16, 13, 11, 0.46) 42%, rgba(16, 13, 11, 0.12) 100%),
+        linear-gradient(0deg, rgba(16, 13, 11, 0.56) 0%, rgba(16, 13, 11, 0.08) 54%);
+    }
+
+    .hero-copy {
+      max-width: 760px;
+    }
+
+    .brand-line {
+      display: block;
+      margin-bottom: 22px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: inherit;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 0.96;
+    }
+
+    h1 {
+      max-width: 820px;
+      font-size: clamp(3.4rem, 8.2vw, 6rem);
+    }
+
+    h2 {
+      max-width: 780px;
+      color: var(--black);
+      font-size: clamp(2.8rem, 6vw, 4.8rem);
+    }
+
+    h3 {
+      color: var(--black);
+      font-size: clamp(1.9rem, 3vw, 2.8rem);
+    }
+
+    .lead {
+      max-width: 620px;
+      margin-top: 22px;
+      color: rgba(255, 253, 248, 0.84);
+      font-size: clamp(1rem, 1.5vw, 1.18rem);
+      line-height: 1.7;
+    }
+
+    .mobile-break {
+      display: none;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .section {
+      padding: clamp(76px, 10vw, 132px) 0;
+    }
+
+    .projects {
+      padding-top: clamp(60px, 8vw, 104px);
+      background: var(--warm-white);
+    }
+
+    .section-intro {
+      display: grid;
+      max-width: 860px;
+      gap: 18px;
+      margin-bottom: clamp(34px, 5vw, 62px);
+    }
+
+    .section-intro p {
+      max-width: 560px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: clamp(18px, 2vw, 28px);
+    }
+
+    .project-card {
+      display: grid;
+      gap: 14px;
+      color: var(--ink);
+    }
+
+    .project-card.feature {
+      grid-column: span 12;
+    }
+
+    .project-card.wide {
+      grid-column: span 7;
+    }
+
+    .project-card.tall {
+      grid-column: span 5;
+    }
+
+    .project-card.standard {
+      grid-column: span 6;
+    }
+
+    .project-media {
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: var(--linen);
+    }
+
+    .project-card.feature .project-media {
+      aspect-ratio: 16 / 9;
+    }
+
+    .project-card.wide .project-media {
+      aspect-ratio: 4 / 3;
+    }
+
+    .project-card.tall .project-media {
+      aspect-ratio: 4 / 5;
+    }
+
+    .project-card.standard .project-media {
+      aspect-ratio: 3 / 2;
+    }
+
+    .project-media img,
+    .compare-figure img,
+    .about-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 700ms var(--ease);
+    }
+
+    .project-card:hover .project-media img,
+    .project-card:focus-visible .project-media img {
+      transform: scale(1.025);
+    }
+
+    .project-card:focus-visible {
+      outline: 2px solid rgba(191, 148, 88, 0.78);
+      outline-offset: 6px;
+      border-radius: var(--radius);
+    }
+
+    .project-caption {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 18px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+    }
+
+    .project-caption h3 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      transition: color 180ms ease;
+    }
+
+    .project-card:hover h3 {
+      color: var(--walnut);
+    }
+
+    .project-caption span {
+      flex: 0 0 auto;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .transformations {
+      background: var(--cream);
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(18px, 2.4vw, 30px);
+      align-items: start;
+    }
+
+    .compare-figure {
+      display: grid;
+      gap: 14px;
+    }
+
+    .compare-media {
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: var(--linen);
+    }
+
+    .compare-label {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 16px;
+    }
+
+    .compare-label strong {
+      color: var(--black);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .compare-label span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .testimonials[hidden] {
+      display: none;
+    }
+
+    .about-services {
+      background: var(--warm-white);
+    }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(340px, 0.55fr);
+      gap: clamp(34px, 6vw, 82px);
+      align-items: center;
+    }
+
+    .about-media {
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: var(--linen);
+      box-shadow: var(--shadow);
+    }
+
+    .about-copy {
+      display: grid;
+      gap: 26px;
+    }
+
+    .about-copy p {
+      max-width: 520px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .service-list {
+      display: grid;
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .service-list span {
+      display: flex;
+      min-height: 58px;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      color: var(--black);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(1.55rem, 2.5vw, 2.3rem);
+      font-weight: 600;
+    }
+
+    .contact {
+      padding-bottom: clamp(34px, 5vw, 64px);
+      background: var(--warm-white);
+    }
+
+    .contact-panel {
+      display: grid;
+      min-height: clamp(360px, 48vw, 560px);
+      align-items: end;
+      border-top: 1px solid var(--line-strong);
+      padding: clamp(42px, 7vw, 82px) 0 0;
+    }
+
+    .contact-copy {
+      display: grid;
+      max-width: 780px;
+      gap: 24px;
+    }
+
+    .contact-copy p {
+      max-width: 440px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .phone-link {
+      display: inline-flex;
+      width: fit-content;
+      color: var(--walnut);
+      font-weight: 800;
+    }
+
+    .site-footer {
+      display: flex;
+      min-height: 84px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    [data-reveal] {
+      opacity: 1;
+      transform: none;
+      transition: opacity 620ms var(--ease), transform 620ms var(--ease);
+      transition-delay: var(--delay, 0ms);
+    }
+
+    [data-reveal].reveal-ready {
+      opacity: 0;
+      transform: translateY(22px);
+    }
+
+    [data-reveal].is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes heroZoom {
+      from {
+        transform: scale(1.02);
+      }
+      to {
+        transform: scale(1.065);
+      }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-poster img {
+        animation: heroZoom 18s var(--ease) forwards;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .site-nav {
+        grid-template-columns: auto auto;
+        min-height: 68px;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        right: 0;
+        display: grid;
+        gap: 4px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 14px;
+        background: rgba(255, 253, 248, 0.96);
+        color: var(--ink);
+        box-shadow: var(--shadow);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-8px);
+        transition: opacity 220ms var(--ease), transform 220ms var(--ease);
+      }
+
+      body.menu-open .nav-links {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .nav-links a {
+        padding: 14px 16px;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .hero {
+        min-height: 88svh;
+        padding: 118px 0 56px;
+      }
+
+      .hero-copy {
+        max-width: 650px;
+      }
+
+      .project-card.wide,
+      .project-card.tall,
+      .project-card.standard {
+        grid-column: span 12;
+      }
+
+      .project-card.wide .project-media,
+      .project-card.tall .project-media,
+      .project-card.standard .project-media {
+        aspect-ratio: 16 / 10;
+      }
+
+      .about-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .about-copy {
+        max-width: 680px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        width: min(calc(100% - 28px), 100%);
+      }
+
+      .site-nav {
+        top: 14px;
+        width: min(calc(100% - 24px), 100%);
+        padding-left: 14px;
+      }
+
+      .brand-logo {
+        width: 112px;
+        height: 46px;
+      }
+
+      .hero {
+        min-height: 88svh;
+      }
+
+      .hero::before {
+        background:
+          linear-gradient(0deg, rgba(16, 13, 11, 0.82) 0%, rgba(16, 13, 11, 0.36) 62%, rgba(16, 13, 11, 0.16) 100%);
+      }
+
+      .brand-line {
+        margin-bottom: 18px;
+        font-size: 0.7rem;
+        letter-spacing: 0.13em;
+      }
+
+      h1 {
+        font-size: clamp(2.55rem, 10vw, 3.15rem);
+      }
+
+      .mobile-break {
+        display: inline;
+      }
+
+      .desktop-space {
+        display: none;
+      }
+
+      .lead {
+        max-width: 340px;
+        margin-top: 18px;
+      }
+
+      .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: min(100%, 360px);
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .section {
+        padding: 72px 0;
+      }
+
+      .section-intro {
+        margin-bottom: 30px;
+      }
+
+      .project-grid,
+      .compare-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card,
+      .compare-figure {
+        gap: 12px;
+      }
+
+      .project-card.feature,
+      .project-card.wide,
+      .project-card.tall,
+      .project-card.standard {
+        grid-column: auto;
+      }
+
+      .project-card.feature .project-media,
+      .project-card.wide .project-media,
+      .project-card.tall .project-media,
+      .project-card.standard .project-media,
+      .compare-media,
+      .about-media {
+        aspect-ratio: 4 / 5;
+      }
+
+      .project-caption,
+      .compare-label {
+        display: grid;
+        gap: 6px;
+      }
+
+      .project-caption span,
+      .compare-label span {
+        font-size: 0.78rem;
+      }
+
+      .contact-panel {
+        min-height: 420px;
+      }
+
+      .site-footer {
+        display: grid;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+
+      [data-reveal] {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-nav" aria-label="Primary navigation">
+    <a class="brand" href="#home" aria-label="WIN DESIGN home">
+      <img class="brand-logo" src="assets/win20/win-design-logo-nav-compact.png" alt="WIN DESIGN logo" width="244" height="104" />
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Site sections">
+      <a href="#projects">Projects</a>
+      <a href="#transformations">Transformations</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <a class="btn btn-dark nav-cta" href="https://wa.me/601172455699?text=Hi%20WIN%20DESIGN%2C%20I%20would%20like%20to%20discuss%20my%20interior%20project." target="_blank" rel="noopener">WhatsApp Us</a>
+    <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-controls="navLinks" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-media" data-video-ready="false">
+        <video class="hero-video" autoplay muted loop playsinline preload="none" poster="assets/win20/hero-condo.webp" aria-hidden="true">
+          <!-- Future desktop video source: add MP4 here, then set data-video-ready to true on .hero-media. -->
+          <!-- Future mobile video source: add a smaller MP4 here and keep the poster as fallback. -->
+        </video>
+        <picture class="hero-poster">
+          <source media="(max-width: 699px)" srcset="assets/win20/hero-condo.webp" />
+          <img src="assets/win20/hero-condo.webp" alt="Modern Malaysian condominium interior with warm walnut cabinetry and hidden lighting" width="1536" height="1024" fetchpriority="high" decoding="async" />
+        </picture>
+      </div>
+
+      <div class="container">
+        <div class="hero-copy">
+          <span class="brand-line">WIN DESIGN</span>
+          <h1>Modern<span class="mobile-break"><br></span><span class="desktop-space"> </span>Spaces,<br>Designed<span class="mobile-break"><br></span><span class="desktop-space"> </span>for Living.</h1>
+          <p class="lead">A refined approach to interior design, renovation and custom cabinetry.</p>
+          <div class="hero-actions">
+            <a class="btn btn-light" href="#projects">Explore Projects</a>
+            <a class="btn btn-dark" href="https://wa.me/601172455699?text=Hi%20WIN%20DESIGN%2C%20I%20would%20like%20to%20discuss%20my%20interior%20project." target="_blank" rel="noopener">WhatsApp Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section projects" id="projects">
+      <div class="container">
+        <div class="section-intro" data-reveal>
+          <h2>Featured Projects</h2>
+          <p>Warm materials, fitted storage and calm Malaysian living spaces, shown through large project photography.</p>
+        </div>
+
+        <div class="project-grid">
+          <a class="project-card feature" href="project.html?project=walnut-residence" aria-label="View Walnut Residence project page" data-reveal>
+            <div class="project-media">
+              <img src="livingroom.jpg.jpg" alt="Warm walnut living room with custom cabinetry and concealed lighting" width="1280" height="854" loading="eager" decoding="async" />
+            </div>
+            <div class="project-caption">
+              <h3>Walnut Residence</h3>
+              <span>Living Room</span>
+            </div>
+          </a>
+
+          <a class="project-card wide" href="project.html?project=stone-kitchen" aria-label="View Stone Kitchen project page" data-reveal style="--delay: 90ms;">
+            <div class="project-media">
+              <img src="livingroom2.jpg.jpg" alt="Luxury kitchen with stone island, walnut cabinetry and warm lighting" width="1280" height="720" loading="eager" decoding="async" />
+            </div>
+            <div class="project-caption">
+              <h3>Stone Kitchen</h3>
+              <span>Kitchen</span>
+            </div>
+          </a>
+
+          <a class="project-card tall" href="project.html?project=private-suite" aria-label="View Private Suite project page" data-reveal style="--delay: 130ms;">
+            <div class="project-media">
+              <img src="livingroom4.jpg.jpg" alt="Calm luxury bedroom with walnut feature wall and soft beige fabrics" width="1280" height="960" loading="eager" decoding="async" />
+            </div>
+            <div class="project-caption">
+              <h3>Private Suite</h3>
+              <span>Bedroom</span>
+            </div>
+          </a>
+
+          <a class="project-card standard" href="project.html?project=open-living" aria-label="View Open Living project page" data-reveal>
+            <div class="project-media">
+              <img src="livingroom3.jpg.jpg" alt="Open Malaysian condominium living and dining space with warm walnut accents" width="1280" height="960" loading="eager" decoding="async" />
+            </div>
+            <div class="project-caption">
+              <h3>Open Living</h3>
+              <span>Living and Dining</span>
+            </div>
+          </a>
+
+          <a class="project-card standard" href="project.html?project=built-in-study" aria-label="View Built-In Study project page" data-reveal style="--delay: 90ms;">
+            <div class="project-media">
+              <img src="assets/win20/project-study.webp" alt="Elegant Malaysian study with warm built-in cabinetry and hidden LED lighting" width="1586" height="992" loading="eager" decoding="async" />
+            </div>
+            <div class="project-caption">
+              <h3>Built-In Study</h3>
+              <span>Study</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section transformations" id="transformations">
+      <div class="container">
+        <div class="section-intro" data-reveal>
+          <h2>Before and After</h2>
+          <p>A clear look at renovation stages, from bare unit to completed living space.</p>
+        </div>
+
+        <!-- Current images are not a verified same-angle pair, so this section uses honest side-by-side comparison instead of a draggable slider. Replace both src values with a true same-room pair before enabling slider mode. -->
+        <div class="compare-grid" data-comparison-mode="side-by-side">
+          <figure class="compare-figure" data-reveal>
+            <div class="compare-media">
+              <img src="assets/win20/before-same-room.webp" alt="Before renovation: unfinished Malaysian condominium interior with bare concrete floor and exposed wiring" width="1537" height="1023" loading="lazy" decoding="async" />
+            </div>
+            <figcaption class="compare-label">
+              <strong>Before</strong>
+              <span>Bare unit</span>
+            </figcaption>
+          </figure>
+
+          <figure class="compare-figure" data-reveal style="--delay: 90ms;">
+            <div class="compare-media">
+              <img src="assets/win20/after-same-room.webp" alt="After renovation: completed Malaysian condominium living room with fitted lighting and furniture" width="1280" height="853" loading="lazy" decoding="async" />
+            </div>
+            <figcaption class="compare-label">
+              <strong>After</strong>
+              <span>Finished interior</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Client Testimonials are intentionally hidden until verified client feedback is available. Add up to three real quotes here, then remove hidden. Do not add names, projects or proof claims unless they are confirmed. -->
+    <section class="section testimonials" id="testimonials" hidden>
+      <div class="container">
+        <h2>Client Testimonials</h2>
+        <template id="testimonial-template">
+          <figure>
+            <blockquote></blockquote>
+            <figcaption></figcaption>
+          </figure>
+        </template>
+      </div>
+    </section>
+
+    <section class="section about-services" id="about">
+      <div class="container about-layout">
+        <figure class="about-media" data-reveal>
+          <img src="assets/win20/craft-workshop.webp" alt="Premium carpentry workshop with craftsman sanding walnut cabinetry" width="1690" height="931" loading="lazy" decoding="async" />
+        </figure>
+
+        <div class="about-copy" data-reveal style="--delay: 90ms;">
+          <h2>Interior work with quiet discipline.</h2>
+          <p>WIN DESIGN plans modern Malaysian homes with a focus on proportion, warm materials and built-in detail.</p>
+          <div class="service-list" aria-label="WIN DESIGN services">
+            <span>Interior Design</span>
+            <span>Renovation</span>
+            <span>Custom Cabinetry</span>
+            <span>Residential Spaces</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact">
+      <div class="container">
+        <div class="contact-panel" data-reveal>
+          <div class="contact-copy">
+            <h2>Let's shape your next space.</h2>
+            <p>Share your home, location and scope. The conversation can start simply.</p>
+            <div class="hero-actions">
+              <a class="btn btn-dark" href="https://wa.me/601172455699?text=Hi%20WIN%20DESIGN%2C%20I%20would%20like%20to%20discuss%20my%20interior%20project." target="_blank" rel="noopener">WhatsApp Us</a>
+              <a class="phone-link" href="tel:+601172455699">+60 1172455699</a>
+            </div>
+          </div>
+        </div>
+
+        <footer class="site-footer">
+          <span>WIN DESIGN</span>
+          <span>Interior Design, Renovation and Custom Cabinetry</span>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const body = document.body;
+    const nav = document.querySelector(".site-nav");
+    const hero = document.querySelector(".hero");
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelectorAll(".nav-links a");
+
+    menuToggle?.addEventListener("click", () => {
+      const isOpen = body.classList.toggle("menu-open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        body.classList.remove("menu-open");
+        menuToggle?.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    if (nav && hero && "IntersectionObserver" in window) {
+      const navObserver = new IntersectionObserver((entries) => {
+        const entry = entries[0];
+        nav.classList.toggle("is-solid", entry.intersectionRatio < 0.82);
+      }, { threshold: [0, 0.82, 1] });
+
+      navObserver.observe(hero);
+    } else {
+      nav?.classList.add("is-solid");
+    }
+
+    const revealItems = document.querySelectorAll("[data-reveal]");
+
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.16 });
+
+      revealItems.forEach((item) => {
+        const rect = item.getBoundingClientRect();
+        const startsInView = rect.top < window.innerHeight * 0.95 && rect.bottom > 0;
+
+        if (startsInView) {
+          item.classList.add("is-visible");
+          return;
+        }
+
+        item.classList.add("reveal-ready");
+        revealObserver.observe(item);
+      });
+    } else {
+      revealItems.forEach((item) => item.classList.add("is-visible"));
+    }
+  </script>
+</body>
+</html>
+
+
