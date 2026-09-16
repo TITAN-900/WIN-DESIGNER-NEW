@@ -18,7 +18,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/win20/hero-condo.webp">
   <link rel="stylesheet" href="assets/css/styles.css">
-  <link rel="stylesheet" href="assets/css/studio-sculpture.css">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -103,23 +102,8 @@
 
     <section class="section studio section-anchor" id="studio" data-nav-section>
       <div class="container studio-grid">
-        <figure class="studio-sculpture" data-sculpture data-reveal aria-label="A study in wood and proportion">
-          <div class="sculpture-stage" data-sculpture-stage>
-            <img class="sculpture-fallback" src="assets/win20/craft-workshop.webp" alt="Premium carpentry workshop with craftsman sanding walnut cabinetry" width="1690" height="931" loading="lazy" decoding="async">
-            <canvas class="sculpture-canvas" data-sculpture-canvas tabindex="0" role="group" aria-roledescription="interactive 3D sculpture" aria-label="Curved walnut layers. Drag or use arrow keys to bend and twist the form." aria-describedby="sculpture-instructions" hidden></canvas>
-          </div>
-          <figcaption class="sculpture-caption">
-            <div class="sculpture-caption-copy">
-              <span class="sculpture-title">A study in wood and proportion.</span>
-              <span class="sculpture-instructions" id="sculpture-instructions" data-sculpture-instructions>Curved layers, considered from every angle.</span>
-            </div>
-            <div class="sculpture-controls" data-sculpture-controls hidden>
-              <button type="button" data-sculpture-pause aria-pressed="false">Pause motion</button>
-              <button type="button" data-sculpture-reset>Reset form</button>
-            </div>
-            <button class="sculpture-retry" type="button" data-sculpture-retry hidden>Retry 3D</button>
-          </figcaption>
-          <span class="sculpture-sr-only" data-sculpture-status role="status" aria-live="polite"></span>
+        <figure class="studio-media" data-reveal>
+          <img src="assets/win20/craft-workshop.webp" alt="Premium carpentry workshop with craftsman sanding walnut cabinetry" width="1690" height="931" loading="lazy" decoding="async">
         </figure>
 
         <div class="studio-copy" data-reveal style="--delay: 90ms;">
@@ -195,6 +179,5 @@
 
   <script src="assets/data/projects.js" defer></script>
   <script src="assets/js/main.js" defer></script>
-  <script src="assets/js/studio-sculpture.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,60 @@
+{
+  "checkedAt": "2026-09-16T08:07:26.166Z",
+  "results": [
+    "15 closed ribs have visible gaps; all eight extreme bends are finite and keep feet anchored",
+    "geometry clamps extreme inputs and restores every original vertex exactly",
+    "actual pointer controller visibly deforms, clamps distant drag and settles exactly to zero",
+    "pointer cancellation releases capture and settles",
+    "keyboard direction changes geometry and key release returns it",
+    "pause stops idle rendering; offscreen cancels frames and clears drag state",
+    "reduced motion is static at rest and responds instantly without elastic motion",
+    "context loss during async initialization keeps fallback until restoration",
+    "all HTML outside About is unchanged except the two dedicated asset includes"
+  ],
+  "geometryStats": {
+    "ribCount": 15,
+    "vertexCount": 21165,
+    "triangleCount": 38880,
+    "ribThickness": 0.062,
+    "restGap": 0.10400000000000001,
+    "restBounds": {
+      "min": [
+        -1.6133354902267456,
+        0.017999999225139618,
+        -1.1929999589920044
+      ],
+      "max": [
+        1.5901422500610352,
+        3.0201377868652344,
+        1.1929999589920044
+      ],
+      "size": [
+        3.2034777402877808,
+        3.0021377876400948,
+        2.385999917984009
+      ]
+    },
+    "bounds": {
+      "min": [
+        -1.6133354902267456,
+        0.017999999225139618,
+        -1.1929999589920044
+      ],
+      "max": [
+        1.5901422500610352,
+        3.0201377868652344,
+        1.1929999589920044
+      ],
+      "size": [
+        3.2034777402877808,
+        3.0021377876400948,
+        2.385999917984009
+      ]
+    },
+    "deformation": {
+      "x": 0,
+      "y": 0,
+      "maxDisplacement": 0
+    }
+  }
+}
