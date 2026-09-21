@@ -18,7 +18,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/win20/hero-condo.webp">
   <link rel="stylesheet" href="assets/css/styles.css">
-  <link rel="stylesheet" href="assets/css/studio-sculpture.css">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -43,15 +42,15 @@
 </head>
 <body class="home-page">
   <header class="site-nav" aria-label="Primary navigation">
-    <a class="brand" href="#home" aria-label="WIN DESIGN home">
+    <a class="brand" href="index.html#home" aria-label="WIN DESIGN home">
       <img class="brand-logo" src="assets/win20/win-design-logo-nav-compact.png" alt="WIN DESIGN logo" width="244" height="104">
     </a>
 
     <nav class="nav-links" id="navLinks" aria-label="Site sections">
-      <a href="#portfolio">Portfolio</a>
-      <a href="#transformations">Before + After</a>
-      <a href="#studio">Studio</a>
-      <a href="#contact">Contact</a>
+      <a href="index.html#portfolio">Portfolio</a>
+      <a href="index.html#transformations">Before + After</a>
+      <a href="about.html">About</a>
+      <a href="index.html#contact">Contact</a>
     </nav>
 
     <a class="btn btn-dark nav-cta" href="https://wa.me/601172455699?text=Hi%20WIN%20DESIGN%2C%20I%20would%20like%20to%20discuss%20my%20interior%20project." target="_blank" rel="noopener">WhatsApp</a>
@@ -101,37 +100,10 @@
       </div>
     </section>
 
-    <section class="section studio section-anchor" id="studio" data-nav-section>
-      <div class="container studio-grid">
-        <figure class="studio-sculpture" data-sculpture data-reveal aria-label="A study in wood and proportion">
-          <div class="sculpture-stage" data-sculpture-stage>
-            <img class="sculpture-fallback" src="assets/win20/craft-workshop.webp" alt="Premium carpentry workshop with craftsman sanding walnut cabinetry" width="1690" height="931" loading="lazy" decoding="async">
-            <canvas class="sculpture-canvas" data-sculpture-canvas tabindex="0" role="group" aria-roledescription="interactive 3D sculpture" aria-label="Curved walnut layers. Drag or use arrow keys to bend and twist the form." aria-describedby="sculpture-instructions" hidden></canvas>
-          </div>
-          <figcaption class="sculpture-caption">
-            <div class="sculpture-caption-copy">
-              <span class="sculpture-title">A study in wood and proportion.</span>
-              <span class="sculpture-instructions" id="sculpture-instructions" data-sculpture-instructions>Curved layers, considered from every angle.</span>
-            </div>
-            <div class="sculpture-controls" data-sculpture-controls hidden>
-              <button type="button" data-sculpture-pause aria-pressed="false">Pause motion</button>
-              <button type="button" data-sculpture-reset>Reset form</button>
-            </div>
-            <button class="sculpture-retry" type="button" data-sculpture-retry hidden>Retry 3D</button>
-          </figcaption>
-          <span class="sculpture-sr-only" data-sculpture-status role="status" aria-live="polite"></span>
-        </figure>
-
-        <div class="studio-copy" data-reveal style="--delay: 90ms;">
-          <h2>Designed with restraint. Built with care.</h2>
-          <p>WIN DESIGN plans residential interiors around proportion, warm materials and fitted detail.</p>
-          <div class="service-list" aria-label="WIN DESIGN services">
-            <span>Interior Design</span>
-            <span>Renovation</span>
-            <span>Custom Cabinetry</span>
-            <span>Residential Spaces</span>
-          </div>
-        </div>
+    <section class="section about-teaser" aria-labelledby="about-teaser-title">
+      <div class="container about-teaser-inner">
+        <h2 id="about-teaser-title">Spaces designed around the way you live.</h2>
+        <a class="inline-link" href="about.html">Discover WIN Design <span aria-hidden="true">→</span></a>
       </div>
     </section>
 
@@ -195,6 +167,5 @@
 
   <script src="assets/data/projects.js" defer></script>
   <script src="assets/js/main.js" defer></script>
-  <script src="assets/js/studio-sculpture.js" defer></script>
 </body>
 </html>

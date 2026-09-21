@@ -1,0 +1,390 @@
+/**
+ * Fifteen bent-timber ribs describe one asymmetric, open architectural volume.
+ * The geometry is authored in metres, with its two feet resting at y = 0.018.
+ * No model, loader, framework or runtime-generated image is required.
+ */
+export function createSculpture(THREE, woodTexture) {
+  const RIB_COUNT = 15;
+  const PATH_SEGMENTS = 80;
+  const RIB_SPACING = 0.166;
+  const BAND_WIDTH = 0.202;
+  const BAND_THICKNESS = 0.062;
+  const EDGE_RADIUS = 0.009;
+  const group = new THREE.Group();
+  group.name = "WIN DESIGN · bent walnut pavilion";
+  const ribs = [];
+  const restBox = new THREE.Box3();
+  const currentBox = new THREE.Box3();
+  const size = new THREE.Vector3();
+  let previousX = NaN;
+  let previousY = NaN;
+
+  // Counterclockwise rounded rectangle: broad timber faces and a small,
+  // physical bevel catch light without making the wood look inflated.
+  const profile = [];
+  const halfWidth = BAND_WIDTH / 2;
+  const halfThickness = BAND_THICKNESS / 2;
+  const corners = [
+    [halfWidth - EDGE_RADIUS, halfThickness - EDGE_RADIUS, 0],
+    [-halfWidth + EDGE_RADIUS, halfThickness - EDGE_RADIUS, Math.PI / 2],
+    [-halfWidth + EDGE_RADIUS, -halfThickness + EDGE_RADIUS, Math.PI],
+    [halfWidth - EDGE_RADIUS, -halfThickness + EDGE_RADIUS, Math.PI * 1.5]
+  ];
+  for (const [cx, cz, start] of corners) {
+    for (let step = 0; step < 4; step += 1) {
+      const angle = start + step * Math.PI / 6;
+      profile.push([cx + Math.cos(angle) * EDGE_RADIUS, cz + Math.sin(angle) * EDGE_RADIUS]);
+    }
+  }
+  const profileCount = profile.length;
+  const perimeterDistances = [0];
+  for (let i = 1; i <= profileCount; i += 1) {
+    const a = profile[i - 1];
+    const b = profile[i % profileCount];
+    perimeterDistances.push(perimeterDistances[i - 1] + Math.hypot(b[0] - a[0], b[1] - a[1]));
+  }
+  const perimeter = perimeterDistances[profileCount];
+
+  for (let ribIndex = 0; ribIndex < RIB_COUNT; ribIndex += 1) {
+    const q = (ribIndex - (RIB_COUNT - 1) / 2) / ((RIB_COUNT - 1) / 2);
+    const z = q * (RIB_COUNT - 1) / 2 * RIB_SPACING;
+    // A full left vault flows into a concave right shoulder. The crown steps
+    // gently through the depth, giving the stack a legible sculptural contour.
+    const outline = [
+      [-1.42, 0.04],
+      [-1.44, 0.65],
+      [-1.47, 1.45],
+      [-1.22, 2.30],
+      [-0.60, 2.83],
+      [0.10, 2.88],
+      [0.67, 2.37],
+      [0.78, 1.62],
+      [1.30, 0.97],
+      [1.49, 0.04]
+    ];
+    const points = outline.map(([x, y], index) => {
+      const t = index / (outline.length - 1);
+      const crown = Math.sin(Math.PI * t);
+      return new THREE.Vector3(
+        x + 0.11 * q * crown + 0.055 * q * q * crown,
+        0.04 + (y - 0.04) * (1 - 0.075 * q * q) + 0.065 * q * crown,
+        z
+      );
+    });
+    const curve = new THREE.CatmullRomCurve3(points, false, "centripetal");
+    const path = curve.getSpacedPoints(PATH_SEGMENTS);
+    const positions = [];
+    const uvs = [];
+    const indices = [];
+    const tangent = new THREE.Vector3();
+    let distance = 0;
+    const pathDistances = [0];
+    for (let j = 1; j <= PATH_SEGMENTS; j += 1) {
+      distance += path[j].distanceTo(path[j - 1]);
+      pathDistances.push(distance);
+    }
+
+    // Duplicate the UV seam while preserving matching rounded-edge normals
+    // below. U follows arc length, so the grain bends with the timber.
+    const ringSize = profileCount + 1;
+    for (let j = 0; j <= PATH_SEGMENTS; j += 1) {
+      const previous = path[Math.max(0, j - 1)];
+      const next = path[Math.min(PATH_SEGMENTS, j + 1)];
+      tangent.subVectors(next, previous).normalize();
+      const nx = -tangent.y;
+      const ny = tangent.x;
+      for (let k = 0; k <= profileCount; k += 1) {
+        const [a, b] = profile[k % profileCount];
+        positions.push(path[j].x + nx * a, path[j].y + ny * a, z + b);
+        uvs.push(pathDistances[j] / distance + ribIndex * 0.041, perimeterDistances[k] / perimeter + ribIndex * 0.173);
+      }
+      if (j === PATH_SEGMENTS) continue;
+      for (let k = 0; k < profileCount; k += 1) {
+        const a = j * ringSize + k;
+        const b = a + ringSize;
+        // Right-handed profile basis (normal, depth, tangent).
+        indices.push(a, a + 1, b, a + 1, b + 1, b);
+      }
+    }
+
+    // Dedicated cap vertices keep the end grain faces planar and their
+    // normals separate from the rounded long edges.
+    for (const endpoint of [0, PATH_SEGMENTS]) {
+      const centerIndex = positions.length / 3;
+      positions.push(path[endpoint].x, path[endpoint].y, z);
+      uvs.push(0.5, 0.5);
+      const first = positions.length / 3;
+      for (let k = 0; k < profileCount; k += 1) {
+        const source = (endpoint * ringSize + k) * 3;
+        positions.push(positions[source], positions[source + 1], positions[source + 2]);
+        uvs.push(profile[k][0] / BAND_WIDTH + 0.5, profile[k][1] / BAND_THICKNESS + 0.5);
+      }
+      for (let k = 0; k < profileCount; k += 1) {
+        const a = first + k;
+        const b = first + (k + 1) % profileCount;
+        if (endpoint === 0) indices.push(centerIndex, b, a);
+        else indices.push(centerIndex, a, b);
+      }
+    }
+
+    let minimumY = Infinity;
+    for (let j = 1; j < positions.length; j += 3) minimumY = Math.min(minimumY, positions[j]);
+    for (let j = 1; j < positions.length; j += 3) positions[j] += 0.018 - minimumY;
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+    geometry.attributes.position.setUsage(THREE.DynamicDrawUsage);
+    geometry.setAttribute("uv", new THREE.Float32BufferAttribute(uvs, 2));
+    geometry.setIndex(indices);
+    geometry.computeVertexNormals();
+    smoothSeam(geometry);
+    geometry.computeBoundingBox();
+    geometry.computeBoundingSphere();
+    restBox.union(geometry.boundingBox);
+    const tint = 0.96 + 0.035 * (0.5 + 0.5 * Math.cos(ribIndex * 1.83));
+    const material = new THREE.MeshStandardMaterial({
+      color: new THREE.Color(tint, tint * 0.995, tint * 0.985),
+      map: woodTexture,
+      bumpMap: woodTexture,
+      bumpScale: 0.009,
+      roughness: 0.73,
+      metalness: 0
+    });
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.name = `Bent walnut rib ${String(ribIndex + 1).padStart(2, "0")}`;
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    group.add(mesh);
+    ribs.push({ mesh, base: geometry.attributes.position.array.slice() });
+  }
+
+  const stats = {
+    ribCount: RIB_COUNT,
+    vertexCount: ribs.reduce((sum, rib) => sum + rib.base.length / 3, 0),
+    triangleCount: ribs.reduce((sum, rib) => sum + rib.mesh.geometry.index.count / 3, 0),
+    ribThickness: BAND_THICKNESS,
+    restGap: RIB_SPACING - BAND_THICKNESS,
+    restBounds: boxSummary(restBox),
+    bounds: boxSummary(restBox),
+    deformation: { x: 0, y: 0, maxDisplacement: 0 }
+  };
+
+  function smoothSeam(geometry) {
+    const normals = geometry.attributes.normal;
+    const seamNormal = new THREE.Vector3();
+    const otherNormal = new THREE.Vector3();
+    for (let j = 0; j <= PATH_SEGMENTS; j += 1) {
+      const first = j * (profileCount + 1);
+      const last = first + profileCount;
+      seamNormal.fromBufferAttribute(normals, first);
+      otherNormal.fromBufferAttribute(normals, last);
+      seamNormal.add(otherNormal).normalize();
+      normals.setXYZ(first, seamNormal.x, seamNormal.y, seamNormal.z);
+      normals.setXYZ(last, seamNormal.x, seamNormal.y, seamNormal.z);
+    }
+    normals.needsUpdate = true;
+  }
+
+  function boxSummary(box) {
+    box.getSize(size);
+    return { min: box.min.toArray(), max: box.max.toArray(), size: size.toArray() };
+  }
+
+  function deform(x = 0, y = 0) {
+    x = Math.max(-1, Math.min(1, Number.isFinite(x) ? x : 0));
+    y = Math.max(-1, Math.min(1, Number.isFinite(y) ? y : 0));
+    if (x === previousX && y === previousY) return stats.deformation;
+    previousX = x;
+    previousY = y;
+    currentBox.makeEmpty();
+    let maximumDistanceSquared = 0;
+    for (const { mesh, base } of ribs) {
+      const attribute = mesh.geometry.attributes.position;
+      const target = attribute.array;
+      for (let i = 0; i < base.length; i += 3) {
+        const bx = base[i];
+        const by = base[i + 1];
+        const bz = base[i + 2];
+        // One continuous field deforms all ribs. It is invertible at each
+        // height: fan stays positive, shear stays bounded, and y is monotone.
+        // Consequently the separated ribs remain separated at full input.
+        const h = Math.max(0, Math.min(1, (by - 0.18) / 2.75));
+        const influence = h * h * (3 - 2 * h);
+        const angle = (x * 0.34 + y * 0.09) * influence;
+        const c = Math.cos(angle);
+        const s = Math.sin(angle);
+        const fx = bx + x * 0.12 * bz * influence;
+        const fz = bz * (1 + y * 0.22 * influence);
+        target[i] = c * fx - s * fz + x * 0.50 * influence;
+        target[i + 1] = by + y * 0.24 * influence;
+        target[i + 2] = s * fx + c * fz;
+        const dx = target[i] - bx;
+        const dy = target[i + 1] - by;
+        const dz = target[i + 2] - bz;
+        maximumDistanceSquared = Math.max(maximumDistanceSquared, dx * dx + dy * dy + dz * dz);
+      }
+      attribute.needsUpdate = true;
+      mesh.geometry.computeVertexNormals();
+      smoothSeam(mesh.geometry);
+      mesh.geometry.computeBoundingBox();
+      mesh.geometry.computeBoundingSphere();
+      currentBox.union(mesh.geometry.boundingBox);
+    }
+    stats.bounds = boxSummary(currentBox);
+    stats.deformation = { x, y, maxDisplacement: Math.sqrt(maximumDistanceSquared) };
+    return stats.deformation;
+  }
+
+  function dispose() {
+    for (const { mesh } of ribs) {
+      mesh.geometry.dispose();
+      mesh.material.dispose();
+    }
+    group.clear();
+    // The caller owns woodTexture and can share it with other scene objects.
+  }
+
+  return { group, deform, dispose, stats };
+}
+
+/**
+ * A small cutaway room that gives the scroll story architectural context.
+ * Parts are intentionally named and positioned as a joinery drawing, rather
+ * than being scattered decorative primitives.
+ */
+export function createInteriorStory(THREE, woodTexture) {
+  const group = new THREE.Group();
+  group.name = "WIN DESIGN · interior cutaway story";
+  const cabinetPieces = [];
+  const furniture = [];
+  const disposables = [];
+  const roomMaterial = new THREE.MeshStandardMaterial({ color: 0xe8ded1, roughness: 0.88, metalness: 0 });
+  const floorMaterial = new THREE.MeshStandardMaterial({ color: 0xb88b61, roughness: 0.82, metalness: 0.02, map: woodTexture });
+  const woodMaterial = new THREE.MeshStandardMaterial({ color: 0x875436, roughness: 0.68, metalness: 0.02, map: woodTexture });
+  const darkWoodMaterial = new THREE.MeshStandardMaterial({ color: 0x4d2b20, roughness: 0.74, metalness: 0.02, map: woodTexture });
+  const edgeWoodMaterial = new THREE.MeshStandardMaterial({ color: 0xb77b4d, roughness: 0.58, metalness: 0.03, map: woodTexture });
+  const fabricMaterial = new THREE.MeshStandardMaterial({ color: 0xa88f7b, roughness: 0.96, transparent: true, opacity: 0 });
+  const metalMaterial = new THREE.MeshStandardMaterial({ color: 0x27231f, roughness: 0.3, metalness: 0.62, transparent: true, opacity: 0 });
+  const warmMaterial = new THREE.MeshStandardMaterial({ color: 0xe1b66c, roughness: 0.4, emissive: 0x5b321d, emissiveIntensity: 0.08, transparent: true, opacity: 0 });
+  const stoneMaterial = new THREE.MeshStandardMaterial({ color: 0xcfc5b6, roughness: 0.34, metalness: 0.02, transparent: true, opacity: 0 });
+  const glassMaterial = new THREE.MeshPhysicalMaterial({ color: 0xb9d0d2, roughness: 0.08, metalness: 0, transmission: 0.72, thickness: 0.08, transparent: true, opacity: 0 });
+  const rugMaterial = new THREE.MeshStandardMaterial({ color: 0x7b695b, roughness: 1, transparent: true, opacity: 0 });
+  const brassMaterial = new THREE.MeshStandardMaterial({ color: 0x8d6738, roughness: 0.24, metalness: 0.82, transparent: true, opacity: 0 });
+  [roomMaterial, floorMaterial, woodMaterial, darkWoodMaterial, edgeWoodMaterial, fabricMaterial, metalMaterial, warmMaterial, stoneMaterial, glassMaterial, rugMaterial, brassMaterial].forEach((material) => disposables.push(material));
+
+  function box(name, size, position, material, target = null, bevel = 0) {
+    const geometry = bevel ? new THREE.ExtrudeGeometry((() => {
+      const shape = new THREE.Shape();
+      const x = size[0] / 2;
+      const y = size[1] / 2;
+      shape.moveTo(-x + bevel, -y);
+      shape.lineTo(x - bevel, -y);
+      shape.quadraticCurveTo(x, -y, x, -y + bevel);
+      shape.lineTo(x, y - bevel);
+      shape.quadraticCurveTo(x, y, x - bevel, y);
+      shape.lineTo(-x + bevel, y);
+      shape.quadraticCurveTo(-x, y, -x, y - bevel);
+      shape.lineTo(-x, -y + bevel);
+      shape.quadraticCurveTo(-x, -y, -x + bevel, -y);
+      return shape;
+    })(), { depth: size[2], bevelEnabled: true, bevelSegments: 2, bevelSize: bevel * 0.55, bevelThickness: bevel * 0.55, curveSegments: 3 }) : new THREE.BoxGeometry(size[0], size[1], size[2]);
+    if (bevel) geometry.translate(0, 0, -size[2] / 2);
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.name = name;
+    mesh.position.set(position[0], position[1], position[2]);
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    group.add(mesh);
+    disposables.push(mesh.geometry);
+    if (target) cabinetPieces.push({ mesh, base: mesh.position.clone(), offset: new THREE.Vector3(...target), order: cabinetPieces.length });
+    return mesh;
+  }
+
+  function cylinder(name, radius, height, position, material, radialSegments = 24) {
+    const mesh = new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, height, radialSegments), material);
+    mesh.name = name;
+    mesh.position.set(...position);
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    group.add(mesh);
+    disposables.push(mesh.geometry);
+    return mesh;
+  }
+
+  // Floor and two walls make the model read as an interior section.
+  box("Room floor", [5.2, 0.12, 3.8], [0, -0.06, 0], floorMaterial);
+  box("Back wall", [5.2, 3.6, 0.10], [0, 1.72, -1.74], roomMaterial);
+  box("Left wall", [0.10, 3.6, 3.8], [-2.55, 1.72, 0], roomMaterial);
+  box("Ceiling reveal", [5.2, 0.06, 0.10], [0, 3.35, -1.68], warmMaterial);
+  box("Back wall skirting", [5.08, 0.14, 0.07], [0, 0.07, -1.67], darkWoodMaterial, null, 0.02);
+  box("Left wall skirting", [0.07, 0.14, 3.62], [-2.48, 0.07, 0], darkWoodMaterial, null, 0.02);
+
+  // A restrained built-in: carcass, shelves and two doors move as one designed system.
+  box("Cabinet back panel", [1.85, 2.18, 0.08], [0.86, 1.08, -1.64], darkWoodMaterial, [0, 0, 0.05], 0.025);
+  box("Cabinet left gable", [0.09, 2.18, 0.50], [-0.02, 1.08, -1.43], darkWoodMaterial, [-0.04, 0, 0.08], 0.025);
+  box("Cabinet right gable", [0.09, 2.18, 0.50], [1.74, 1.08, -1.43], darkWoodMaterial, [0.04, 0, 0.08], 0.025);
+  box("Cabinet top", [1.85, 0.11, 0.50], [0.86, 2.12, -1.43], edgeWoodMaterial, [0, 0.08, 0.10], 0.025);
+  box("Cabinet shelf lower", [1.54, 0.07, 0.49], [0.86, 0.65, -1.44], woodMaterial, [-0.10, -0.05, 0.10], 0.018);
+  box("Cabinet shelf upper", [1.54, 0.07, 0.49], [0.86, 1.38, -1.44], woodMaterial, [0.10, 0.07, 0.10], 0.018);
+  box("Cabinet drawer lower", [0.70, 0.30, 0.08], [0.46, 0.42, -1.73], edgeWoodMaterial, [-0.16, -0.02, 0.14], 0.018);
+  box("Cabinet drawer upper", [0.70, 0.30, 0.08], [1.26, 0.42, -1.73], edgeWoodMaterial, [0.16, -0.02, 0.14], 0.018);
+  box("Cabinet door left", [0.72, 1.92, 0.075], [0.46, 1.08, -1.73], woodMaterial, [-0.18, 0.03, 0.16], 0.024);
+  box("Cabinet door right", [0.72, 1.92, 0.075], [1.26, 1.08, -1.73], woodMaterial, [0.18, -0.03, 0.16], 0.024);
+  box("Cabinet handle left", [0.035, 0.20, 0.035], [0.80, 1.08, -1.80], metalMaterial, [-0.05, 0, 0.24], 0.01);
+  box("Cabinet handle right", [0.035, 0.20, 0.035], [0.92, 1.08, -1.80], metalMaterial, [0.05, 0, 0.24], 0.01);
+  box("Cabinet rail", [1.58, 0.07, 0.08], [0.86, 2.13, -1.75], warmMaterial, [0, 0.12, 0.2], 0.015);
+
+  // Few furniture pieces establish scale. They fade in during the final act.
+  const sofaBase = box("Sofa seat", [1.42, 0.28, 0.64], [-1.18, 0.38, 0.30], fabricMaterial, null, 0.08);
+  const sofaBack = box("Sofa back", [1.42, 0.92, 0.18], [-1.18, 0.86, 0.56], fabricMaterial, null, 0.08);
+  const sofaSide = box("Sofa side", [0.18, 0.65, 0.64], [-1.82, 0.62, 0.30], fabricMaterial, null, 0.05);
+  const tableTop = box("Coffee table", [0.86, 0.07, 0.50], [-0.32, 0.46, 0.16], darkWoodMaterial, null, 0.025);
+  tableTop.material = stoneMaterial;
+  const tableLegA = cylinder("Coffee table leg A", 0.025, 0.42, [-0.66, 0.23, -0.01], brassMaterial, 16);
+  const tableLegB = cylinder("Coffee table leg B", 0.025, 0.42, [0.02, 0.23, 0.33], brassMaterial, 16);
+  const lamp = box("Floor lamp", [0.05, 1.18, 0.05], [-1.98, 0.58, -0.55], metalMaterial);
+  const lampShade = box("Floor lamp shade", [0.38, 0.18, 0.38], [-1.98, 1.25, -0.55], warmMaterial);
+  const rug = box("Woven rug", [2.25, 0.025, 1.52], [-0.72, 0.02, 0.28], rugMaterial, null, 0.025);
+  const windowGlass = box("Fluted glass panel", [1.12, 1.72, 0.025], [-1.7, 1.62, -1.67], glassMaterial, null, 0.012);
+  const windowTop = box("Window top frame", [1.3, 0.045, 0.07], [-1.7, 2.5, -1.63], metalMaterial);
+  const windowBottom = box("Window bottom frame", [1.3, 0.045, 0.07], [-1.7, 0.74, -1.63], metalMaterial);
+  const windowSideA = box("Window side frame A", [0.045, 1.8, 0.07], [-2.33, 1.62, -1.63], metalMaterial);
+  const windowSideB = box("Window side frame B", [0.045, 1.8, 0.07], [-1.07, 1.62, -1.63], metalMaterial);
+  const vase = cylinder("Stone vase", 0.11, 0.28, [0.05, 0.64, 0.18], stoneMaterial, 28);
+  furniture.push(sofaBase, sofaBack, sofaSide, tableTop, tableLegA, tableLegB, lamp, lampShade, rug, windowGlass, windowTop, windowBottom, windowSideA, windowSideB, vase);
+
+  group.scale.setScalar(0.82);
+  group.position.set(0, 0.02, 0);
+
+  function smooth(value) {
+    value = Math.max(0, Math.min(1, value));
+    return value * value * (3 - 2 * value);
+  }
+
+  function setMaterialOpacity(material, value) {
+    material.opacity = value;
+    material.transparent = value < 0.999;
+    material.needsUpdate = true;
+  }
+
+  function setProgress(progress) {
+    const p = Math.max(0, Math.min(1, Number.isFinite(progress) ? progress : 0));
+    const cabinet = smooth((p - 0.27) / 0.45);
+    cabinetPieces.forEach(({ mesh, base, offset, order }) => {
+      const phase = smooth((cabinet - order * 0.035) / 0.88);
+      const explode = Math.sin(Math.PI * phase);
+      mesh.position.copy(base).addScaledVector(offset, explode);
+    });
+    const finish = smooth((p - 0.56) / 0.24);
+    furniture.forEach((mesh) => setMaterialOpacity(mesh.material, finish));
+    return { progress: p, cabinet, explode: Math.sin(Math.PI * cabinet), finish };
+  }
+
+  function dispose() {
+    disposables.forEach((item) => item.dispose?.());
+    group.clear();
+  }
+
+  setProgress(0);
+  return { group, setProgress, dispose, cabinetPieces, furniture };
+}

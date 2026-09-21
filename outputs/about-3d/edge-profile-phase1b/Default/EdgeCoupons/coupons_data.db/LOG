@@ -1,0 +1,5 @@
+2026/09/16-21:38:49.846 3630 Creating DB C:\Users\helon\OneDrive\Desktop\WIN-DESIGNER\outputs\about-3d\edge-profile-phase1b\Default\EdgeCoupons/coupons_data.db since it was missing.
+2026/09/16-21:38:49.864 3630 Reusing MANIFEST C:\Users\helon\OneDrive\Desktop\WIN-DESIGNER\outputs\about-3d\edge-profile-phase1b\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
+2026/09/16-21:38:51.678 6cb8 Level-0 table #5: started
+2026/09/16-21:38:51.685 6cb8 Level-0 table #5: 683284 bytes OK
+2026/09/16-21:38:51.689 6cb8 Delete type=0 #3

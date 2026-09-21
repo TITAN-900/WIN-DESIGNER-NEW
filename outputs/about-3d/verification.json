@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-09-16T08:07:26.166Z",
+  "checkedAt": "2026-09-16T16:07:11.582Z",
   "results": [
     "15 closed ribs have visible gaps; all eight extreme bends are finite and keep feet anchored",
     "geometry clamps extreme inputs and restores every original vertex exactly",
@@ -9,7 +9,7 @@
     "pause stops idle rendering; offscreen cancels frames and clears drag state",
     "reduced motion is static at rest and responds instantly without elastic motion",
     "context loss during async initialization keeps fallback until restoration",
-    "all HTML outside About is unchanged except the two dedicated asset includes"
+    "homepage keeps portfolio, before/after and contact with the full story in About"
   ],
   "geometryStats": {
     "ribCount": 15,

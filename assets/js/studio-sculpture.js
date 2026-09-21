@@ -4,7 +4,13 @@
 
   const root = document.querySelector("#studio [data-sculpture]");
   if (!root) return;
+  const moduleBase = document.currentScript?.src
+    ? new URL(".", document.currentScript.src)
+    : new URL("assets/js/", document.baseURI);
 
+  const storySection = document.querySelector("#studio[data-story-section]");
+  const storyTrack = storySection?.querySelector("[data-story-track]");
+  const storySteps = storySection ? Array.from(storySection.querySelectorAll("[data-story-step]")) : [];
   const stage = root.querySelector("[data-sculpture-stage]");
   const canvas = root.querySelector("[data-sculpture-canvas]");
   const fallback = root.querySelector(".sculpture-fallback");
@@ -25,7 +31,9 @@
   let view;
   let loading = false;
   let destroyed = false;
-  let visible = false;
+  // Start as visible so the first render cannot be lost between the async
+  // module load and the visibility observer's first callback.
+  let visible = true;
   let paused = reducedMotion.matches;
   let pointer = null;
   let frame = 0;
@@ -33,16 +41,26 @@
   let lastDraw = 0;
   let idleTime = 0;
   let yaw = 0;
+  let storyProgress = 0;
+  let wheelTarget = 0;
+  let wheelEngaged = false;
+  let scrollLocked = false;
+  let lockedScrollY = 0;
+  let lockPhase = "idle";
+  let exitDirection = 0;
+  let settleTimer = 0;
+  let wheelSnapTimer = 0;
+  let touchY = null;
+  let storyStage = -1;
   let appliedX = NaN;
   let appliedY = NaN;
   let needsRender = true;
   let contextLost = false;
 
   function updateInstructions() {
-    instructions.textContent = coarsePointer.matches
-      ? "Drag sideways to bend. Scroll vertically to explore."
-      : "Drag to bend & twist. Release to settle.";
-    canvas.setAttribute("aria-description", "Hold arrow keys to bend or twist. Release to return. Press Escape to reset. Vertical touch gestures scroll the page.");
+    instructions.textContent = "Scroll to move through the space.";
+    canvas.setAttribute("aria-description", "Scroll through the three stages. Drag remains available for close inspection. Press Escape to reset the form.");
+    pauseButton.hidden = Boolean(storySection);
     pauseButton.disabled = reducedMotion.matches;
     pauseButton.textContent = reducedMotion.matches ? "Motion reduced" : paused ? "Resume motion" : "Pause motion";
     pauseButton.setAttribute("aria-pressed", String(paused));
@@ -63,6 +81,203 @@
     if (!frame && view && visible && !document.hidden && !contextLost && !destroyed) {
       frame = requestAnimationFrame(tick);
     }
+  }
+
+  function updateStoryProgress() {
+    if (!storySection || !view) return false;
+    const rect = storyTrack.getBoundingClientRect();
+    const pageProgress = rect.top > window.innerHeight * 0.5 ? 0 : rect.bottom < window.innerHeight * 0.5 ? 1 : storyProgress;
+    const target = !reducedMotion.matches && wheelEngaged ? wheelTarget : pageProgress;
+    const delta = clamp(target - storyProgress, -0.018, 0.018);
+    const next = Math.abs(target - storyProgress) < 0.001 ? target : storyProgress + delta;
+    const changed = Math.abs(next - storyProgress) > 0.0005;
+    storyProgress = next;
+    if (changed || storyStage < 0) applyStoryProgress(next);
+    if (scrollLocked && lockPhase === "active" &&
+        ((wheelTarget >= 0.999 && storyProgress >= 0.999) ||
+         (wheelTarget <= 0.001 && storyProgress <= 0.001))) {
+      finishAtEndpoint(wheelTarget >= 0.999 ? 1 : 0);
+    }
+    return changed;
+  }
+
+  function getLockTop() {
+    return Math.min(112, Math.max(76, window.innerHeight * 0.1));
+  }
+
+  function lockStory(direction) {
+    if (scrollLocked || !storyTrack) return;
+    const rect = storyTrack.getBoundingClientRect();
+    const currentScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    lockedScrollY = Math.max(0, currentScrollY + rect.top - getLockTop());
+    window.scrollTo(0, lockedScrollY);
+    document.documentElement.style.setProperty("--studio-lock-offset", `-${lockedScrollY}px`);
+    document.documentElement.classList.add("is-studio-scroll-locked");
+    document.body.classList.add("is-studio-scroll-locked");
+    storySection.classList.add("is-scroll-locked");
+    storySection.dataset.scrollDirection = direction > 0 ? "forward" : "reverse";
+    storySection.dataset.scrollState = "active";
+    scrollLocked = true;
+    lockPhase = "active";
+    exitDirection = 0;
+    window.clearTimeout(settleTimer);
+    wheelEngaged = true;
+    wheelTarget = storyProgress;
+    announce(direction > 0 ? "Studio locked. Scroll to build the space." : "Studio locked. Scroll upward to reverse the space.");
+  }
+
+  function restoreScrollPosition(y) {
+    const html = document.documentElement;
+    const previousInlineBehavior = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";
+    window.scrollTo(0, y);
+    html.style.scrollBehavior = previousInlineBehavior;
+  }
+
+  function unlockStory() {
+    if (!scrollLocked) return;
+    scrollLocked = false;
+    wheelEngaged = false;
+    lockPhase = "idle";
+    exitDirection = 0;
+    window.clearTimeout(settleTimer);
+    window.clearTimeout(wheelSnapTimer);
+    document.documentElement.classList.remove("is-studio-scroll-locked");
+    document.body.classList.remove("is-studio-scroll-locked");
+    document.documentElement.style.removeProperty("--studio-lock-offset");
+    storySection.classList.remove("is-scroll-locked");
+    delete storySection.dataset.scrollState;
+    delete storySection.dataset.scrollDirection;
+    restoreScrollPosition(lockedScrollY);
+  }
+
+  function armExitAfterQuiet() {
+    window.clearTimeout(settleTimer);
+    settleTimer = window.setTimeout(() => {
+      if (!scrollLocked || lockPhase !== "settling") return;
+      lockPhase = "armed";
+      storySection.dataset.scrollState = "awaiting-new-input";
+      announce(exitDirection > 0 ? "Studio complete. Scroll again to continue." : "Studio reset. Scroll upward again to continue.");
+    }, 180);
+  }
+
+  function finishAtEndpoint(endpoint) {
+    if (!scrollLocked) return;
+    const progress = endpoint === 1 ? 1 : 0;
+    exitDirection = endpoint === 1 ? 1 : -1;
+    lockPhase = "settling";
+    storySection.dataset.scrollState = "settling";
+    wheelTarget = progress;
+    wheelEngaged = true;
+    touchY = null;
+    window.clearTimeout(wheelSnapTimer);
+    applyStoryProgress(progress);
+    armExitAfterQuiet();
+  }
+
+  function exitOnFreshInput(direction, delta, event) {
+    event.preventDefault();
+    const destination = Math.max(0, lockedScrollY + clamp(delta, -120, 120));
+    unlockStory();
+    requestAnimationFrame(() => restoreScrollPosition(destination));
+    return true;
+  }
+
+  function shouldLock(direction, delta) {
+    if (!storyTrack) return false;
+    const rect = storyTrack.getBoundingClientRect();
+    const activation = Math.max(28, Math.min(window.innerHeight, Math.abs(delta) * 1.25));
+    const lockTop = getLockTop();
+    if (direction > 0) {
+      return storyProgress < 0.999 && rect.top <= lockTop + activation && rect.bottom > lockTop + 120;
+    }
+    return storyProgress > 0.001 && rect.bottom >= window.innerHeight - activation && rect.top < window.innerHeight - 120;
+  }
+
+  function consumeStoryDelta(delta, event) {
+    if (!storyTrack || reducedMotion.matches || !view || Math.abs(delta) < 0.01) return false;
+    const direction = Math.sign(delta);
+    if (scrollLocked && lockPhase === "settling") {
+      event.preventDefault();
+      wheelTarget = exitDirection > 0 ? 1 : 0;
+      applyStoryProgress(wheelTarget);
+      armExitAfterQuiet();
+      return true;
+    }
+    if (scrollLocked && lockPhase === "armed") {
+      if (direction === exitDirection) return exitOnFreshInput(direction, delta, event);
+      lockPhase = "active";
+      storySection.dataset.scrollState = "active";
+      wheelTarget = storyProgress;
+    }
+    if (!scrollLocked) {
+      if (!shouldLock(direction, delta)) return false;
+      lockStory(direction);
+    }
+    if ((direction > 0 && storyProgress >= 0.999) || (direction < 0 && storyProgress <= 0.001)) {
+      event.preventDefault();
+      const endpoint = direction > 0 ? 1 : 0;
+      finishAtEndpoint(endpoint);
+      return true;
+    }
+    event.preventDefault();
+    wheelEngaged = true;
+    wheelTarget = clamp(wheelTarget + clamp(delta, -100, 100) / 1450, 0, 1);
+    window.clearTimeout(wheelSnapTimer);
+    wheelSnapTimer = window.setTimeout(() => {
+      const stops = Array.from({ length: storySteps.length + 1 }, (_, index) => index / storySteps.length);
+      const nearest = stops.reduce((best, stop) => Math.abs(stop - wheelTarget) < Math.abs(best - wheelTarget) ? stop : best, stops[0]);
+      if (Math.abs(nearest - wheelTarget) < 0.012) wheelTarget = nearest;
+      wake();
+    }, 220);
+    wake();
+    return true;
+  }
+
+  if (storySection) {
+    window.addEventListener("wheel", (event) => consumeStoryDelta(event.deltaY, event), { ...listenerOptions, passive: false });
+    window.addEventListener("touchstart", (event) => { touchY = event.touches[0]?.clientY ?? null; }, { ...listenerOptions, passive: true });
+    window.addEventListener("touchmove", (event) => {
+      const nextY = event.touches[0]?.clientY;
+      if (touchY == null || nextY == null) return;
+      const delta = (touchY - nextY) * 1.35;
+      if (consumeStoryDelta(delta, event)) touchY = nextY;
+    }, { ...listenerOptions, passive: false });
+    window.addEventListener("touchend", () => { touchY = null; }, listenerOptions);
+    window.addEventListener("keydown", (event) => {
+      if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement || event.target instanceof HTMLSelectElement) return;
+      const deltaByKey = {
+        PageDown: 100,
+        PageUp: -100,
+        " ": event.shiftKey ? -100 : 100,
+        End: 100,
+        Home: -100
+      }[event.key];
+      if (deltaByKey) consumeStoryDelta(deltaByKey, event);
+    }, listenerOptions);
+  }
+
+  function applyStoryProgress(progress) {
+    storyProgress = clamp(progress, 0, 1);
+    if (storySection) {
+      storySection.dataset.storyProgress = storyProgress.toFixed(3);
+      storySection.style.setProperty("--story-progress", String(storyProgress * 100));
+    }
+    if (!view?.story) return;
+    view.story.setProgress(storyProgress);
+    const p = storyProgress * storyProgress * (3 - 2 * storyProgress);
+    const portrait = stage.clientWidth / stage.clientHeight < 1;
+    view.camera.position.set(2.35 - p * 0.7, 2.25 - p * 0.25, (portrait ? 10.8 : 7.3) - p * 1.5);
+    view.camera.lookAt(-0.12, 1.38, -1.1 - p * 0.2);
+    view.key.intensity = 2.0 + clamp((storyProgress - 0.72) / 0.16, 0, 1) * 0.75;
+    const nextStage = [0.15, 0.35, 0.55, 0.72, 0.88].filter(boundary => storyProgress >= boundary).length;
+    storySteps.forEach((step, index) => step.classList.toggle("is-active", index === nextStage));
+    if (nextStage !== storyStage) {
+      storyStage = nextStage;
+      const labels = ["Design stage.", "Craftsmanship stage.", "Custom cabinetry stage.", "Materials stage.", "Precision stage.", "Built for your space."];
+      announce(labels[nextStage]);
+    }
+    needsRender = true;
   }
 
   function resetSpring() {
@@ -121,17 +336,20 @@
     if (!view || !visible || document.hidden || contextLost || destroyed) return;
     const dt = lastTime ? Math.min((time - lastTime) / 1000, 0.05) : 1 / 60;
     lastTime = time;
+    const storyChanged = updateStoryProgress();
     if (!reducedMotion.matches) advanceSpring(dt);
 
     const resting = !pointer && keys.size === 0 && spring.x === 0 && spring.y === 0;
-    const idle = !paused && !reducedMotion.matches && resting;
+    const idle = !storySection && !paused && !reducedMotion.matches && resting;
     if (idle) {
       idleTime += dt;
       yaw = Math.sin(idleTime * 0.14) * 0.105;
+    } else {
+      yaw = 0;
     }
 
     // A paused/resting scene has no persistent requestAnimationFrame loop.
-    const moving = idle || spring.vx !== 0 || spring.vy !== 0 || spring.x !== spring.tx || spring.y !== spring.ty;
+    const moving = Boolean(storySection && visible) || idle || storyChanged || spring.vx !== 0 || spring.vy !== 0 || spring.x !== spring.tx || spring.y !== spring.ty;
     const geometryChanged = spring.x !== appliedX || spring.y !== appliedY;
     const interval = coarsePointer.matches ? 1000 / 30 : 1000 / 60;
     if (needsRender || !moving || time - lastDraw >= interval - 1) {
@@ -140,7 +358,7 @@
         appliedX = spring.x;
         appliedY = spring.y;
       }
-      view.sculpture.group.rotation.y = -0.14 + yaw + spring.x * 0.045;
+      if (!storySection) view.sculpture.group.rotation.y = -0.14 + yaw + spring.x * 0.045;
       view.renderer.render(view.scene, view.camera);
       needsRender = false;
       lastDraw = time;
@@ -157,13 +375,18 @@
     const aspect = width / height;
     const halfHeight = Math.max(2.55, 2.6 / aspect);
     const { camera, renderer } = view;
-    camera.left = -halfHeight * aspect;
-    camera.right = halfHeight * aspect;
-    camera.top = halfHeight;
-    camera.bottom = -halfHeight;
+    if (camera.isPerspectiveCamera) {
+      camera.aspect = aspect;
+    } else {
+      camera.left = -halfHeight * aspect;
+      camera.right = halfHeight * aspect;
+      camera.top = halfHeight;
+      camera.bottom = -halfHeight;
+    }
     camera.updateProjectionMatrix();
     renderer.setPixelRatio(Math.min(devicePixelRatio || 1, coarsePointer.matches ? 1.5 : 1.75));
     renderer.setSize(width, height, false);
+    if (storySection) applyStoryProgress(storyProgress);
     needsRender = true;
     wake();
   }
@@ -188,22 +411,24 @@
     let wood;
     let sculpture;
     let floor;
+    let story;
     try {
       const [THREE, geometryModule] = await Promise.all([
-        import("./vendor/three.module.min.js"),
-        import("./studio-sculpture-geometry.js")
+        import(new URL("./vendor/three.module.min.js", moduleBase).href),
+        import(new URL("./studio-sculpture-geometry.js", moduleBase).href)
       ]);
       if (destroyed) return;
       renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: "low-power" });
-      renderer.setClearColor(0x000000, 0);
+      renderer.setClearColor(0xded5c7, 1);
       renderer.outputColorSpace = THREE.SRGBColorSpace;
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.3;
+      renderer.toneMappingExposure = 0.95;
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = THREE.VSMShadowMap;
 
       // Reuse the site's actual walnut photograph. No runtime CDN or model request.
-      wood = await new THREE.TextureLoader().loadAsync("american-walnut.jpg.jpeg");
+      const textureUrl = new URL("assets/../american-walnut.jpg.jpeg", document.baseURI);
+      wood = await new THREE.TextureLoader().loadAsync(textureUrl.href);
       wood.colorSpace = THREE.SRGBColorSpace;
       wood.wrapS = wood.wrapT = THREE.RepeatWrapping;
       wood.center.set(0.5, 0.5);
@@ -217,34 +442,89 @@
       }
 
       const scene = new THREE.Scene();
-      const camera = new THREE.OrthographicCamera(-3, 3, 2.55, -2.55, 0.1, 40);
+      const camera = storySection ? new THREE.PerspectiveCamera(44, 1, 0.1, 50) : new THREE.OrthographicCamera(-3, 3, 2.55, -2.55, 0.1, 40);
       camera.position.set(4.7, 3.8, 7.5);
       camera.lookAt(0, 1.3, 0);
-      scene.add(new THREE.HemisphereLight(0xfffaf1, 0xb4ada2, 2.5));
+      scene.add(new THREE.HemisphereLight(0xfff6e5, 0x706153, 0.65));
 
-      const key = new THREE.DirectionalLight(0xfff9f0, 3);
-      key.position.set(-2.4, 10, 3);
-      key.target.position.set(0, 1.25, 0);
+      // Bake a small photographic studio environment once for glass/metal
+      // reflections. The lighting cards are absent from the visible room.
+      if (storySection) {
+        const environmentScene = new THREE.Scene();
+        environmentScene.background = new THREE.Color(0x9e968c);
+        const envGeometry = new THREE.BoxGeometry(1, 1, 1);
+        const envMaterials = [];
+        for (const [position, scale, color, intensity] of [
+          [[-5, 2, 0], [0.1, 4, 7], 0xe9f4ff, 4],
+          [[0, 6, 0], [8, 0.1, 8], 0xfff2dc, 1.5],
+          [[3, 1, -4], [2, 3, 0.1], 0xffc786, 1.2]
+        ]) {
+          const mat = new THREE.MeshBasicMaterial({color: new THREE.Color(color).multiplyScalar(intensity)});
+          envMaterials.push(mat);
+          const card = new THREE.Mesh(envGeometry, mat);
+          card.position.set(...position); card.scale.set(...scale); environmentScene.add(card);
+        }
+        const pmrem = new THREE.PMREMGenerator(renderer);
+        const environmentTarget = pmrem.fromScene(environmentScene, 0.04);
+        scene.environment = environmentTarget.texture;
+        scene.environmentIntensity = 0.65;
+        scene.userData.environmentTarget = environmentTarget;
+        pmrem.dispose(); envGeometry.dispose(); envMaterials.forEach(mat => mat.dispose());
+      }
+
+      const key = new THREE.DirectionalLight(0xfff5e8, 2.55);
+      key.position.set(-3.5, 3.25, 1.7);
+      key.target.position.set(0.5, 0.5, -1.6);
       key.castShadow = true;
       key.shadow.mapSize.setScalar(1024);
-      key.shadow.radius = 4;
+      key.shadow.radius = 5;
       key.shadow.blurSamples = 8;
       Object.assign(key.shadow.camera, { left: -4.5, right: 4.5, top: 4.5, bottom: -4.5, near: 0.5, far: 20 });
       key.shadow.normalBias = 0.018;
       key.shadow.bias = -0.0002;
       scene.add(key, key.target);
-      const fill = new THREE.DirectionalLight(0xf4eee7, 1.4);
-      fill.position.set(4, 3, -4);
+      const fill = new THREE.DirectionalLight(0xe8d6c4, 0.8);
+      fill.position.set(0, 2.8, 5);
       scene.add(fill);
+      const bounce = new THREE.PointLight(0xd8a36a, 0.55, 5.5, 2);
+      bounce.position.set(-1.7, 2.05, -0.75);
+      scene.add(bounce);
+      const interiorGlow = new THREE.SpotLight(0xffd7a0, 7.5, 7, Math.PI / 5, 0.72, 1.7);
+      interiorGlow.position.set(-1.55, 3.25, 1.6);
+      interiorGlow.target.position.set(-0.45, 0.2, -0.35);
+      interiorGlow.castShadow = false;
+      interiorGlow.shadow.mapSize.setScalar(768);
+      scene.add(interiorGlow, interiorGlow.target);
 
       sculpture = geometryModule.createSculpture(THREE, wood);
       scene.add(sculpture.group);
+      let roomAssets;
+      if (storySection) {
+        const { GLTFLoader } = await import(new URL('./vendor/GLTFLoader.js', moduleBase).href);
+        const textureLoader = new THREE.TextureLoader();
+        const names = ['rosewood_veneer1', 'marble_01', 'wood_floor'];
+        const loaded = await Promise.all(names.map(async (name) => {
+          const maps = await Promise.all(['Diffuse', 'nor_gl', 'Rough'].map(kind => textureLoader.loadAsync(new URL(`assets/3d/materials/${name}_${kind}.jpg`, document.baseURI).href)));
+          maps.forEach(t => { t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 4; });
+          maps[0].colorSpace = THREE.SRGBColorSpace;
+          return maps;
+        }));
+        const sofa = await new GLTFLoader().loadAsync(new URL('assets/3d/lounge/lounge.gltf', document.baseURI).href);
+        roomAssets = { wood: loaded[0], stone: loaded[1], floor: loaded[2], sofa: sofa.scene };
+      }
+      story = geometryModule.createInteriorStory(THREE, wood, roomAssets);
+      scene.add(story.group);
+      story.group.renderOrder = -1;
+      story.setProgress(0);
+      sculpture.group.visible = !storySection;
+      sculpture.group.scale.setScalar(storySection ? 0.72 : 1);
+      sculpture.group.position.set(storySection ? -0.28 : 0, storySection ? 0.03 : 0, storySection ? 0.08 : 0);
       floor = new THREE.Mesh(new THREE.PlaneGeometry(200, 200), new THREE.ShadowMaterial({ color: 0x573b28, opacity: 0.17 }));
       floor.rotation.x = -Math.PI / 2;
       floor.position.y = -0.012;
       floor.receiveShadow = true;
       scene.add(floor);
-      view = { renderer, scene, camera, sculpture, wood, floor, key };
+      view = { renderer, scene, camera, sculpture, story, storyGroup: story.group, wood, floor, key };
 
       // A GPU context can be lost while the asynchronous texture is loading.
       // Keep the photograph visible until the browser restores that context.
@@ -258,10 +538,36 @@
       root.dataset.sculptureState = "ready";
       updateInstructions();
       resize();
-      announce("Interactive wooden sculpture ready. Drag or hold arrow keys to bend. Release to return to its original form.");
+      // Reuse this renderer once for the About hero, never a second WebGL scene.
+      // The interactive progress and original scroll state remain at their start.
+      const preview = document.querySelector("[data-studio-preview]");
+      if (preview && storySection) {
+        const initialProgress = storyProgress;
+        try {
+          applyStoryProgress(1);
+          renderer.setPixelRatio(1);
+          renderer.setSize(1120, 720, false);
+          camera.aspect = 1120 / 720;
+          camera.position.set(1.65, 2, 5.8);
+          camera.lookAt(-0.12, 1.38, -1.3);
+          camera.updateProjectionMatrix();
+          renderer.render(scene, camera);
+          preview.src = canvas.toDataURL("image/webp", 0.88);
+          preview.alt = "Finished 3D interior study with walnut cabinetry, stone, leather seating and warm lighting";
+        } catch {
+          // A blocked canvas export must not disable the working 3D story.
+          // Keep the supplied interior photograph as the hero fallback.
+        } finally {
+          applyStoryProgress(initialProgress);
+          resize();
+        }
+      }
+      applyStoryProgress(storyProgress);
+      announce(storySection ? "Scroll-driven interior story ready." : "Interactive wooden sculpture ready. Drag or hold arrow keys to bend. Release to return to its original form.");
       wake();
     } catch (error) {
       sculpture?.dispose();
+      story?.dispose();
       wood?.dispose();
       floor?.geometry.dispose();
       floor?.material.dispose();
@@ -389,15 +695,8 @@
 
   const resizeObserver = new ResizeObserver(resize);
   resizeObserver.observe(stage);
-  let approachObserver;
   let visibilityObserver;
   if ("IntersectionObserver" in window) {
-    approachObserver = new IntersectionObserver((entries, observer) => {
-      if (!entries.some((entry) => entry.isIntersecting)) return;
-      observer.disconnect();
-      init();
-    }, { rootMargin: "450px" });
-    approachObserver.observe(stage);
     visibilityObserver = new IntersectionObserver((entries) => {
       visible = entries.some((entry) => entry.isIntersecting);
       if (visible) {
@@ -411,25 +710,31 @@
     visibilityObserver.observe(stage);
   } else {
     visible = true;
-    init();
   }
 
+  // Deterministic startup is more reliable than gating the whole About
+  // experience behind an observer. The local modules and texture are small,
+  // while rendering still pauses whenever the section is off screen.
+  init();
+
   window.addEventListener("pagehide", (event) => {
+    unlockStory();
     releaseInput(true);
     stop();
     if (event.persisted) return;
     destroyed = true;
-    approachObserver?.disconnect();
     visibilityObserver?.disconnect();
     resizeObserver.disconnect();
     lifetime.abort();
     if (view) {
       view.sculpture.dispose();
+      view.story.dispose();
       view.wood.dispose();
       view.floor.geometry.dispose();
       view.floor.material.dispose();
       view.key.shadow.map?.dispose();
       view.renderer.dispose();
+      view.scene.userData.environmentTarget?.dispose();
       view = undefined;
     }
   }, listenerOptions);

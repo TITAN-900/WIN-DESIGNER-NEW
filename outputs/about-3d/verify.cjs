@@ -58,13 +58,14 @@ class Element {
   sculpt.dispose();
 
   const source = fs.readFileSync(path.join(project, 'assets/js/studio-sculpture.js'), 'utf8')
-    .replace('import("./vendor/three.module.min.js")', 'Promise.resolve(mockThree)')
-    .replace('import("./studio-sculpture-geometry.js")', 'Promise.resolve(mockGeometry)');
+    .replace('importLocalModule("./vendor/three.module.min.js")', 'Promise.resolve(mockThree)')
+    .replace('importLocalModule("./studio-sculpture-geometry.js")', 'Promise.resolve(mockGeometry)');
   async function setup({ reduced = false, deferTexture = false } = {}) {
     const nodes = new Map();
     const root = new Element();
     root.querySelector = selector => { if (!nodes.has(selector)) nodes.set(selector, new Element()); return nodes.get(selector); };
-    const document = new Element(); document.hidden = false; document.querySelector = () => root;
+    root.offsetHeight = 900; root.getBoundingClientRect = () => ({ top: 0 });
+    const document = new Element(); document.hidden = false; document.baseURI = 'http://127.0.0.1/'; document.body = { classList: { contains: () => false } }; document.querySelector = selector => selector.includes("data-story-section") ? null : root;
     const window = new Element();
     const media = new Element(); media.matches = reduced;
     const coarse = new Element(); coarse.matches = false;
@@ -81,20 +82,22 @@ class Element {
       },
       TextureLoader: class { loadAsync() { return deferTexture ? texturePromise : Promise.resolve(new THREE.Texture()); } }
     };
-    const mockGeometry = { createSculpture: () => ({ group: new THREE.Group(), deform(x,y) { lastDeform = [x,y]; }, dispose() {} }) };
+    const mockGeometry = {
+      createSculpture: () => ({ group: new THREE.Group(), deform(x,y) { lastDeform = [x,y]; }, dispose() {} }),
+      createInteriorStory: () => ({ group: new THREE.Group(), setProgress() {}, dispose() {} })
+    };
     class Observer {
       constructor(callback, options) { this.callback = callback; this.options = options; observers.push(this); }
       observe() {} disconnect() {}
     }
     window.IntersectionObserver = Observer;
-    const context = { console, document, window, mockThree, mockGeometry, AbortController,
+    const context = { console, document, window, mockThree, mockGeometry, AbortController, URL,
       matchMedia: query => query.includes('reduced') ? media : coarse,
       IntersectionObserver: Observer, ResizeObserver: class { observe() {} disconnect() {} },
       requestAnimationFrame: callback => { frames.set(++id, callback); return id; },
       cancelAnimationFrame: key => frames.delete(key), devicePixelRatio: 1.25 };
     vm.runInNewContext(source, context, { filename: 'studio-sculpture.js' });
-    observers[1].callback([{ isIntersecting: true }]);
-    observers[0].callback([{ isIntersecting: true }], observers[0]);
+    observers[0].callback([{ isIntersecting: true }]);
     async function flush() { for (let i=0;i<12;i++) await Promise.resolve(); }
     await flush();
     function step(count = 1) {
@@ -138,9 +141,9 @@ class Element {
   assert.equal(env.renders, pausedRenders); assert.equal(env.frames.size, 0);
   canvas.emit('keydown', { key: 'ArrowRight' }); env.step(40);
   assert.ok(env.deformation[0] > .5);
-  env.observers[1].callback([{isIntersecting:false}]); env.step(20);
+  env.observers[0].callback([{isIntersecting:false}]); env.step(20);
   assert.equal(env.frames.size, 0);
-  env.observers[1].callback([{isIntersecting:true}]); env.step(2);
+  env.observers[0].callback([{isIntersecting:true}]); env.step(2);
   assert.deepEqual(env.deformation, [0,0]);
   pass('pause stops idle rendering; offscreen cancels frames and clears drag state');
   const reduced = await setup({ reduced: true }); reduced.step(2);
@@ -160,11 +163,13 @@ class Element {
   interrupted.node('[data-sculpture-canvas]').emit('webglcontextrestored'); interrupted.step(2);
   assert.equal(interrupted.root.dataset.sculptureState, 'ready');
   pass('context loss during async initialization keeps fallback until restoration');
-  const oldHtml = fs.readFileSync(path.join(project, 'backups/about-3d-20260916-001838-116/index.html'),'utf8');
   const newHtml = fs.readFileSync(path.join(project,'index.html'),'utf8');
-  const strip = value => value.replace(/\r/g,'').replace(/    <section class="section studio[\s\S]*?<\/section>/,'')
-    .replace(/^.*(?:assets\/css\/studio-sculpture.css|assets\/js\/studio-sculpture.js).*\n/gm,'');
-  assert.equal(strip(newHtml),strip(oldHtml));
-  pass('all HTML outside About is unchanged except the two dedicated asset includes');
+  assert.match(newHtml, /id="portfolio"/);
+  assert.match(newHtml, /id="transformations"/);
+  assert.match(newHtml, /id="contact"/);
+  assert.match(newHtml, /href="#studio">About<\/a>/);
+  assert.match(newHtml, /data-story-section/);
+  assert.match(newHtml, /assets\/js\/studio-sculpture\.js/);
+  pass('homepage keeps portfolio, before/after and contact with the full story in About');
   fs.writeFileSync(path.join(__dirname,'verification.json'), JSON.stringify({ checkedAt:new Date().toISOString(), results, geometryStats },null,2));
 })().catch(error => { console.error(error); process.exitCode = 1; });

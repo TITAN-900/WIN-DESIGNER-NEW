@@ -162,3 +162,379 @@
     transition: none;
   }
 }
+
+/* About page framing keeps the 3D story quiet, editorial and brand-led. */
+#about-title {
+  max-width: 11ch;
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(3.8rem, 8vw, 7.8rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 0.88;
+}
+
+.about-hero {
+  padding-top: clamp(150px, 19vw, 260px);
+  padding-bottom: clamp(84px, 11vw, 150px);
+  background: var(--warm-white);
+}
+
+.about-hero-grid,
+.about-principles-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(260px, 0.58fr);
+  gap: clamp(40px, 10vw, 150px);
+  align-items: end;
+}
+
+.about-hero-note,
+.about-principles-grid > p {
+  max-width: 34ch;
+  color: var(--muted);
+  font-size: 1.04rem;
+  line-height: 1.75;
+}
+
+.text-link {
+  display: inline-flex;
+  gap: 12px;
+  margin-top: 28px;
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.about-principles {
+  padding-top: clamp(92px, 12vw, 170px);
+  padding-bottom: clamp(92px, 12vw, 170px);
+  background: var(--linen);
+}
+
+.about-principles-grid h2 {
+  max-width: 11ch;
+}
+
+/* Scroll story: the room stays in view while the copy advances through its three acts. */
+html.is-studio-scroll-locked {
+  overflow: hidden;
+  overscroll-behavior: none;
+  scroll-behavior: auto !important;
+}
+
+body.is-studio-scroll-locked {
+  position: fixed;
+  top: var(--studio-lock-offset, 0);
+  right: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+#studio.studio-story {
+  position: relative;
+  min-height: 118svh;
+  padding-top: clamp(64px, 7vw, 96px);
+  padding-bottom: clamp(42px, 6vw, 80px);
+  background:
+    radial-gradient(circle at 18% 20%, rgba(233, 221, 205, 0.36), transparent 33%),
+    var(--warm-white);
+}
+
+#studio.is-scroll-locked {
+  overscroll-behavior: contain;
+}
+
+#studio.is-scroll-locked .studio-story-grid {
+  will-change: transform;
+}
+
+#studio .studio-story-intro {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 14px;
+  max-width: 620px;
+  margin-bottom: clamp(34px, 5vw, 58px);
+}
+
+#studio .studio-story-intro h2 {
+  max-width: 11ch;
+}
+
+#studio .studio-story-intro > p:last-child {
+  max-width: 42ch;
+  color: var(--muted);
+}
+
+#studio .story-kicker {
+  color: var(--walnut);
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+#studio .studio-story-track {
+  position: relative;
+  min-height: 100svh;
+}
+
+#studio .studio-story-grid {
+  position: sticky;
+  top: clamp(92px, 10vh, 124px);
+  display: grid;
+  min-height: min(760px, calc(100svh - 150px));
+  grid-template-columns: minmax(0, 1.12fr) minmax(290px, 0.62fr);
+  gap: clamp(36px, 7vw, 110px);
+  align-items: center;
+}
+
+#studio .studio-story-copy {
+  position: relative;
+  min-height: 400px;
+}
+
+#studio .story-step {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  max-width: 370px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(24px, -46%, 0);
+  filter: blur(6px);
+  transition: opacity 420ms var(--ease), transform 650ms var(--ease), filter 520ms var(--ease);
+}
+
+#studio .story-step.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate3d(0, -50%, 0);
+  filter: blur(0);
+}
+
+#studio .story-step-index {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+#studio .story-step h3 {
+  margin: 0 0 12px;
+  color: var(--ink);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2.3rem, 4vw, 4rem);
+  font-weight: 600;
+  line-height: 0.95;
+}
+
+#studio .story-step p {
+  max-width: 34ch;
+  margin: 0;
+  color: var(--muted);
+}
+
+#studio .studio-story-copy .service-list {
+  max-width: 370px;
+  margin-top: 12px;
+}
+
+#studio .studio-story-copy::after {
+  content: "";
+  position: absolute;
+  bottom: 12%;
+  left: 0;
+  width: min(240px, 72%);
+  height: 1px;
+  background: linear-gradient(90deg, var(--walnut) calc(var(--story-progress, 0) * 1%), var(--line) 0);
+}
+
+#studio .story-progress {
+  position: absolute;
+  top: 50%;
+  left: -26px;
+  width: 1px;
+  height: 210px;
+  overflow: hidden;
+  background: var(--line);
+  transform: translateY(-50%);
+}
+
+#studio .story-progress::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: var(--story-progress, 0%);
+  background: var(--walnut);
+}
+
+#studio .sculpture-stage {
+  min-height: 0;
+}
+
+#studio .sculpture-canvas {
+  touch-action: pan-y pinch-zoom;
+}
+
+@media (max-width: 1040px) {
+  #studio.studio-story {
+    min-height: 120svh;
+  }
+
+  #studio .studio-story-track {
+    min-height: 100svh;
+  }
+
+  #studio .studio-story-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(250px, 0.55fr);
+    gap: 38px;
+  }
+}
+
+@media (max-width: 760px) {
+  #studio.studio-story {
+    min-height: 120svh;
+    padding-top: 74px;
+  }
+
+  #studio .studio-story-intro {
+    margin-bottom: 56px;
+  }
+
+  #studio .studio-story-track {
+    min-height: 100svh;
+  }
+
+  #studio .studio-story-grid {
+    top: 76px;
+    display: block;
+    min-height: calc(100svh - 110px);
+  }
+
+  #studio .studio-sculpture {
+    width: 100%;
+  }
+
+  #studio .studio-story-copy {
+    position: absolute;
+    right: 14px;
+    bottom: 0;
+    left: 14px;
+    display: block;
+    min-height: 0;
+    padding: 0;
+  }
+
+  #studio .story-step {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    max-width: 34ch;
+    margin: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+
+  #studio .story-step.is-active {
+    transform: translate3d(0, 0, 0);
+  }
+
+  #studio .story-step h3 {
+    font-size: clamp(2.45rem, 12vw, 3.6rem);
+  }
+
+  #studio .studio-story-copy .service-list {
+    margin-top: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #studio .story-step {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .about-hero {
+    padding-top: 132px;
+  }
+
+  .about-hero-grid,
+  .about-principles-grid {
+    display: block;
+  }
+
+  .about-hero-note,
+  .about-principles-grid > p {
+    margin-top: 34px;
+  }
+}
+
+/* The architectural image owns the viewport; the story is a quiet image caption. */
+#studio .studio-story-intro {
+  max-width: none;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  margin-bottom: 32px;
+}
+#studio .studio-story-intro .story-kicker { grid-column: 1 / -1; }
+#studio .studio-story-intro h2 { max-width: 22ch; font-size: clamp(2.4rem, 4.3vw, 4.6rem); }
+#studio .studio-story-intro > p:last-child { justify-self: end; }
+#studio .studio-story-grid {
+  display: block;
+  width: min(calc(100% - 40px), 1600px);
+  min-height: 0;
+}
+#studio .studio-sculpture { width: 100%; max-width: none; }
+#studio .sculpture-stage {
+  height: min(76svh, 880px);
+  min-height: 380px;
+  aspect-ratio: auto;
+  overflow: hidden;
+  background: #ded5c7;
+}
+#studio .studio-story-copy {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 75px;
+  min-height: 145px;
+  pointer-events: none;
+  background: linear-gradient(0deg, rgba(20, 18, 15, 0.76), rgba(20, 18, 15, 0));
+}
+#studio .story-step {
+  left: 4%;
+  top: auto;
+  bottom: 26px;
+  width: 85%;
+  max-width: 740px;
+  transform: translateY(10px);
+}
+#studio .story-step.is-active { transform: translateY(0); }
+#studio .story-step h3 { color: #fff8ec; font-size: clamp(2rem, 3.5vw, 3.8rem); margin-bottom: 8px; }
+#studio .story-step p { color: #eee2d1; max-width: 55ch; font-size: 0.9rem; }
+#studio .story-step-index { display: none; }
+#studio .studio-story-copy::after { display: none; }
+#studio .sculpture-caption { min-height: 75px; padding-top: 14px; margin: 0; }
+@media(max-width:760px) {
+  #studio .studio-story-intro { display: block; }
+  #studio .studio-story-intro h2 { margin-block: 12px; }
+  #studio .studio-story-grid { width: calc(100% - 24px); }
+  #studio .sculpture-stage { height: 66svh; min-height: 350px; }
+  #studio .studio-story-copy { bottom: 100px; min-height: 155px; }
+  #studio .sculpture-caption { min-height: 100px; }
+  #studio .story-step { bottom: 18px; right: auto; }
+  #studio .story-step h3 { font-size: 2.1rem; }
+  #studio .story-step p { font-size: 0.8rem; }
+}

@@ -1,0 +1,546 @@
+/* About-only progressive enhancement. Three.js is local and loaded on approach. */
+(() => {
+  "use strict";
+
+  const root = document.querySelector("#studio [data-sculpture]");
+  if (!root) return;
+  const moduleBase = new URL(".", document.currentScript.src);
+
+  const storySection = document.querySelector("#studio[data-story-section]");
+  const storySteps = storySection ? Array.from(storySection.querySelectorAll("[data-story-step]")) : [];
+  const stage = root.querySelector("[data-sculpture-stage]");
+  const canvas = root.querySelector("[data-sculpture-canvas]");
+  const fallback = root.querySelector(".sculpture-fallback");
+  const controls = root.querySelector("[data-sculpture-controls]");
+  const instructions = root.querySelector("[data-sculpture-instructions]");
+  const status = root.querySelector("[data-sculpture-status]");
+  const pauseButton = root.querySelector("[data-sculpture-pause]");
+  const resetButton = root.querySelector("[data-sculpture-reset]");
+  const retryButton = root.querySelector("[data-sculpture-retry]");
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  const coarsePointer = matchMedia("(pointer: coarse)");
+  const lifetime = new AbortController();
+  const listenerOptions = { signal: lifetime.signal };
+  const keys = new Set();
+  const spring = { x: 0, y: 0, vx: 0, vy: 0, tx: 0, ty: 0 };
+  const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+  let view;
+  let loading = false;
+  let destroyed = false;
+  // Start as visible so the first render cannot be lost between the async
+  // module load and the visibility observer's first callback.
+  let visible = true;
+  let paused = reducedMotion.matches;
+  let pointer = null;
+  let frame = 0;
+  let lastTime = 0;
+  let lastDraw = 0;
+  let idleTime = 0;
+  let yaw = 0;
+  let storyProgress = 0;
+  let wheelTarget = 0;
+  let wheelEngaged = false;
+  let wheelSnapTimer = 0;
+  let storyStage = -1;
+  let appliedX = NaN;
+  let appliedY = NaN;
+  let needsRender = true;
+  let contextLost = false;
+
+  function updateInstructions() {
+    instructions.textContent = "Scroll to move through the space.";
+    canvas.setAttribute("aria-description", "Scroll through the three stages. Drag remains available for close inspection. Press Escape to reset the form.");
+    pauseButton.hidden = Boolean(storySection);
+    pauseButton.disabled = reducedMotion.matches;
+    pauseButton.textContent = reducedMotion.matches ? "Motion reduced" : paused ? "Resume motion" : "Pause motion";
+    pauseButton.setAttribute("aria-pressed", String(paused));
+  }
+
+  function announce(message) {
+    status.textContent = message;
+  }
+
+  function stop() {
+    cancelAnimationFrame(frame);
+    frame = 0;
+    lastTime = 0;
+    lastDraw = 0;
+  }
+
+  function wake() {
+    if (!frame && view && visible && !document.hidden && !contextLost && !destroyed) {
+      frame = requestAnimationFrame(tick);
+    }
+  }
+
+  function updateStoryProgress() {
+    if (!storySection || !view) return false;
+    const rect = storySection.getBoundingClientRect();
+    const travel = Math.max(1, storySection.offsetHeight - window.innerHeight);
+    const pageProgress = clamp(-rect.top / travel, 0, 1);
+    const target = !reducedMotion.matches && wheelEngaged ? wheelTarget : pageProgress;
+    const delta = clamp(target - storyProgress, -0.028, 0.028);
+    const next = Math.abs(target - storyProgress) < 0.001 ? target : storyProgress + delta;
+    const changed = Math.abs(next - storyProgress) > 0.0005;
+    storyProgress = next;
+    if (changed || storyStage < 0) applyStoryProgress(next);
+    return changed;
+  }
+
+  function handleStoryWheel(event) {
+    if (!storySection || reducedMotion.matches || !view) return;
+    const rect = storySection.getBoundingClientRect();
+    const active = rect.top <= window.innerHeight * 0.28 && rect.bottom >= window.innerHeight * 0.72;
+    if (!active || Math.abs(event.deltaY) < 0.01) return;
+    const direction = Math.sign(event.deltaY);
+    const currentStage = Math.min(2, Math.floor(storyProgress * 3.01));
+    const lower = currentStage / 3;
+    const upper = (currentStage + 1) / 3;
+    const atBoundary = direction < 0 ? storyProgress <= lower + 0.002 : storyProgress >= upper - 0.002;
+    if ((direction < 0 && storyProgress <= 0.002) || (direction > 0 && storyProgress >= 0.998)) return;
+    if (atBoundary && ((direction > 0 && wheelTarget >= upper - 0.002) || (direction < 0 && wheelTarget <= lower + 0.002))) return;
+    event.preventDefault();
+    wheelEngaged = true;
+    const step = clamp(event.deltaY, -92, 92) / 760;
+    const nextTarget = clamp(wheelTarget + step, 0, 1);
+    wheelTarget = direction > 0 ? Math.min(nextTarget, upper) : Math.max(nextTarget, lower);
+    window.clearTimeout(wheelSnapTimer);
+    wheelSnapTimer = window.setTimeout(() => {
+      const stops = [0, 1 / 3, 2 / 3, 1];
+      const nearest = stops.reduce((best, stop) => Math.abs(stop - wheelTarget) < Math.abs(best - wheelTarget) ? stop : best, stops[0]);
+      if (Math.abs(nearest - wheelTarget) < 0.018) wheelTarget = nearest;
+      wake();
+    }, 180);
+    wake();
+  }
+
+  if (storySection) window.addEventListener("wheel", handleStoryWheel, { ...listenerOptions, passive: false });
+
+  function applyStoryProgress(progress) {
+    storyProgress = clamp(progress, 0, 1);
+    if (storySection) storySection.dataset.storyProgress = storyProgress.toFixed(3);
+    if (!view?.story) return;
+    const design = clamp(storyProgress / 0.32, 0, 1);
+    const cabinetry = clamp((storyProgress - 0.25) / 0.43, 0, 1);
+    const renovation = clamp((storyProgress - 0.62) / 0.38, 0, 1);
+    view.story.setProgress(storyProgress);
+    view.storyGroup.position.y = -0.18 + design * 0.12;
+    view.storyGroup.rotation.y = -0.1 + design * 0.08;
+    view.sculpture.group.rotation.y = -0.16 + design * 0.22 + cabinetry * 0.06;
+    view.camera.position.x = 4.7 - design * 1.1 + renovation * 0.85;
+    view.camera.position.y = 3.8 - design * 0.25 + renovation * 0.3;
+    view.camera.position.z = 7.5 - design * 0.95 + renovation * 1.35;
+    view.camera.lookAt(0.05 + design * 0.12, 1.25 + renovation * 0.08, -0.05);
+    view.key.intensity = 2.7 + renovation * 1.1;
+    storySteps.forEach((step, index) => step.classList.toggle("is-active", index === Math.min(2, Math.floor(storyProgress * 3.01))));
+    const nextStage = Math.min(2, Math.floor(storyProgress * 3.01));
+    if (nextStage !== storyStage) {
+      storyStage = nextStage;
+      const labels = ["Interior Design stage: proportion and circulation.", "Custom Cabinetry stage: joinery opens and resolves.", "Renovation stage: material, furniture and light complete the room."];
+      announce(labels[nextStage]);
+    }
+    needsRender = true;
+  }
+
+  function resetSpring() {
+    spring.x = spring.y = spring.vx = spring.vy = spring.tx = spring.ty = 0;
+    needsRender = true;
+  }
+
+  function releasePointer() {
+    if (pointer && canvas.hasPointerCapture(pointer.id)) canvas.releasePointerCapture(pointer.id);
+    pointer = null;
+    canvas.classList.remove("is-dragging");
+  }
+
+  function releaseInput(instant = false) {
+    // Clear ownership before releasePointerCapture dispatches lostpointercapture.
+    const activePointer = pointer;
+    pointer = null;
+    if (activePointer && canvas.hasPointerCapture(activePointer.id)) canvas.releasePointerCapture(activePointer.id);
+    canvas.classList.remove("is-dragging");
+    keys.clear();
+    spring.tx = spring.ty = 0;
+    if (instant || reducedMotion.matches) resetSpring();
+    wake();
+  }
+
+  function setTarget(x, y) {
+    spring.tx = clamp(x, -1, 1);
+    spring.ty = clamp(y, -1, 1);
+    if (reducedMotion.matches) {
+      spring.x = spring.tx;
+      spring.y = spring.ty;
+      spring.vx = spring.vy = 0;
+    }
+    needsRender = true;
+    wake();
+  }
+
+  function advanceSpring(dt) {
+    // Small fixed substeps keep the damped spring stable after slow frames.
+    const steps = Math.max(1, Math.ceil(dt / (1 / 120)));
+    const step = dt / steps;
+    for (let i = 0; i < steps; i++) {
+      for (const [position, velocity, target] of [["x", "vx", "tx"], ["y", "vy", "ty"]]) {
+        spring[velocity] += ((spring[target] - spring[position]) * 105 - spring[velocity] * 17) * step;
+        spring[position] = clamp(spring[position] + spring[velocity] * step, -1.03, 1.03);
+        if (Math.abs(spring[target] - spring[position]) < 0.0002 && Math.abs(spring[velocity]) < 0.001) {
+          spring[position] = spring[target];
+          spring[velocity] = 0;
+        }
+      }
+    }
+  }
+
+  function tick(time) {
+    frame = 0;
+    if (!view || !visible || document.hidden || contextLost || destroyed) return;
+    const dt = lastTime ? Math.min((time - lastTime) / 1000, 0.05) : 1 / 60;
+    lastTime = time;
+    const storyChanged = updateStoryProgress();
+    if (!reducedMotion.matches) advanceSpring(dt);
+
+    const resting = !pointer && keys.size === 0 && spring.x === 0 && spring.y === 0;
+    const idle = !storySection && !paused && !reducedMotion.matches && resting;
+    if (idle) {
+      idleTime += dt;
+      yaw = Math.sin(idleTime * 0.14) * 0.105;
+    } else {
+      yaw = 0;
+    }
+
+    // A paused/resting scene has no persistent requestAnimationFrame loop.
+    const moving = Boolean(storySection && visible) || idle || storyChanged || spring.vx !== 0 || spring.vy !== 0 || spring.x !== spring.tx || spring.y !== spring.ty;
+    const geometryChanged = spring.x !== appliedX || spring.y !== appliedY;
+    const interval = coarsePointer.matches ? 1000 / 30 : 1000 / 60;
+    if (needsRender || !moving || time - lastDraw >= interval - 1) {
+      if (geometryChanged) {
+        view.sculpture.deform(spring.x, spring.y);
+        appliedX = spring.x;
+        appliedY = spring.y;
+      }
+      if (!storySection) view.sculpture.group.rotation.y = -0.14 + yaw + spring.x * 0.045;
+      view.renderer.render(view.scene, view.camera);
+      needsRender = false;
+      lastDraw = time;
+    }
+    if (moving || needsRender) wake();
+    else lastTime = 0;
+  }
+
+  function resize() {
+    if (!view) return;
+    const width = stage.clientWidth;
+    const height = stage.clientHeight;
+    if (!width || !height) return;
+    const aspect = width / height;
+    const halfHeight = Math.max(2.55, 2.6 / aspect);
+    const { camera, renderer } = view;
+    camera.left = -halfHeight * aspect;
+    camera.right = halfHeight * aspect;
+    camera.top = halfHeight;
+    camera.bottom = -halfHeight;
+    camera.updateProjectionMatrix();
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, coarsePointer.matches ? 1.5 : 1.75));
+    renderer.setSize(width, height, false);
+    needsRender = true;
+    wake();
+  }
+
+  function showFallback(message) {
+    canvas.hidden = true;
+    fallback.hidden = false;
+    controls.hidden = true;
+    retryButton.hidden = false;
+    root.dataset.sculptureState = "fallback";
+    instructions.textContent = message;
+    announce(message);
+  }
+
+  async function importLocalModule(path) {
+    const response = await fetch(new URL(path, moduleBase));
+    if (!response.ok) throw new Error(`Could not load ${path} (${response.status})`);
+    const source = await response.text();
+    const blobUrl = URL.createObjectURL(new Blob([source], { type: "text/javascript" }));
+    try {
+      return await import(blobUrl);
+    } finally {
+      URL.revokeObjectURL(blobUrl);
+    }
+  }
+
+  async function init() {
+    if (loading || view || destroyed) return;
+    loading = true;
+    retryButton.hidden = true;
+    root.dataset.sculptureState = "loading";
+    instructions.textContent = "Preparing the form…";
+    let renderer;
+    let wood;
+    let sculpture;
+    let floor;
+    let story;
+    try {
+      const [THREE, geometryModule] = await Promise.all([
+        importLocalModule("./vendor/three.module.min.js"),
+        importLocalModule("./studio-sculpture-geometry.js")
+      ]);
+      if (destroyed) return;
+      renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: "low-power" });
+      renderer.setClearColor(0x000000, 0);
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.3;
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.VSMShadowMap;
+
+      // Reuse the site's actual walnut photograph. No runtime CDN or model request.
+      const textureUrl = new URL("assets/../american-walnut.jpg.jpeg", document.baseURI);
+      wood = await new THREE.TextureLoader().loadAsync(textureUrl.href);
+      wood.colorSpace = THREE.SRGBColorSpace;
+      wood.wrapS = wood.wrapT = THREE.RepeatWrapping;
+      wood.center.set(0.5, 0.5);
+      wood.rotation = Math.PI / 2;
+      wood.repeat.set(1.6, 0.26);
+      wood.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+      if (destroyed) {
+        wood.dispose();
+        renderer.dispose();
+        return;
+      }
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.OrthographicCamera(-3, 3, 2.55, -2.55, 0.1, 40);
+      camera.position.set(4.7, 3.8, 7.5);
+      camera.lookAt(0, 1.3, 0);
+      scene.add(new THREE.HemisphereLight(0xfffaf1, 0x76685b, 1.65));
+
+      const key = new THREE.DirectionalLight(0xfff5e8, 2.55);
+      key.position.set(-2.4, 10, 3);
+      key.target.position.set(0, 1.25, 0);
+      key.castShadow = true;
+      key.shadow.mapSize.setScalar(1024);
+      key.shadow.radius = 4;
+      key.shadow.blurSamples = 8;
+      Object.assign(key.shadow.camera, { left: -4.5, right: 4.5, top: 4.5, bottom: -4.5, near: 0.5, far: 20 });
+      key.shadow.normalBias = 0.018;
+      key.shadow.bias = -0.0002;
+      scene.add(key, key.target);
+      const fill = new THREE.DirectionalLight(0xe8d6c4, 0.8);
+      fill.position.set(4, 3, -4);
+      scene.add(fill);
+      const bounce = new THREE.PointLight(0xd8a36a, 0.55, 5.5, 2);
+      bounce.position.set(-1.7, 2.05, -0.75);
+      scene.add(bounce);
+
+      sculpture = geometryModule.createSculpture(THREE, wood);
+      scene.add(sculpture.group);
+      story = geometryModule.createInteriorStory(THREE, wood);
+      scene.add(story.group);
+      story.group.renderOrder = -1;
+      story.setProgress(0);
+      sculpture.group.visible = !storySection;
+      sculpture.group.scale.setScalar(storySection ? 0.72 : 1);
+      sculpture.group.position.set(storySection ? -0.28 : 0, storySection ? 0.03 : 0, storySection ? 0.08 : 0);
+      floor = new THREE.Mesh(new THREE.PlaneGeometry(200, 200), new THREE.ShadowMaterial({ color: 0x573b28, opacity: 0.17 }));
+      floor.rotation.x = -Math.PI / 2;
+      floor.position.y = -0.012;
+      floor.receiveShadow = true;
+      scene.add(floor);
+      view = { renderer, scene, camera, sculpture, story, storyGroup: story.group, wood, floor, key };
+
+      // A GPU context can be lost while the asynchronous texture is loading.
+      // Keep the photograph visible until the browser restores that context.
+      if (contextLost) {
+        showFallback("3D is temporarily unavailable. Our workshop is shown instead.");
+        return;
+      }
+      canvas.hidden = false;
+      fallback.hidden = true;
+      controls.hidden = false;
+      root.dataset.sculptureState = "ready";
+      updateInstructions();
+      resize();
+      applyStoryProgress(storyProgress);
+      announce(storySection ? "Scroll-driven interior story ready." : "Interactive wooden sculpture ready. Drag or hold arrow keys to bend. Release to return to its original form.");
+      wake();
+    } catch (error) {
+      sculpture?.dispose();
+      story?.dispose();
+      wood?.dispose();
+      floor?.geometry.dispose();
+      floor?.material.dispose();
+      renderer?.dispose();
+      view = undefined;
+      showFallback("3D is unavailable. Our workshop is shown instead.");
+      console.warn("WIN DESIGN studio sculpture could not start:", error);
+    } finally {
+      loading = false;
+    }
+  }
+
+  canvas.addEventListener("pointerdown", (event) => {
+    if (!view || contextLost || pointer || event.button !== 0 || !event.isPrimary) return;
+    keys.clear();
+    pointer = { id: event.pointerId, x: event.clientX, y: event.clientY, touch: event.pointerType === "touch", startX: spring.x, startY: spring.y };
+    canvas.setPointerCapture(event.pointerId);
+    canvas.classList.add("is-dragging");
+    canvas.focus({ preventScroll: true });
+    // Native pan-y/pinch-zoom remains available for touch input.
+    if (event.pointerType !== "touch") event.preventDefault();
+  }, listenerOptions);
+
+  canvas.addEventListener("pointermove", (event) => {
+    if (!pointer || event.pointerId !== pointer.id) return;
+    const distance = Math.max(140, stage.clientWidth * 0.36);
+    const x = pointer.startX + (event.clientX - pointer.x) / distance;
+    const y = pointer.touch ? pointer.startY : pointer.startY - (event.clientY - pointer.y) / distance;
+    setTarget(x, y);
+  }, listenerOptions);
+
+  for (const type of ["pointerup", "pointercancel", "lostpointercapture"]) {
+    canvas.addEventListener(type, (event) => {
+      if (pointer?.id === event.pointerId) releaseInput();
+    }, listenerOptions);
+  }
+
+  function keyboardTarget() {
+    setTarget((Number(keys.has("ArrowRight")) - Number(keys.has("ArrowLeft"))) * 0.85,
+      (Number(keys.has("ArrowUp")) - Number(keys.has("ArrowDown"))) * 0.85);
+  }
+
+  canvas.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" || event.key === "Home") {
+      event.preventDefault();
+      reset();
+    } else if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) {
+      event.preventDefault();
+      releasePointer();
+      keys.add(event.key);
+      keyboardTarget();
+    }
+  }, listenerOptions);
+  canvas.addEventListener("keyup", (event) => {
+    if (!keys.has(event.key)) return;
+    event.preventDefault();
+    keys.delete(event.key);
+    keyboardTarget();
+  }, listenerOptions);
+  canvas.addEventListener("blur", () => releaseInput(), listenerOptions);
+  window.addEventListener("blur", () => releaseInput(true), listenerOptions);
+
+  function reset() {
+    releaseInput(true);
+    idleTime = yaw = 0;
+    wake();
+    announce("Original form restored.");
+  }
+
+  resetButton.addEventListener("click", reset, listenerOptions);
+  pauseButton.addEventListener("click", () => {
+    paused = !paused;
+    updateInstructions();
+    needsRender = true;
+    wake();
+    announce(paused ? "Automatic motion paused. Drag and keyboard controls remain available." : reducedMotion.matches ? "Reduced motion is enabled on your device. Automatic motion remains off." : "Automatic motion resumed.");
+  }, listenerOptions);
+  retryButton.addEventListener("click", () => {
+    if (contextLost) {
+      announce("The graphics context is still unavailable. Reload the page to try again.");
+      instructions.textContent = "Please reload the page to restore 3D.";
+    } else init();
+  }, listenerOptions);
+
+  reducedMotion.addEventListener("change", () => {
+    paused = reducedMotion.matches;
+    reset();
+    if (view) updateInstructions();
+  }, listenerOptions);
+  coarsePointer.addEventListener("change", () => {
+    if (view) updateInstructions();
+    resize();
+  }, listenerOptions);
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      releaseInput(true);
+      stop();
+    } else {
+      needsRender = true;
+      wake();
+    }
+  }, listenerOptions);
+
+  canvas.addEventListener("webglcontextlost", (event) => {
+    event.preventDefault();
+    contextLost = true;
+    releaseInput(true);
+    stop();
+    showFallback("3D is temporarily unavailable. Our workshop is shown instead.");
+  }, listenerOptions);
+  canvas.addEventListener("webglcontextrestored", () => {
+    contextLost = false;
+    if (!view) return;
+    canvas.hidden = false;
+    fallback.hidden = true;
+    controls.hidden = false;
+    retryButton.hidden = true;
+    root.dataset.sculptureState = "ready";
+    updateInstructions();
+    needsRender = true;
+    resize();
+    announce("The interactive sculpture is available again.");
+  }, listenerOptions);
+
+  const resizeObserver = new ResizeObserver(resize);
+  resizeObserver.observe(stage);
+  let visibilityObserver;
+  if ("IntersectionObserver" in window) {
+    visibilityObserver = new IntersectionObserver((entries) => {
+      visible = entries.some((entry) => entry.isIntersecting);
+      if (visible) {
+        needsRender = true;
+        wake();
+      } else {
+        releaseInput(true);
+        stop();
+      }
+    });
+    visibilityObserver.observe(stage);
+  } else {
+    visible = true;
+  }
+
+  // Deterministic startup is more reliable than gating the whole About
+  // experience behind an observer. The local modules and texture are small,
+  // while rendering still pauses whenever the section is off screen.
+  init();
+
+  window.addEventListener("pagehide", (event) => {
+    releaseInput(true);
+    stop();
+    if (event.persisted) return;
+    destroyed = true;
+    visibilityObserver?.disconnect();
+    resizeObserver.disconnect();
+    lifetime.abort();
+    if (view) {
+      view.sculpture.dispose();
+      view.story.dispose();
+      view.wood.dispose();
+      view.floor.geometry.dispose();
+      view.floor.material.dispose();
+      view.key.shadow.map?.dispose();
+      view.renderer.dispose();
+      view = undefined;
+    }
+  }, listenerOptions);
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted) {
+      needsRender = true;
+      wake();
+    }
+  }, listenerOptions);
+})();

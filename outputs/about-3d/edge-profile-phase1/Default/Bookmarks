@@ -1,0 +1,117 @@
+{
+   "checksum": "c7e0127bdacb702e89d7cbff68975e5c",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13353663506867116",
+            "date_last_used": "13428687042652132",
+            "guid": "84c3d8f6-db6b-41de-8a14-2c163bab47c9",
+            "id": "9",
+            "name": "OctaTrader网络平台—OctaFX",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://my.octafxmy.net/octatrader/",
+            "visit_count": 1
+         }, {
+            "date_added": "13353683606518185",
+            "date_last_used": "0",
+            "guid": "d2a281ae-bfc7-4e84-841c-18bbfc707a2f",
+            "id": "10",
+            "name": "Instagram",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://www.instagram.com/",
+            "visit_count": 0
+         }, {
+            "date_added": "13354024897335951",
+            "date_last_used": "0",
+            "guid": "eba29bfd-337a-4ccc-ab07-c5649a290d54",
+            "id": "11",
+            "name": "YouTube Music",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://music.youtube.com/",
+            "visit_count": 0
+         }, {
+            "date_added": "13354277991022506",
+            "date_last_used": "0",
+            "guid": "2a593c4d-3967-46a2-b7cb-9ad94e53fdfa",
+            "id": "12",
+            "name": "Facebook",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://www.facebook.com/",
+            "visit_count": 0
+         } ],
+         "date_added": "13434039471935804",
+         "date_last_used": "0",
+         "date_modified": "13354277991022506",
+         "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+         "id": "1",
+         "name": "Favorites bar",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "other": {
+         "children": [ {
+            "date_added": "13350399230198229",
+            "date_last_used": "0",
+            "guid": "aba05aa4-67ba-41b5-90c1-eb7cc91badcd",
+            "id": "7",
+            "name": "【心得】(20230620更新) 所有位置牌組-絕望用 (近戰 / 醫生 / 散彈 / 狙擊 / 輕機槍組 / 塔拉卡組) @喋血復仇（Back 4 Blood） 哈啦板 - 巴哈姆特",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://forum.gamer.com.tw/C.php?bsn=36260&snA=1067",
+            "visit_count": 0
+         }, {
+            "date_added": "13353680632454541",
+            "date_last_used": "0",
+            "guid": "6fee38c7-515a-4151-95cb-26383f5333df",
+            "id": "8",
+            "name": "您的个人专区 — Octa",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://my.octafxmy.net/",
+            "visit_count": 0
+         } ],
+         "date_added": "13434039471935804",
+         "date_last_used": "0",
+         "date_modified": "13353680632454541",
+         "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+         "id": "2",
+         "name": "Other favorites",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13434039471935804",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+         "id": "3",
+         "name": "Mobile favorites",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "workspaces_v2": {
+         "children": [  ],
+         "date_added": "13434039471935804",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "75aa6670-344f-549d-b742-660f029506ab",
+         "id": "5",
+         "name": "Workspaces",
+         "source": "unknown",
+         "type": "folder"
+      }
+   },
+   "sync_metadata": "CkEKHgiIgQISCCSka6qgAQAAKg4QABgBIAAoBTAAOABAABIAKhhDNXdQSGNISXVZZU4rV3piWTRYaVpBPT1IA6AGDBKMAQgFEocBChx3UkJyWkwrNlBBOWF2S2dqTlA3SlhETGNmdnM9EiQxYWY3ODlmMi1lZmE5LTU3OTktYjY2Ny02YTRhNzAzNWFmYWIYACAAKAAwjrGK0aEzOJSyitGhM0CUsorRoTNKHG5teDY1c1FEdnhJOFRnRWV2K0ErbnR0b1NuND1lAAAAAMI+AmAAEowBCAMShwEKHG5qZ0R1ODhlQ3J2WHA4NnBEN2ZIR2NxRnA4OD0SJDA0ZjRjOWI1LTA3YzUtNTZlMS04YzQxLTA4ZjAzYmE1MDgxNhgAIAAoADDCqe3s/i446pTirIUwQOqU4qyFMEoceXpOQjAxY241NEE3Y1JVMHVUKy9QZ21UdFVvPWUAAAAAwj4CYAASrQEIDBKoAQocUUdvbEIwbFVPU3RvdHI3RTU5Z2RKcHRXVUY4PRIkMmE1OTNjNGQtMzk2Ny00NmEyLWI3Y2ItOWFkOTRlNTNmZGZhGAAgACgAMPHimf7KMjiT5Zn+yjJAk+WZ/soyShw0RnJaYUhHWHowN1VTMllPZ3dhQWpqN0NlUUE9Wh8iHehOMGNmcDQzZTVYTUNTZkVTZzZmNmpqK3NGYzA9ZeprWSjCPgJgBRKtAQgLEqgBChxDSE9ySUZKZmt2d3lxeGFsbzA4S0VjaFZCZ0U9EiRlYmEyOWJmZC0zMzdhLTRjY2MtYWIwNy1jNTY0OWEyOTBkNTQYACAAKAAw9eKZ/soyOOvlmf7KMkDr5Zn+yjJKHEdWNHUyQXlRQ21FRGozeWppMG02K05pRDliWT1aHyId0DFMcW8xU0RYMktZVXhuVkJhY1F2SzFma1YvMD1l9xhob8I+AmAFEq0BCAoSqAEKHDN3bTBvTDdZRmNEK3E5Qm9pTXdROGVzOS9Daz0SJGQyYTI4MWFlLWJmYzctNGU4NC04NDFjLTE4YmJmYzcwN2EyZhgAIAAoADDz4pn+yjI4wuWZ/soyQMLlmf7KMkocTFNURVJKcXk1YTdzcmxTYmY5Slh5b3hISGNzPVofIh2hQUt5NmUzb1JuRmdESnI1U2ZZWFlHUmtWMWE4PWXRqx7jwj4CYAUSjAEIARKHAQoceXhKLzZmdmtlY3I3a3A1RVF6QjR0V0xwZGJFPRIkYjY0NzIzZGYtMmFkOC01M2NlLWE5ZGEtY2NmNzAxN2Q3Njg5GAAgACgAML2p7ez+Ljj9k+KshTBA/ZPirIUwShxhUkNXTGdoRjliNUlucUtJRHZ1Si9qdlFrRmM9ZQAAAADCPgJgABKMAQgCEocBChxZY1NUb252RVNQd3FDczRMMmNyVmh2NjhMOTg9EiQ4YjVmMjViMC1lNjUyLTVhODYtYTczMC1jMTMyNWExNzQ5YWIYACAAKAAwvqnt7P4uOJyU4qyFMECclOKshTBKHG9QVmtod0JSYlY2NUtDV1IyK0lPTkhXb091OD1lAAAAAMI+AmAAEqwBCAgSpwEKHGZGaGNnQ2M4RkRKd1NWRFZqQm5BVll0WmN2ST0SJDZmZWUzOGM3LTUxNWEtNDE1MS05NWNiLTI2MzgzZjUzMzNkZhgAIAAoADDy4pn+yjI4rOWZ/soyQKzlmf7KMkocUC9UL3Z2VlNkQ3hocWtmelVMZW4wWVFldjZzPVoeIhxIRmdtYTVOWEowc0RwUkhCaGY3ZVlGSUIwQms9ZeTgc7jCPgJgBRKsAQgHEqcBChxuY0d6Q24wUlpwV0Zlb0Q2T3Z4d0Z4bHhKclk9EiRhYmEwNWFhNC02N2JhLTQxYjUtOTBjMS1lYjdjYzkxYmFkY2QYACAAKAAw9OKZ/soyONflmf7KMkDX5Zn+yjJKHGdMcUhYM1lPcWdJWUdDaTZVL3kzc1lJOTljaz1aHiIcRUYyUENGSkdKN2lTM0I2dVZwcytxQ0VCTThzPWVymaQzwj4CYAUSrAEICRKnAQocdW5vZTFuR0xUSWNTd1UxVlJSaEg1cmZqN3ZVPRIkODRjM2Q4ZjYtZGI2Yi00MWRlLThhMTQtMmMxNjNiYWI0N2M5GAAgACgAMIa1otv2Mzj85Jn+yjJA/OSZ/soyShxab0QvS2E0amVaTW45bWRiaGVUNDE5QkhTREk9Wh4iHEJlZ1FseS93cFJ3L0Y4Snh5ZnNRdzd0dGdQRT1lDKBAF8I+AmAFMAA4AA==",
+   "version": 1
+}

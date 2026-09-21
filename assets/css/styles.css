@@ -16,6 +16,18 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Home keeps only a compact link to the dedicated studio story. */
+.about-teaser-inner { display: flex; justify-content: space-between; align-items: center; gap: 32px; }
+.about-teaser-inner h2 { max-width: 22ch; margin: 0; }
+.about-teaser-inner .inline-link { flex-shrink: 0; }
+@media (max-width: 760px) {
+  .about-teaser-inner { align-items: flex-start; flex-direction: column; gap: 22px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .home-page main, .about-page main { animation: page-arrival 180ms ease-out; }
+  @keyframes page-arrival { from { opacity: .88; } to { opacity: 1; } }
+}
+
 * {
   box-sizing: border-box;
 }

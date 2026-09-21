@@ -1,0 +1,25 @@
+2026-09-16 13:42:19.335: [INFO] CurrentProfilePath: C:\Users\helon\OneDrive\Desktop\WIN-DESIGNER\outputs\about-3d\edge-profile-final\Default
+2026-09-16 13:42:19.335: [INFO] Profiles total count: 1
+2026-09-16 13:42:19.335: [INFO] Profile: name=Profile 1 path=C:\Users\helon\OneDrive\Desktop\WIN-DESIGNER\outputs\about-3d\edge-profile-final\Default lastActive=2026-09-16T13:42:19.311Z
+2026-09-16 13:42:19.335: [INFO] LastUsedProfileDir: C:\Users\helon\OneDrive\Desktop\WIN-DESIGNER\outputs\about-3d\edge-profile-final\Default
+2026-09-16 13:42:19.335: [INFO] MostRecentlyActiveProfile: name=Profile 1 path=C:\Users\helon\OneDrive\Desktop\WIN-DESIGNER\outputs\about-3d\edge-profile-final\Default lastActive=2026-09-16T13:42:19.311Z
+2026-09-16 13:42:19.335: [INFO] OnDoneLoading sync enabled: 0
+2026-09-16 13:42:19.335: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-09-16 13:42:19.335: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-09-16 13:42:19.335: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-09-16 13:42:19.431: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-09-16 13:42:19.585: [INFO] VisibilityChanged: 0
+2026-09-16 13:42:21.018: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-09-16 13:42:21.023: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-09-16 13:42:21.027: [INFO] Primary account changed.
+2026-09-16 13:42:21.027: [INFO] OnPrimaryAccountChanged PrimaryAccountChangeEvent::Type::kSet
+2026-09-16 13:42:21.043: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-09-16 13:42:21.065: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-09-16 13:42:21.780: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-09-16 13:42:21.782: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-09-16 13:42:21.785: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-09-16 13:42:21.788: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-09-16 13:42:21.791: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-09-16 13:42:21.794: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-09-16 13:42:21.797: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 4
+2026-09-16 13:42:23.387: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1

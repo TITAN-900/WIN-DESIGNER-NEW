@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-18T00:00:00+08:00",
+  "title": "Design System: WIN DESIGN",
+  "extensions": {
+    "shadows": [
+      { "name": "warm-surface", "value": "0 18px 48px rgba(70, 49, 31, 0.1)", "purpose": "Shared media and mobile menu depth." },
+      { "name": "solid-navigation", "value": "0 14px 42px rgba(55, 38, 24, 0.09)", "purpose": "Solid floating navigation." },
+      { "name": "field-focus", "value": "0 0 0 3px rgba(191, 148, 88, 0.18)", "purpose": "Visible field focus feedback." }
+    ],
+    "motion": [
+      { "name": "ease", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Existing image and content transitions." },
+      { "name": "control-transition", "value": "180ms ease", "purpose": "Button and navigation feedback." },
+      { "name": "page-arrival", "value": "180ms ease-out", "purpose": "Subtle page entrance when reduced motion is not requested." }
+    ],
+    "breakpoints": [
+      { "name": "navigation-collapse", "value": "1040px" },
+      { "name": "stacked-content", "value": "760px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Dark button", "kind": "button", "refersTo": "button-dark", "description": "Primary contact action.",
+      "html": "<button class=\"ds-dark\">Contact WIN Design</button>",
+      "css": ".ds-dark{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 22px;border:1px solid transparent;border-radius:999px;background:var(--black,#171513);color:var(--ivory,#fffdf8);font:800 .88rem Inter,Arial,sans-serif;cursor:pointer;transition:transform 180ms ease,background 180ms ease}.ds-dark:hover,.ds-dark:focus-visible{background:#2b241f;outline:none}.ds-dark:active{transform:translateY(1px)}"
+    },
+    {
+      "name": "Outline button", "kind": "button", "refersTo": "button-outline", "description": "Secondary action on warm surfaces.",
+      "html": "<button class=\"ds-outline\">View portfolio</button>",
+      "css": ".ds-outline{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 22px;border:1px solid var(--line-strong,rgba(69,52,38,.22));border-radius:999px;background:transparent;color:var(--ink,#211d19);font:800 .88rem Inter,Arial,sans-serif;cursor:pointer;transition:transform 180ms ease,background 180ms ease,border-color 180ms ease}.ds-outline:hover,.ds-outline:focus-visible{border-color:rgba(107,73,52,.4);background:rgba(107,73,52,.07);outline:none}.ds-outline:active{transform:translateY(1px)}"
+    },
+    {
+      "name": "Light button", "kind": "button", "description": "Translucent action placed over imagery.",
+      "html": "<button class=\"ds-light\">Explore our work</button>",
+      "css": ".ds-light{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 22px;border:1px solid rgba(255,253,248,.68);border-radius:999px;background:rgba(255,253,248,.16);color:var(--ivory,#fffdf8);font:800 .88rem Inter,Arial,sans-serif;cursor:pointer;transition:transform 180ms ease,background 180ms ease,color 180ms ease}.ds-light:hover,.ds-light:focus-visible{background:rgba(255,253,248,.96);color:var(--ink,#211d19);outline:none}.ds-light:active{transform:translateY(1px)}"
+    },
+    {
+      "name": "Contact field", "kind": "input", "refersTo": "field", "description": "Warm bordered field with gold focus feedback.",
+      "html": "<input class=\"ds-field\" aria-label=\"Name\" placeholder=\"Your name\">",
+      "css": ".ds-field{width:100%;border:1px solid var(--line-strong,rgba(69,52,38,.22));border-radius:var(--radius,12px);padding:14px 15px;background:var(--ivory,#fffdf8);color:var(--ink,#211d19);font:1rem Inter,Arial,sans-serif;outline:none;transition:border-color 160ms ease,box-shadow 160ms ease}.ds-field::placeholder{color:#81776d}.ds-field:focus{border-color:rgba(107,73,52,.52);box-shadow:0 0 0 3px rgba(191,148,88,.18)}"
+    },
+    {
+      "name": "Navigation links", "kind": "nav", "description": "Shared compact uppercase destination pills.",
+      "html": "<nav class=\"ds-nav\"><a href=\"index.html#portfolio\">Portfolio</a><a href=\"index.html#before-after\">Before + After</a><a href=\"about.html\" aria-current=\"page\">About</a><a href=\"index.html#contact\">Contact</a></nav>",
+      "css": ".ds-nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:2px;padding:8px;border-radius:999px;background:rgba(255,253,248,.94);color:var(--ink,#211d19);font:800 .72rem Inter,Arial,sans-serif;text-transform:uppercase}.ds-nav a{border-radius:999px;padding:12px 13px;opacity:.82;color:inherit;text-decoration:none;transition:opacity 180ms ease,background 180ms ease,color 180ms ease}.ds-nav a:hover,.ds-nav a:focus-visible,.ds-nav a[aria-current]{background:rgba(107,73,52,.08);opacity:1;outline:none}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Warm architectural interiors",
+    "overview": "This records the existing WIN DESIGN identity, not a new direction. Cream surfaces, walnut accents, serif headlines and compact sans-serif controls frame residential imagery. Photographs and the existing interior scene carry the visual detail; interface decoration stays restrained.",
+    "keyCharacteristics": ["Warm neutral surfaces and dark readable text.", "Architectural imagery at generous scale.", "Serif editorial hierarchy with practical sans-serif navigation.", "Shared pill navigation and concise calls to action."],
+    "rules": [{ "name": "The Existing Palette Rule", "body": "Extend the existing warm identity rather than giving About a separate visual brand.", "section": "colors" }],
+    "dos": ["Do reuse the existing warm palette, type families and navigation.", "Do make architectural imagery the principal visual content.", "Do preserve the existing scene and bidirectional scroll behavior when changing page composition.", "Do give each section a clear content purpose and keep supporting text concise."],
+    "donts": ["Don't replace the approved interior with a generic geometric demo.", "Don't rebuild the scroll controller to accommodate a layout change.", "Don't turn About into a different visual identity.", "Don't put the complete About 3D experience back on Home."]
+  }
+}

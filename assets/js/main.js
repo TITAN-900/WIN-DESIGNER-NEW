@@ -83,7 +83,11 @@
       if (!visible) return;
 
       navLinks.forEach((link) => {
-        link.classList.toggle("is-active", link.getAttribute("href") === `#${visible.target.id}`);
+        const destination = new URL(link.href, location.href);
+        const samePage = destination.pathname === location.pathname ||
+          (destination.pathname.endsWith("/index.html") && location.pathname.endsWith("/"));
+        link.classList.toggle("is-active", link.getAttribute("aria-current") === "page" ||
+          (samePage && destination.hash === `#${visible.target.id}`));
       });
     }, { rootMargin: "-35% 0px -50% 0px", threshold: [0.12, 0.45, 0.75] });
 
