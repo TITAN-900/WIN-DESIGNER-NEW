@@ -221,26 +221,30 @@ body.menu-open .nav-links a.is-active {
   display: none;
   width: 48px;
   height: 48px;
-  align-items: center;
   justify-content: center;
+  align-items: flex-end;
   flex-direction: column;
-  border: 1px solid rgba(69, 52, 38, 0.14);
-  border-radius: 999px;
-  background: rgba(255, 253, 248, 0.72);
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
   color: var(--ink);
 }
 
 .menu-toggle span {
   display: block;
-  width: 18px;
-  height: 2px;
-  border-radius: 999px;
+  width: 22px;
+  height: 1px;
   background: currentColor;
   transition: transform 220ms var(--ease), opacity 180ms ease;
 }
 
+.menu-toggle span:nth-child(2) {
+  width: 16px;
+}
+
 .menu-toggle span + span {
-  margin-top: 4px;
+  margin-top: 5px;
 }
 
 body.menu-open .menu-toggle span:first-child {
@@ -885,7 +889,7 @@ p {
 
 @media (max-width: 1040px) {
   .site-nav {
-    grid-template-columns: auto auto;
+    grid-template-columns: auto 1fr auto;
     min-height: 68px;
   }
 
@@ -924,6 +928,8 @@ p {
 
   .menu-toggle {
     display: flex;
+    grid-column: 3;
+    justify-self: end;
   }
 
   .project-story,
